@@ -181,21 +181,21 @@ img {
 }
 
 .nav-menu-wrapper .header-menu li a {
-    color: #111111;
+    color: var(--nav-text);
     font-weight: 700;
     padding: 6px 14px;
-    font-size: 19px;
-    border-radius: 8px;
+    font-size: var(--nav-font-size);
+    border-radius: var(--container-radius);
     transition: all 0.2s ease;
     text-decoration: none;
-    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-family: var(--font-primary);
     white-space: nowrap;
 }
 
 .nav-menu-wrapper .header-menu li a:hover,
 .nav-menu-wrapper .header-menu li.current-menu-item a {
-    background-color: #e91e63;
-    color: #ffffff;
+    background-color: var(--nav-hover-bg);
+    color: var(--nav-hover);
 }
 
 /* Header Actions & Inline Expanding Search Bar */
@@ -392,11 +392,11 @@ img {
 }
 
 .ticker-label {
-    background-color: #e91e63;
+    background-color: var(--primary-color);
     color: #ffffff;
     font-weight: 800;
     padding: 7px 16px;
-    border-radius: 8px;
+    border-radius: var(--container-radius);
     font-size: 15px;
     display: flex;
     align-items: center;
@@ -408,7 +408,7 @@ img {
 .ticker-label i {
     animation: flash 1s infinite alternate;
     font-size: 16px;
-    color: #ffeb3b;
+    color: var(--accent-yellow);
 }
 
 @keyframes flash {
@@ -572,7 +572,7 @@ img {
     left: 0;
     width: 55px;
     height: 3.5px;
-    background-color: #e91e63;
+    background-color: var(--primary-color);
     border-radius: 2px;
 }
 
@@ -588,7 +588,7 @@ img {
 }
 
 .section-more-link:hover {
-    color: #e91e63;
+    color: var(--primary-color);
 }
 
 /* Category Badge Tags */

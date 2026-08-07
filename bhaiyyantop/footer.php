@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="container">
             <div class="footer-widgets">
                 <div class="footer-widget">
-                    <h4><?php esc_html_e( 'हमारे बारे में', 'bhaiyyantop' ); ?></h4>
-                    <p><?php esc_html_e( 'भैय्यान्टॉप भारत का एक अग्रणी न्यूज़ पोर्टल है जो नवीनतम समाचार, राजनीति, खेल, मनोरंजन और तकनीकी जगत की ख़बरें हिंदी में प्रदान करता है।', 'bhaiyyantop' ); ?></p>
+                    <h4><?php echo esc_html( get_theme_mod( 'bhaiyyantop_footer_about_title', __( 'हमारे बारे में', 'bhaiyyantop' ) ) ); ?></h4>
+                    <p><?php echo wp_kses_post( get_theme_mod( 'bhaiyyantop_footer_about_text', __( 'भैय्यान्टॉप भारत का एक अग्रणी न्यूज़ पोर्टल है जो नवीनतम समाचार, राजनीति, खेल, मनोरंजन और तकनीकी जगत की ख़बरें हिंदी में प्रदान करता है।', 'bhaiyyantop' ) ) ); ?></p>
                 </div>
                 <div class="footer-widget">
                     <h4><?php esc_html_e( 'मुख्य श्रेणियां', 'bhaiyyantop' ); ?></h4>
