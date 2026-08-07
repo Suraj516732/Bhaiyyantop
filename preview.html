@@ -15,89 +15,72 @@
 
 <!-- Header Section -->
 <header id="masthead" class="site-header">
-    <div class="header-overlay-bg"></div>
     <div class="container header-inner">
         <!-- Site Branding Logo -->
         <div class="logo-container">
             <a href="preview.html" rel="home" class="logo-link">
-                <img src="bhaiyyantop/assets/images/logo.svg" alt="भैय्यान्टॉप" class="custom-logo" onerror="this.outerHTML='<div class=\'logo-bubble\'><span>भ</span></div><div class=\'logo-text-banner\'><h1>भैय्यान्टॉप</h1></div>';">
+                <img src="bhaiyyantop/assets/images/logo.svg" alt="भैय्यान्टॉप" class="custom-logo">
             </a>
         </div>
 
-        <!-- Right Side Date, Weather & Dark Mode Widget -->
-        <div class="header-widgets-container">
-            <div class="date-weather-widget">
-                <div class="date-text">
-                    <i class="fa fa-calendar-alt"></i>
-                    <span id="previewDate">शुक्रवार, 7 अगस्त 2026</span>
-                </div>
-                <div class="weather-text">
-                    <i class="fa fa-cloud-sun"></i>
-                    <span>नई दिल्ली, 31°C</span>
-                </div>
+        <!-- Categories Navigation Menu on Banner -->
+        <nav id="site-navigation" class="header-nav main-navigation" aria-label="Primary Menu">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+
+            <div class="nav-menu-wrapper" id="primary-menu">
+                <ul class="header-menu">
+                    <li class="current-menu-item"><a href="preview.html">होम</a></li>
+                    <li><a href="#desh">देश</a></li>
+                    <li><a href="#duniya">दुनिया</a></li>
+                    <li><a href="#business">बिज़नेस</a></li>
+                    <li><a href="#technology">टेक्नोलॉजी</a></li>
+                    <li><a href="#khel">खेल</a></li>
+                    <li><a href="#manoranjan">मनोरंजन</a></li>
+                    <li><a href="#swasthya">स्वास्थ्य</a></li>
+                    <li><a href="#lifestyle">लाइफस्टाइल</a></li>
+                    <li><a href="#blog">ब्लॉग</a></li>
+                    <li><a href="#video">वीडियो</a></li>
+                </ul>
             </div>
+        </nav>
 
-            <div class="header-social-icons">
-                <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon twitter" aria-label="Twitter (X)"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">
-                    <i class="fa fa-moon"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Navigation Bar -->
-<nav id="site-navigation" class="main-navigation" aria-label="Primary Menu">
-    <div class="container nav-container">
-        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-        </button>
-
-        <div class="nav-menu-wrapper" id="primary-menu">
-            <ul class="header-menu">
-                <li class="current-menu-item"><a href="preview.html">होम</a></li>
-                <li><a href="#desh">देश</a></li>
-                <li><a href="#duniya">दुनिया</a></li>
-                <li><a href="#business">बिज़नेस</a></li>
-                <li><a href="#technology">टेक्नोलॉजी</a></li>
-                <li><a href="#khel">खेल</a></li>
-                <li><a href="#manoranjan">मनोरंजन</a></li>
-                <li><a href="#swasthya">स्वास्थ्य</a></li>
-                <li><a href="#lifestyle">लाइफस्टाइल</a></li>
-            </ul>
-        </div>
-
+        <!-- Search Circle Button & Subscribe Button -->
         <div class="header-actions">
             <button class="search-trigger" id="searchTriggerBtn" aria-label="Search">
                 <i class="fa fa-search"></i>
             </button>
-            <button class="subscribe-btn" id="subscribeBtn">Subscribe</button>
+            <a href="#subscribe" class="subscribe-btn" id="subscribeBtn">Subscribe</a>
         </div>
     </div>
-</nav>
+</header>
 
-<!-- Breaking News Ticker -->
+<!-- Breaking News Ticker in Yellow Bar with White Color Box -->
 <section class="breaking-ticker">
-    <div class="container ticker-inner">
-        <div class="ticker-label">
-            <i class="fa fa-bolt"></i>
-            <span>ताजा खबरें</span>
+    <div class="container ticker-container-wrap">
+        <div class="ticker-white-box">
+            <div class="ticker-label">
+                <span>ताज़ा खबरें</span>
+                <i class="fa fa-bolt"></i>
+            </div>
+            <div class="ticker-slider">
+                <ul class="ticker-list">
+                    <li class="ticker-item"><a href="#news1">सरकार ने लॉन्च की नई हेल्थ इंश्योरेंस योजना</a></li>
+                    <li class="ticker-item"><a href="#news2">शेयर बाजार में जोरदार उछाल, सेंसेक्स 1200 अंक ऊपर</a></li>
+                    <li class="ticker-item"><a href="#news3">भारत ने टी20 सीरीज़ 3-1 से जीती</a></li>
+                    <li class="ticker-item"><a href="#news4">मौसम विभाग ने जारी की भारी बारिश की चेतावनी</a></li>
+                </ul>
+            </div>
+            <div class="ticker-controls">
+                <button class="ticker-control-btn ticker-prev" aria-label="Previous news"><i class="fa fa-chevron-left"></i></button>
+                <button class="ticker-control-btn ticker-next" aria-label="Next news"><i class="fa fa-chevron-right"></i></button>
+            </div>
         </div>
-        <div class="ticker-slider">
-            <ul class="ticker-list">
-                <li class="ticker-item"><a href="#news1">सरकार ने लॉन्च की नई हेल्थ इंश्योरेंस योजना</a></li>
-                <li class="ticker-item"><a href="#news2">शेयर बाजार में जोरदार उछाल, सेंसेक्स 1200 अंक ऊपर</a></li>
-                <li class="ticker-item"><a href="#news3">भारत ने टी20 सीरीज़ 3-1 से जीती</a></li>
-                <li class="ticker-item"><a href="#news4">मौसम विभाग ने जारी की भारी बारिश की चेतावनी</a></li>
-            </ul>
-        </div>
-        <div class="ticker-controls">
+    </div>
+</section>
             <button class="ticker-control-btn ticker-prev" aria-label="Previous news"><i class="fa fa-chevron-left"></i></button>
             <button class="ticker-control-btn ticker-next" aria-label="Next news"><i class="fa fa-chevron-right"></i></button>
         </div>

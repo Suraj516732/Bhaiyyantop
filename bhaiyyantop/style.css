@@ -84,40 +84,30 @@ img {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: #ffffff;
-    min-height: 145px;
+    color: #111111;
+    min-height: 90px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.header-overlay-bg {
-    display: none;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    z-index: 100;
 }
 
 .header-inner {
     position: relative;
     z-index: 2;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     width: 100%;
-}
-
-.header-yellow-bar {
-    display: none;
+    gap: 20px;
 }
 
 /* Logo */
 .logo-container {
     display: flex;
     align-items: center;
-    margin-left: 45px;
-    margin-top: 10px;
-    margin-bottom: 0;
+    flex-shrink: 0;
 }
 
 .logo-link {
@@ -132,287 +122,106 @@ img {
 }
 
 .custom-logo {
-    height: 125px;
+    height: 65px;
     width: auto;
     display: block;
 }
 
-/* Header Right Side Widgets */
-.header-widgets-container {
+/* Header Navigation Categories (On Banner with Black Font) */
+.header-nav {
     display: flex;
     align-items: center;
-    gap: 25px;
-    margin-left: auto;
-    margin-right: 45px;
-}
-
-.date-weather-widget {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    text-align: right;
-    font-size: 16px;
-    font-weight: 700;
-    color: #111111;
-}
-
-.date-weather-widget i {
-    color: #e65100;
-    margin-right: 5px;
-}
-
-.date-text, .weather-text {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.header-social-icons {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.social-icon {
-    display: flex;
-    align-items: center;
+    flex-grow: 1;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #111111;
-    border-radius: 50%;
-    font-size: 19px;
-    text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1.5px solid rgba(0, 0, 0, 0.15);
-}
-
-.social-icon:hover {
-    color: #ffffff;
-    transform: translateY(-4px) scale(1.08);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Brand Colors on Hover */
-.social-icon.facebook:hover {
-    background-color: #1877f2;
-    border-color: #1877f2;
-}
-
-.social-icon.twitter:hover {
-    background-color: #000000;
-    border-color: #000000;
-}
-
-.social-icon.instagram:hover {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    border-color: transparent;
-}
-
-.social-icon.youtube:hover {
-    background-color: #ff0000;
-    border-color: #ff0000;
-}
-
-.dark-mode-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #111111;
-    border-radius: 50%;
-    font-size: 19px;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1.5px solid rgba(0, 0, 0, 0.15);
-    padding: 0;
-}
-
-.dark-mode-toggle:hover {
-    color: #ffffff;
-    background-color: #ffd600;
-    border-color: #ffd600;
-    transform: translateY(-4px) scale(1.08);
-    box-shadow: 0 5px 12px rgba(255, 214, 0, 0.3);
-}
-
-/* Dark Mode CSS Overrides */
-body.dark-mode {
-    background-color: #121212 !important;
-    color: #e0e0e0 !important;
-}
-
-body.dark-mode .post,
-body.dark-mode .widget,
-body.dark-mode .main-content-card,
-body.dark-mode .post-card-layout,
-body.dark-mode .grid-news-card {
-    background-color: #1e1e1e !important;
-    border-color: #2d2d2d !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
-}
-
-body.dark-mode h1,
-body.dark-mode h2,
-body.dark-mode h3,
-body.dark-mode h4,
-body.dark-mode h5,
-body.dark-mode h6,
-body.dark-mode .entry-title a,
-body.dark-mode .grid-news-title a {
-    color: #ffffff !important;
-}
-
-body.dark-mode .post-meta,
-body.dark-mode .entry-content p,
-body.dark-mode .grid-news-excerpt {
-    color: #b0b0b0 !important;
-}
-
-body.dark-mode a {
-    color: #4fc3f7;
-}
-
-body.dark-mode .cat-badge {
-    box-shadow: none !important;
-}
-
-body.dark-mode .site-footer {
-    background-color: #0c0c0c !important;
-    border-top: 1px solid #222 !important;
-}
-
-body.dark-mode .footer-widget h4,
-body.dark-mode .footer-bottom p {
-    color: #ffffff !important;
-}
-
-body.dark-mode .footer-widget ul li a,
-body.dark-mode .footer-widget p {
-    color: #aaaaaa !important;
-}
-
-body.dark-mode .breaking-ticker {
-    background: linear-gradient(to right, #ffd600 0%, #ffeb3b 30%, rgba(255, 255, 255, 0.05) 100%) !important;
-}
-
-body.dark-mode .dark-mode-toggle {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-body.dark-mode .dark-mode-toggle:hover {
-    background-color: #ffeb3b;
-    border-color: #ffeb3b;
-    color: #111111;
-}
-
-/* Sticky Navigation Bar */
-.main-navigation {
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    background-color: #2d3136;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    border-bottom: 3px solid var(--primary-color);
-    font-family: 'Noto Sans Devanagari', sans-serif;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 56px;
 }
 
 .nav-menu-wrapper {
     display: flex;
     align-items: center;
-    height: 100%;
 }
 
 .nav-menu-wrapper .header-menu {
     display: flex;
     list-style: none;
     align-items: center;
-    gap: 0;
+    gap: 12px;
     margin: 0;
     padding: 0;
-    height: 100%;
 }
 
 .nav-menu-wrapper .header-menu li {
     display: flex;
     align-items: center;
-    height: 100%;
 }
 
 .nav-menu-wrapper .header-menu li a {
-    color: #ffffff;
-    font-weight: 500;
-    padding: 0 22px;
-    font-size: 19px;
-    height: 100%;
-    display: flex;
-    align-items: center;
+    color: #111111;
+    font-weight: 700;
+    padding: 6px 14px;
+    font-size: 16px;
+    border-radius: 6px;
     transition: all 0.2s ease;
     text-decoration: none;
-    letter-spacing: 0.3px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Noto Sans Devanagari', sans-serif;
 }
 
 .nav-menu-wrapper .header-menu li a:hover,
 .nav-menu-wrapper .header-menu li.current-menu-item a {
-    background-color: var(--primary-color);
+    background-color: #e91e63;
     color: #ffffff;
 }
 
-/* Header actions override inside dark navbar */
-.main-navigation .header-actions {
+/* Header Actions: White Search Circle & Pink Subscribe Button */
+.header-actions {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
-.main-navigation .search-trigger {
-    background: transparent;
+.search-trigger {
+    background: #ffffff;
     border: none;
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    color: #ffffff;
+    color: #111111;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 17px;
     transition: all 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-.main-navigation .search-trigger:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--primary-color);
+.search-trigger:hover {
+    transform: scale(1.08);
+    background-color: #ffffff;
+    color: #e91e63;
 }
 
-.main-navigation .subscribe-btn {
-    background-color: var(--primary-color);
+.subscribe-btn {
+    background-color: #e91e63;
     color: #ffffff;
     border: none;
-    padding: 7px 18px;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 15px;
     font-weight: 800;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.2s ease;
+    box-shadow: 0 3px 10px rgba(233, 30, 99, 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.main-navigation .subscribe-btn:hover {
+.subscribe-btn:hover {
     background-color: #d81b60;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(233, 30, 99, 0.5);
 }
 
 /* Hamburger toggle styling */
@@ -432,84 +241,65 @@ body.dark-mode .dark-mode-toggle:hover {
 .menu-toggle .hamburger-bar {
     width: 100%;
     height: 3px;
-    background-color: #ffffff;
+    background-color: #111111;
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-@keyframes pulseGlow {
-    0% {
-        box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(233, 30, 99, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(233, 30, 99, 0);
-    }
-}
-
-.subscribe-btn {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    padding: 9px 22px;
-    border-radius: 20px;
-    font-weight: 800;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(233, 30, 99, 0.35);
-    animation: pulseGlow 2.5s infinite;
-    transition: background-color 0.25s, transform 0.25s, box-shadow 0.25s;
-}
-
-.subscribe-btn:hover {
-    background-color: #c2185b;
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 14px rgba(233, 30, 99, 0.5);
-}
-
-/* Breaking News Ticker */
+/* Breaking News Ticker (Yellow Bar with White Color Box) */
 .breaking-ticker {
-    background: linear-gradient(to right, #ffd600 0%, #ffeb3b 50%, rgba(255, 255, 255, 0) 100%);
+    background-color: #ffeb3b;
     border-bottom: 2px solid rgba(251, 192, 45, 0.4);
-    height: 55px;
-    overflow: hidden;
+    padding: 6px 0;
 }
 
-.ticker-inner {
+.ticker-container-wrap {
+    width: 100%;
+}
+
+.ticker-white-box {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 4px 10px;
     display: flex;
     align-items: center;
-    height: 100%;
+    gap: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .ticker-label {
-    background-color: #d50000;
+    background-color: #e91e63;
     color: #ffffff;
     font-weight: 800;
-    padding: 0 20px;
-    height: 100%;
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 15px;
     display: flex;
     align-items: center;
-    font-size: 18px;
-    gap: 8px;
-    position: relative;
-    clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
-    padding-right: 32px;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .ticker-label i {
     animation: flash 1s infinite alternate;
-    font-size: 20px;
+    font-size: 16px;
+    color: #ffeb3b;
+}
+
+@keyframes flash {
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
 }
 
 .ticker-slider {
     flex-grow: 1;
     overflow: hidden;
     position: relative;
-    height: 100%;
+    height: 36px;
+    display: flex;
+    align-items: center;
 }
 
 .ticker-list {
@@ -517,37 +307,65 @@ body.dark-mode .dark-mode-toggle:hover {
     align-items: center;
     list-style: none;
     height: 100%;
+    margin: 0;
+    padding: 0;
     transition: transform 0.5s ease-in-out;
 }
 
 .ticker-item {
-    padding: 0 25px;
-    font-size: 17.5px;
+    padding: 0 15px;
+    font-size: 15.5px;
     font-weight: 700;
-    color: #1a252f;
+    color: #222222;
     white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+.ticker-item a {
+    color: #222222;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.ticker-item a:hover {
+    color: #e91e63;
+}
+
 .ticker-item::after {
     content: "•";
-    color: #7f8c8d;
-    font-size: 20px;
-    margin-left: 25px;
+    color: #888888;
+    font-size: 18px;
+    margin-left: 15px;
 }
 
 .ticker-controls {
     display: flex;
-    gap: 8px;
-    padding-right: 20px;
+    gap: 6px;
+    flex-shrink: 0;
 }
 
 .ticker-control-btn {
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    width: 32px;
+    border: 1px solid #e0e0e0;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444444;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.ticker-control-btn:hover {
+    background: #e91e63;
+    color: #ffffff;
+    border-color: #e91e63;
+}
     height: 32px;
     display: flex;
     align-items: center;
