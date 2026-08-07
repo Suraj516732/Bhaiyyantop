@@ -19,7 +19,7 @@ function register_nav_menus($locations = array()) {}
 function register_sidebar($args = array()) {}
 function wp_enqueue_style($handle, $src = '', $deps = array(), $ver = false, $media = 'all') {}
 function wp_enqueue_script($handle, $src = '', $deps = array(), $ver = false, $in_footer = false) {}
-function get_stylesheet_uri() { return 'bhaiyyantop/style.css'; }
+function get_stylesheet_uri() { return '/bhaiyyantop/style.css'; }
 function wp_parse_args($args, $defaults = array()) {
     if (is_object($args)) {
         $r = get_object_vars($args);
@@ -139,11 +139,11 @@ require_once __DIR__ . '/bhaiyyantop/functions.php';
 function wp_head() {
     echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;900&family=Outfit:wght@400;600;700;800;900&display=swap">' . "\n";
     echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">' . "\n";
-    echo '<link rel="stylesheet" href="bhaiyyantop/style.css?v=' . filemtime(__DIR__ . '/bhaiyyantop/style.css') . '">' . "\n";
+    echo '<link rel="stylesheet" href="/bhaiyyantop/style.css?v=' . filemtime(__DIR__ . '/bhaiyyantop/style.css') . '">' . "\n";
 }
 
 function wp_footer() {
-    echo '<script src="bhaiyyantop/assets/js/theme.js?v=' . filemtime(__DIR__ . '/bhaiyyantop/assets/js/theme.js') . '"></script>' . "\n";
+    echo '<script src="/bhaiyyantop/assets/js/theme.js?v=' . filemtime(__DIR__ . '/bhaiyyantop/assets/js/theme.js') . '"></script>' . "\n";
 }
 
 function wp_body_open() {}
@@ -207,7 +207,7 @@ function has_nav_menu( $location ) {
 }
 
 function get_template_directory_uri() {
-    return 'bhaiyyantop';
+    return '/bhaiyyantop';
 }
 
 function get_posts( $args = array() ) {

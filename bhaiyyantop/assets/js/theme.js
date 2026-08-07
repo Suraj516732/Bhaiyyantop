@@ -240,4 +240,33 @@ document.addEventListener('DOMContentLoaded', function() {
             primaryMenu.classList.toggle('active');
         });
     }
+
+    // -------------------------------------------------------------
+    // Dark Mode Toggle
+    // -------------------------------------------------------------
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        const savedDarkMode = localStorage.getItem('darkMode');
+        const icon = darkModeToggle.querySelector('i');
+        
+        if (savedDarkMode === 'true') {
+            document.body.classList.add('dark-mode');
+            if (icon) {
+                icon.className = 'fa fa-sun';
+            }
+        }
+
+        darkModeToggle.addEventListener('click', function() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            if (icon) {
+                if (isDarkMode) {
+                    icon.className = 'fa fa-sun';
+                } else {
+                    icon.className = 'fa fa-moon';
+                }
+            }
+        });
+    }
 });

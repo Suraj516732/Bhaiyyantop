@@ -48,6 +48,9 @@
                 <a href="#" class="social-icon twitter" aria-label="Twitter (X)"><i class="fab fa-twitter"></i></a>
                 <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="social-icon youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">
+                    <i class="fa fa-moon"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -89,7 +92,6 @@
             <button class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
                 <i class="fa fa-search"></i>
             </button>
-            <button class="subscribe-btn" id="subscribeBtn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></button>
         </div>
     </div>
 </nav>
