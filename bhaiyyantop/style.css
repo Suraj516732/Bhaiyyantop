@@ -1516,3 +1516,80 @@ img {
     display: inline-block;
     margin-bottom: 10px;
 }
+
+/* ==========================================================================
+   STRETCHED LINK PATTERN (Whole-Card Click Target)
+   ========================================================================== */
+.grid-news-card,
+.mini-news-card,
+.editors-hero-card,
+.editors-wide-card,
+.mid-featured-story,
+.hero-slide,
+.color-card-promo,
+.poster-card,
+.editorial-post-card {
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+
+/* Nested Interactive Elements (Higher z-index so category & author links remain independently clickable) */
+.grid-news-card a:not(.stretched-link),
+.mini-news-card a:not(.stretched-link),
+.editors-hero-card a:not(.stretched-link),
+.editors-wide-card a:not(.stretched-link),
+.mid-featured-story a:not(.stretched-link),
+.hero-slide a:not(.stretched-link),
+.color-card-promo a:not(.stretched-link),
+.poster-card a:not(.stretched-link),
+.editorial-post-card a:not(.stretched-link),
+.cat-badge,
+.author-link,
+.section-more-link,
+.read-more-btn,
+.subscribe-btn,
+.cat-tab-btn,
+button,
+input {
+    position: relative;
+    z-index: 2;
+}
+
+/* Card Hover Elevation State Triggered when hovering over card */
+.grid-news-card:hover,
+.mini-news-card:hover,
+.editors-hero-card:hover,
+.editors-wide-card:hover,
+.mid-featured-story:hover,
+.poster-card:hover,
+.editorial-post-card:hover,
+.color-card-promo:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Keyboard & Accessibility Focus State */
+.stretched-link:focus-visible {
+    outline: none;
+}
+
+.grid-news-card:focus-within,
+.mini-news-card:focus-within,
+.editors-hero-card:focus-within,
+.editors-wide-card:focus-within,
+.mid-featured-story:focus-within,
+.poster-card:focus-within,
+.editorial-post-card:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}

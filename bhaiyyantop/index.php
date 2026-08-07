@@ -25,24 +25,16 @@ get_header();
                     <h1 class="section-title"><?php esc_html_e( 'समाचार', 'bhaiyyantop' ); ?></h1>
                 </header>
 
-                <div class="latest-news-grid" style="margin-top: 20px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+                <div class="latest-news-grid" style="margin-top: 20px;">
                     <?php
                     /* Start the Loop */
                     while ( have_posts() ) :
                         the_post();
-                        ?>
-                        <article class="grid-news-card">
-                            <div class="grid-news-thumb">
-                                <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'bhaiyyantop-medium' ); else : ?>
-                                    <div class="no-thumb" style="height:150px; background-color:#ccc;"></div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="grid-news-content">
-                                <h3 class="grid-news-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo get_the_date(); ?></div>
-                            </div>
-                        </article>
-                    <?php endwhile; ?>
+
+                        get_template_part( 'template-parts/content' );
+
+                    endwhile;
+                    ?>
                 </div>
 
                 <div class="pagination" style="margin-top: 30px; display: flex; gap: 10px; font-weight: 700;">

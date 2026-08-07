@@ -35,26 +35,14 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
 
             <div class="featured-news-list">
                 <?php foreach ( $featured_posts as $item ) : ?>
-                    <article class="mini-news-card">
-                        <div class="mini-news-thumb">
-                            <a href="<?php echo esc_url( $item['permalink'] ); ?>">
-                                <img src="<?php echo esc_url( $item['thumbnail'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" loading="lazy">
-                            </a>
-                        </div>
-                        <div class="mini-news-content">
-                            <h3 class="mini-news-title">
-                                <a href="<?php echo esc_url( $item['permalink'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a>
-                            </h3>
-                            <div class="post-meta">by <span><?php echo esc_html( $item['author'] ); ?></span> &bull; <?php echo esc_html( $item['date'] ); ?></div>
-                        </div>
-                    </article>
+                    <?php get_template_part( 'template-parts/cards/card', 'mini', array( 'item' => $item ) ); ?>
                 <?php endforeach; ?>
             </div>
 
             <!-- Pink Color Card Promo Box -->
             <?php if ( isset( $recent_posts[6] ) ) : $promo = $recent_posts[6]; ?>
-                <div class="color-card-promo">
-                    <h3><a href="<?php echo esc_url( $promo['permalink'] ); ?>"><?php echo esc_html( $promo['title'] ); ?></a></h3>
+                <div class="color-card-promo whole-card-link">
+                    <h3><a href="<?php echo esc_url( $promo['permalink'] ); ?>" class="stretched-link"><?php echo esc_html( $promo['title'] ); ?></a></h3>
                     <div class="post-meta">by <span><?php echo esc_html( $promo['author'] ); ?></span> &bull; <?php echo esc_html( $promo['date'] ); ?></div>
                 </div>
             <?php endif; ?>
@@ -68,17 +56,7 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
             <!-- Hero Slider -->
             <div class="hero-slider-wrap" id="heroSlider">
                 <?php if ( $hero_post ) : ?>
-                    <div class="hero-slide active">
-                        <a href="<?php echo esc_url( $hero_post['permalink'] ); ?>" class="hero-img-link">
-                            <img src="<?php echo esc_url( $hero_post['thumbnail'] ); ?>" alt="<?php echo esc_attr( $hero_post['title'] ); ?>">
-                        </a>
-                        <div class="hero-overlay">
-                            <a href="<?php echo esc_url( $hero_post['cat_url'] ); ?>" class="cat-badge pink"><?php echo esc_html( $hero_post['category'] ); ?></a>
-                            <h2 class="hero-title"><a href="<?php echo esc_url( $hero_post['permalink'] ); ?>"><?php echo esc_html( $hero_post['title'] ); ?></a></h2>
-                            <p class="hero-excerpt"><?php echo esc_html( $hero_post['excerpt'] ); ?></p>
-                            <div class="post-meta">by <span><?php echo esc_html( $hero_post['author'] ); ?></span> &bull; <?php echo esc_html( $hero_post['date'] ); ?></div>
-                        </div>
-                    </div>
+                    <?php get_template_part( 'template-parts/cards/card', 'hero', array( 'item' => $hero_post ) ); ?>
                 <?php endif; ?>
                 
                 <!-- Dot indicators -->
@@ -92,20 +70,7 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
 
             <!-- Middle Wide Featured Card -->
             <?php if ( $mid_card_post ) : ?>
-                <div class="mid-featured-story">
-                    <div class="mid-card-inner">
-                        <div class="mid-card-content">
-                            <a href="<?php echo esc_url( $mid_card_post['cat_url'] ); ?>" class="cat-badge teal"><?php echo esc_html( $mid_card_post['category'] ); ?></a>
-                            <h3 class="mid-card-title"><a href="<?php echo esc_url( $mid_card_post['permalink'] ); ?>"><?php echo esc_html( $mid_card_post['title'] ); ?></a></h3>
-                            <div class="post-meta">by <span><?php echo esc_html( $mid_card_post['author'] ); ?></span> &bull; <?php echo esc_html( $mid_card_post['date'] ); ?></div>
-                        </div>
-                        <div class="mid-card-image">
-                            <a href="<?php echo esc_url( $mid_card_post['permalink'] ); ?>">
-                                <img src="<?php echo esc_url( $mid_card_post['thumbnail'] ); ?>" alt="<?php echo esc_attr( $mid_card_post['title'] ); ?>">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php get_template_part( 'template-parts/cards/card', 'mid', array( 'item' => $mid_card_post ) ); ?>
             <?php endif; ?>
         </main>
 
@@ -120,51 +85,15 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
 
             <div class="editors-choice-list">
                 <?php if ( isset( $editors_posts[0] ) ) : $ed1 = $editors_posts[0]; ?>
-                    <!-- Editors Hero Card -->
-                    <article class="editors-hero-card">
-                        <div class="editors-hero-image">
-                            <a href="<?php echo esc_url( $ed1['permalink'] ); ?>">
-                                <img src="<?php echo esc_url( $ed1['thumbnail'] ); ?>" alt="<?php echo esc_attr( $ed1['title'] ); ?>">
-                            </a>
-                        </div>
-                        <div class="editors-hero-content">
-                            <a href="<?php echo esc_url( $ed1['cat_url'] ); ?>" class="cat-badge pink"><?php echo esc_html( $ed1['category'] ); ?></a>
-                            <h3 class="editors-hero-title"><a href="<?php echo esc_url( $ed1['permalink'] ); ?>"><?php echo esc_html( $ed1['title'] ); ?></a></h3>
-                            <div class="post-meta">by <span><?php echo esc_html( $ed1['author'] ); ?></span> &bull; <?php echo esc_html( $ed1['date'] ); ?></div>
-                        </div>
-                    </article>
+                    <?php get_template_part( 'template-parts/cards/card', 'editor-hero', array( 'item' => $ed1 ) ); ?>
                 <?php endif; ?>
 
                 <?php if ( isset( $editors_posts[1] ) ) : $ed2 = $editors_posts[1]; ?>
-                    <!-- Editors Wide List 1 -->
-                    <article class="editors-wide-card">
-                        <div class="editors-wide-content">
-                            <a href="<?php echo esc_url( $ed2['cat_url'] ); ?>" class="cat-badge teal"><?php echo esc_html( $ed2['category'] ); ?></a>
-                            <h3 class="editors-wide-title"><a href="<?php echo esc_url( $ed2['permalink'] ); ?>"><?php echo esc_html( $ed2['title'] ); ?></a></h3>
-                            <div class="post-meta">by <span><?php echo esc_html( $ed2['author'] ); ?></span> &bull; <?php echo esc_html( $ed2['date'] ); ?></div>
-                        </div>
-                        <div class="editors-wide-thumb">
-                            <a href="<?php echo esc_url( $ed2['permalink'] ); ?>">
-                                <img src="<?php echo esc_url( $ed2['thumbnail'] ); ?>" alt="<?php echo esc_attr( $ed2['title'] ); ?>">
-                            </a>
-                        </div>
-                    </article>
+                    <?php get_template_part( 'template-parts/cards/card', 'editor-wide', array( 'item' => $ed2, 'badge_color' => 'teal' ) ); ?>
                 <?php endif; ?>
 
                 <?php if ( isset( $editors_posts[2] ) ) : $ed3 = $editors_posts[2]; ?>
-                    <!-- Editors Wide List 2 -->
-                    <article class="editors-wide-card">
-                        <div class="editors-wide-content">
-                            <a href="<?php echo esc_url( $ed3['cat_url'] ); ?>" class="cat-badge blue"><?php echo esc_html( $ed3['category'] ); ?></a>
-                            <h3 class="editors-wide-title"><a href="<?php echo esc_url( $ed3['permalink'] ); ?>"><?php echo esc_html( $ed3['title'] ); ?></a></h3>
-                            <div class="post-meta">by <span><?php echo esc_html( $ed3['author'] ); ?></span> &bull; <?php echo esc_html( $ed3['date'] ); ?></div>
-                        </div>
-                        <div class="editors-wide-thumb">
-                            <a href="<?php echo esc_url( $ed3['permalink'] ); ?>">
-                                <img src="<?php echo esc_url( $ed3['thumbnail'] ); ?>" alt="<?php echo esc_attr( $ed3['title'] ); ?>">
-                            </a>
-                        </div>
-                    </article>
+                    <?php get_template_part( 'template-parts/cards/card', 'editor-wide', array( 'item' => $ed3, 'badge_color' => 'blue' ) ); ?>
                 <?php endif; ?>
             </div>
         </aside>
@@ -188,20 +117,7 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
 
             <div class="latest-news-grid" id="latestNewsGrid">
                 <?php foreach ( $grid_posts as $post_item ) : ?>
-                    <article class="grid-news-card" data-category="all" data-cats="<?php echo esc_attr( $post_item['cat_slug'] ); ?>">
-                        <div class="grid-news-thumb">
-                            <a href="<?php echo esc_url( $post_item['permalink'] ); ?>">
-                                <img src="<?php echo esc_url( $post_item['thumbnail'] ); ?>" alt="<?php echo esc_attr( $post_item['title'] ); ?>">
-                            </a>
-                        </div>
-                        <div class="grid-news-content">
-                            <a href="<?php echo esc_url( $post_item['cat_url'] ); ?>" class="cat-badge pink"><?php echo esc_html( $post_item['category'] ); ?></a>
-                            <h3 class="grid-news-title">
-                                <a href="<?php echo esc_url( $post_item['permalink'] ); ?>"><?php echo esc_html( $post_item['title'] ); ?></a>
-                            </h3>
-                            <div class="post-meta">by <span><?php echo esc_html( $post_item['author'] ); ?></span> &bull; <?php echo esc_html( $post_item['date'] ); ?></div>
-                        </div>
-                    </article>
+                    <?php get_template_part( 'template-parts/cards/card', 'grid', array( 'item' => $post_item ) ); ?>
                 <?php endforeach; ?>
             </div>
         </section>
