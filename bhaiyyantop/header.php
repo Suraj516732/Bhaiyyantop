@@ -34,7 +34,7 @@
             <?php endif; ?>
         </div>
 
-        <!-- Categories Navigation Menu (In same line as logo, a little above bottom end) -->
+        <!-- Categories Navigation Menu -->
         <nav id="site-navigation" class="header-nav main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
                 <span class="hamburger-bar"></span>
@@ -64,19 +64,27 @@
             </div>
         </nav>
 
-        <!-- Right Side Actions: Inline Expanding Search Bar & Social Buttons -->
+        <!-- Right Side Actions: Inline Header Search & Social Buttons -->
         <div class="header-actions">
             <div class="header-search-container">
                 <div class="search-expand" id="searchExpand">
-                    <form role="search" method="get" class="search-expand-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                        <input type="search" name="s" placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>" class="search-input" id="searchInput" required autocomplete="off" />
-                        <button type="submit" class="search-submit" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                    <form class="search-expand-form" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <input
+                            class="search-input"
+                            id="searchInput"
+                            type="search"
+                            placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>"
+                            name="s"
+                            required
+                            autocomplete="off">
+                        <button class="search-submit" type="submit">
                             <?php esc_html_e( 'खोजें', 'bhaiyyantop' ); ?>
                         </button>
                     </form>
                 </div>
-                <button type="button" class="search-toggle" id="searchToggleBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
-                    <i class="fa fa-search"></i>
+
+                <button class="search-toggle" id="searchToggleBtn" type="button" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                    <i class="fas fa-search"></i>
                 </button>
             </div>
 
