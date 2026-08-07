@@ -362,6 +362,23 @@ require_once get_template_directory() . '/inc/related-posts.php';
 require_once get_template_directory() . '/inc/author-box.php';
 require_once get_template_directory() . '/inc/share-buttons.php';
 require_once get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Render Advertisement Block Component
+ *
+ * @param string $slot Ad slot identifier.
+ */
+function bhaiyyantop_render_ad_block( $slot = 'default' ) {
+    $enable_ad = get_theme_mod( 'bhaiyyantop_enable_header_ad', false );
+    $ad_code   = get_theme_mod( 'bhaiyyantop_header_ad_code', '' );
+
+    if ( $enable_ad && ! empty( $ad_code ) ) {
+        echo '<div class="ad-block-container ad-slot-' . esc_attr( $slot ) . '">';
+        echo '<span class="ad-label">' . esc_html__( 'विज्ञापन', 'bhaiyyantop' ) . '</span>';
+        echo '<div class="ad-content">' . wp_kses_post( $ad_code ) . '</div>';
+        echo '</div>';
+    }
+}
 require_once get_template_directory() . '/inc/scripts-handler.php';
 require_once get_template_directory() . '/inc/demo-import.php';
 
