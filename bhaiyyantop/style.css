@@ -16,6 +16,8 @@ Tags: news, magazine, responsive-layout, grid, custom-colors, translation-ready
 This theme is designed from a custom visual layout with high fidelity Devanagari web typography.
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Mukta:wght@500;600&display=swap');
+
 /* Reset & Base Styles */
 *,
 *::before,
@@ -38,7 +40,9 @@ This theme is designed from a custom visual layout with high fidelity Devanagari
     --text-muted: #757575;
     --light-bg: #f4f3ef;
     --border-color: #e0e0e0;
-    --font-primary: 'Noto Sans Devanagari', sans-serif;
+    --font-primary: 'Noto Serif Devanagari', 'Martel', Georgia, serif;
+    --font-heading: 'Martel', 'Noto Serif Devanagari', Georgia, serif;
+    --font-ui: 'Mukta', sans-serif;
     --container-width: 1800px;
     --container-radius: 8px;
 }
@@ -48,8 +52,14 @@ body {
     background-color: var(--light-bg);
     color: var(--text-color);
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .headline, .title {
+    font-family: var(--font-heading);
+    font-weight: 700;
 }
 
 a {
@@ -181,13 +191,13 @@ img {
 
 .nav-menu-wrapper .header-menu li a {
     color: #111111;
-    font-weight: 700;
+    font-weight: 600;
     padding: 6px 14px;
     font-size: 19px;
     border-radius: 8px;
     transition: all 0.2s ease;
     text-decoration: none;
-    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-family: var(--font-ui);
     white-space: nowrap;
 }
 
@@ -561,7 +571,7 @@ img {
     font-weight: 800;
     color: #111111;
     position: relative;
-    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-family: var(--font-heading);
     margin: 0;
     padding-bottom: 8px;
 }
@@ -579,7 +589,8 @@ img {
 
 .section-more-link {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
+    font-family: var(--font-ui);
     color: #222222;
     text-decoration: none;
     display: flex;
@@ -596,7 +607,8 @@ img {
 .cat-badge {
     color: #ffffff;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
+    font-family: var(--font-ui);
     padding: 3px 8px;
     border-radius: 2px;
     display: inline-block;
@@ -676,13 +688,15 @@ img {
 }
 
 .post-meta {
+    font-family: var(--font-primary);
     font-size: 13px;
-    color: var(--text-muted);
+    color: #666666;
     margin-top: 4px;
+    font-weight: 400;
 }
 
 .post-meta span {
-    font-weight: 600;
+    font-weight: 400;
 }
 
 /* Colored Card Alert Block */
@@ -976,7 +990,8 @@ img {
     padding: 6px 14px;
     border-radius: 4px;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
+    font-family: var(--font-ui);
     border: none;
     cursor: pointer;
     transition: all 0.2s;
@@ -1044,7 +1059,7 @@ img {
     color: #bbbbbb;
     padding: 40px 0 20px 0;
     margin-top: 40px;
-    font-size: 13.5px;
+    font-size: 16px;
     border-top: 5px solid var(--primary-color);
 }
 
@@ -1057,11 +1072,12 @@ img {
 
 .footer-widget h4 {
     color: #ffffff;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     margin-bottom: 15px;
     position: relative;
     padding-bottom: 8px;
+    font-family: var(--font-heading);
 }
 
 .footer-widget h4::after {
@@ -1097,7 +1113,8 @@ img {
 }
 
 .footer-bottom p {
-    font-size: 12px;
+    font-size: 14px;
+    color: #888888;
 }
 
 .footer-socials {

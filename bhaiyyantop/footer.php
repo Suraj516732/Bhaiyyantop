@@ -34,8 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <h4><?php esc_html_e( 'सामाजिक और संपर्क', 'bhaiyyantop' ); ?></h4>
                     <ul>
                         <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'मुख्य पृष्ठ (Home)', 'bhaiyyantop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>"><?php esc_html_e( 'फेसबुक पेज़', 'bhaiyyantop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>"><?php esc_html_e( 'यूट्यूब चैनल', 'bhaiyyantop' ); ?></a></li>
                     </ul>
                 </div>
             </div>
