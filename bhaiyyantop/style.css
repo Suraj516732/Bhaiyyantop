@@ -27,20 +27,46 @@ This theme is designed from a custom visual layout with high fidelity Devanagari
 
 :root {
     --primary-color: #e91e63;
-    /* Pink/Red */
     --secondary-color: #00bcd4;
-    /* Teal */
+    --accent-color: #ffeb3b;
     --accent-yellow: #ffeb3b;
-    /* Yellow ticker */
-    --ticker-bg: #fffde7;
+    --header-bg: #00bcd4;
+    --card-bg: #ffffff;
     --dark-color: #1a1a1a;
     --text-color: #333333;
     --text-muted: #757575;
     --light-bg: #f4f3ef;
     --border-color: #e0e0e0;
-    --font-primary: 'Noto Sans Devanagari', sans-serif;
-    --container-width: 1800px;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.12);
+
+    /* Border Radii */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
     --container-radius: 8px;
+    --container-width: 1800px;
+
+    /* Transitions */
+    --transition: all 0.25s ease;
+
+    /* Fonts */
+    --font-body: 'Noto Sans Devanagari', sans-serif;
+    --font-heading: 'Noto Sans Devanagari', sans-serif;
+    --font-primary: 'Noto Sans Devanagari', sans-serif;
+
+    /* Navigation & Theme Customizer Aliases */
+    --nav-text: #111111;
+    --nav-hover: #ffffff;
+    --nav-hover-bg: #e91e63;
+    --nav-font-size: 19px;
+    --button-bg: #e91e63;
+    --button-hover: #c2185b;
+    --footer-bg: #121216;
+    --footer-text: #a0a0a0;
 }
 
 body {
@@ -290,24 +316,7 @@ img {
     }
 }
 
-@media (max-width: 768px) {
-    .sticky-nav .nav-menu-wrapper {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #00bcd4;
-        padding: 15px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-    .sticky-nav .nav-menu-wrapper.active {
-        display: block;
-    }
-    .sticky-nav .menu-toggle {
-        display: flex;
-    }
-}
+
 
 .header-social-buttons {
     display: flex;
@@ -1270,6 +1279,25 @@ img {
 
     .header-menu {
         justify-content: center;
+    }
+
+    .sticky-nav .nav-menu-wrapper {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--secondary-color);
+        padding: 15px;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .sticky-nav .nav-menu-wrapper.active {
+        display: block;
+    }
+
+    .sticky-nav .menu-toggle {
+        display: flex;
     }
 
     .ticker-inner {
