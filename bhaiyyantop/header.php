@@ -20,10 +20,10 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Header Section with Logo, Navigation & Action Buttons on Banner -->
+<!-- Header Section with 1.5x Banner Size and 1.5x Logo Size -->
 <header id="masthead" class="site-header">
     <div class="container header-inner">
-        <!-- Site Branding Logo -->
+        <!-- Site Branding Logo (0.5x / +50% larger) -->
         <div class="logo-container">
             <?php if ( has_custom_logo() ) : ?>
                 <?php the_custom_logo(); ?>
@@ -64,12 +64,16 @@
             </div>
         </nav>
 
-        <!-- Search Circle Button and Pink Subscribe Button -->
+        <!-- Search Circle Button & Social Media Icon Buttons (Instagram, YouTube, Facebook) -->
         <div class="header-actions">
             <button class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
                 <i class="fa fa-search"></i>
             </button>
-            <a href="#subscribe" class="subscribe-btn" id="subscribeBtn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></a>
+            <div class="header-social-buttons">
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
         </div>
     </div>
 </header>
@@ -84,7 +88,7 @@
 </div>
 
 <?php if ( get_theme_mod( 'bhaiyyantop_show_ticker', true ) ) : ?>
-<!-- Breaking News Ticker in Yellow Bar with White Color Box -->
+<!-- Breaking News Ticker in Transparent Faded Yellow Bar with White Color Box -->
 <section class="breaking-ticker">
     <div class="container ticker-container-wrap">
         <div class="ticker-white-box">
