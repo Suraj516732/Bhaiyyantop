@@ -220,34 +220,30 @@ function bhaiyyantop_get_theme_inline_script() {
             });
         }
 
-        // 6. Animated Dropdown Search Box Handler
-        const searchBtn = document.getElementById('searchTriggerBtn');
-        const searchDropdown = document.getElementById('headerSearchBoxDropdown');
-        const searchInput = document.getElementById('headerSearchInput');
+        // 6. Inline Expanding Search Bar Handler (Right-to-Left expand width: 0 -> 320px)
+        const searchToggleBtn = document.getElementById('searchToggleBtn');
+        const searchExpand = document.getElementById('searchExpand');
+        const searchInput = document.getElementById('searchInput');
 
-        if (searchBtn && searchDropdown) {
-            searchBtn.addEventListener('click', function(e) {
+        if (searchToggleBtn && searchExpand) {
+            searchToggleBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const isActive = searchDropdown.classList.toggle('active');
-                searchBtn.classList.toggle('active');
+                const isActive = searchExpand.classList.toggle('active');
+                searchToggleBtn.classList.toggle('active');
                 if (isActive && searchInput) {
-                    setTimeout(() => searchInput.focus(), 100);
+                    setTimeout(() => searchInput.focus(), 150);
                 }
             });
 
             document.addEventListener('click', function(e) {
-                if (searchDropdown && !searchDropdown.contains(e.target) && !searchBtn.contains(e.target)) {
-                    searchDropdown.classList.remove('active');
-                    searchBtn.classList.remove('active');
+                if (searchExpand && !searchExpand.contains(e.target) && !searchToggleBtn.contains(e.target)) {
+                    if (!searchInput || searchInput.value.trim() === '') {
+                        searchExpand.classList.remove('active');
+                        searchToggleBtn.classList.remove('active');
+                    }
                 }
             });
-
-            if (searchDropdown) {
-                searchDropdown.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            }
         }
 
         // 7. Interactive Subscribe Modal
