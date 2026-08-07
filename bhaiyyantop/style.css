@@ -85,33 +85,22 @@ img {
     background-position: center;
     background-repeat: no-repeat;
     color: #111111;
-    min-height: 160px;
+    min-height: 125px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-end; /* Align logo, nav, search/social near bottom of header cover */
+    padding-bottom: 18px; /* Positioned a little above the bottom-end of the container! */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     z-index: 100;
-    padding: 12px 0 0 0;
 }
 
-.header-inner-wrapper {
+.header-inner {
     position: relative;
     z-index: 2;
     display: flex;
-    flex-direction: column;
+    align-items: center; /* Same horizontal line! */
     justify-content: space-between;
     width: 100%;
-    height: 100%;
-    min-height: 145px;
-}
-
-/* Top Row: Logo & Header Actions */
-.header-main-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding-bottom: 10px;
+    gap: 15px;
 }
 
 /* Logo */
@@ -133,26 +122,17 @@ img {
 }
 
 .custom-logo {
-    height: 85px;
+    height: 75px;
     width: auto;
     display: block;
 }
 
-/* Bottom Row: Navigation Bar positioned at the bottom end of the header cover banner */
-.header-nav-row {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 4px;
-    margin-top: auto;
-}
-
+/* Header Navigation Categories (Arranged in the same line next to logo) */
 .header-nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    flex-grow: 1;
 }
 
 .nav-menu-wrapper {
@@ -164,7 +144,7 @@ img {
     display: flex;
     list-style: none;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     margin: 0;
     padding: 0;
 }
@@ -177,12 +157,13 @@ img {
 .nav-menu-wrapper .header-menu li a {
     color: #111111;
     font-weight: 700;
-    padding: 6px 16px;
-    font-size: 16.5px;
+    padding: 6px 14px;
+    font-size: 15.5px;
     border-radius: 6px;
     transition: all 0.2s ease;
     text-decoration: none;
     font-family: 'Noto Sans Devanagari', sans-serif;
+    white-space: nowrap;
 }
 
 .nav-menu-wrapper .header-menu li a:hover,
@@ -195,7 +176,7 @@ img {
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-shrink: 0;
 }
 
@@ -235,10 +216,11 @@ img {
 /* Inline Expanding Search Bar (Right to Left width: 0 -> 320px) */
 .search-expand {
     width: 0;
+    max-width: 0;
     opacity: 0;
     overflow: hidden;
-    transition: width 0.35s ease, opacity 0.35s ease;
     white-space: nowrap;
+    transition: width 0.35s ease, max-width 0.35s ease, opacity 0.35s ease;
     display: flex;
     align-items: center;
     margin-right: 8px;
@@ -246,6 +228,7 @@ img {
 
 .search-expand.active {
     width: 320px;
+    max-width: 320px;
     opacity: 1;
 }
 

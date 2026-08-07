@@ -229,10 +229,23 @@ function bhaiyyantop_get_theme_inline_script() {
             searchToggleBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const isActive = searchExpand.classList.toggle('active');
-                searchToggleBtn.classList.toggle('active');
-                if (isActive && searchInput) {
-                    setTimeout(() => searchInput.focus(), 150);
+                
+                const isAlreadyActive = searchExpand.classList.contains('active');
+                
+                if (!isAlreadyActive) {
+                    searchExpand.classList.add('active');
+                    searchToggleBtn.classList.add('active');
+                    if (searchInput) {
+                        setTimeout(function() { searchInput.focus(); }, 150);
+                    }
+                } else {
+                    if (searchInput && searchInput.value.trim() !== '') {
+                        const form = searchExpand.querySelector('form');
+                        if (form) form.submit();
+                    } else {
+                        searchExpand.classList.remove('active');
+                        searchToggleBtn.classList.remove('active');
+                    }
                 }
             });
 
@@ -243,6 +256,10 @@ function bhaiyyantop_get_theme_inline_script() {
                         searchToggleBtn.classList.remove('active');
                     }
                 }
+            });
+
+            searchExpand.addEventListener('click', function(e) {
+                e.stopPropagation();
             });
         }
 

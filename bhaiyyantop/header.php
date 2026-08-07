@@ -20,76 +20,71 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Header Section with Nav at Bottom End of Banner & Inline Expanding Search Bar -->
+<!-- Header Section with Logo, Navigation & Search arranged in same line a little above bottom end -->
 <header id="masthead" class="site-header">
-    <div class="container header-inner-wrapper">
-        <!-- Top Row: Logo & Search / Social Actions -->
-        <div class="header-main-row">
-            <!-- Site Branding Logo -->
-            <div class="logo-container">
-                <?php if ( has_custom_logo() ) : ?>
-                    <?php the_custom_logo(); ?>
-                <?php else : ?>
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-link">
-                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="custom-logo">
-                    </a>
-                <?php endif; ?>
-            </div>
-
-            <!-- Header Actions: Inline Expanding Search Container & Social Media Buttons -->
-            <div class="header-actions">
-                <div class="header-search-container">
-                    <div class="search-expand" id="searchExpand">
-                        <form role="search" method="get" class="search-expand-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                            <input type="search" name="s" placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>" class="search-input" id="searchInput" required autocomplete="off" />
-                            <button type="submit" class="search-submit" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
-                                <?php esc_html_e( 'खोजें', 'bhaiyyantop' ); ?>
-                            </button>
-                        </form>
-                    </div>
-                    <button type="button" class="search-toggle" id="searchToggleBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-
-                <div class="header-social-buttons">
-                    <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
+    <div class="container header-inner">
+        <!-- Site Branding Logo -->
+        <div class="logo-container">
+            <?php if ( has_custom_logo() ) : ?>
+                <?php the_custom_logo(); ?>
+            <?php else : ?>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-link">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="custom-logo">
+                </a>
+            <?php endif; ?>
         </div>
 
-        <!-- Bottom End Row: Navigation Bar positioned at the bottom end of the header banner cover -->
-        <div class="header-nav-row">
-            <nav id="site-navigation" class="header-nav main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
-                    <span class="hamburger-bar"></span>
-                    <span class="hamburger-bar"></span>
-                    <span class="hamburger-bar"></span>
-                </button>
+        <!-- Categories Navigation Menu (In same line as logo, a little above bottom end) -->
+        <nav id="site-navigation" class="header-nav main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
 
-                <div class="nav-menu-wrapper" id="primary-menu">
-                    <?php
-                    if ( has_nav_menu( 'primary' ) ) {
-                        wp_nav_menu( array(
-                            'theme_location' => 'primary',
-                            'menu_class'     => 'header-menu',
-                            'container'      => false,
-                            'depth'          => 1,
-                        ) );
-                    } else {
-                        $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
-                        echo '<ul class="header-menu">';
-                        echo '<li class="current-menu-item"><a href="' . esc_url( home_url( '/' ) ) . '">होम</a></li>';
-                        foreach ( $categories as $slug => $cat_info ) {
-                            echo '<li><a href="' . esc_url( $cat_info['url'] ) . '">' . esc_html( $cat_info['name'] ) . '</a></li>';
-                        }
-                        echo '</ul>';
+            <div class="nav-menu-wrapper" id="primary-menu">
+                <?php
+                if ( has_nav_menu( 'primary' ) ) {
+                    wp_nav_menu( array(
+                        'theme_location' => 'primary',
+                        'menu_class'     => 'header-menu',
+                        'container'      => false,
+                        'depth'          => 1,
+                    ) );
+                } else {
+                    $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
+                    echo '<ul class="header-menu">';
+                    echo '<li class="current-menu-item"><a href="' . esc_url( home_url( '/' ) ) . '">होम</a></li>';
+                    foreach ( $categories as $slug => $cat_info ) {
+                        echo '<li><a href="' . esc_url( $cat_info['url'] ) . '">' . esc_html( $cat_info['name'] ) . '</a></li>';
                     }
-                    ?>
+                    echo '</ul>';
+                }
+                ?>
+            </div>
+        </nav>
+
+        <!-- Right Side Actions: Inline Expanding Search Bar & Social Buttons -->
+        <div class="header-actions">
+            <div class="header-search-container">
+                <div class="search-expand" id="searchExpand">
+                    <form role="search" method="get" class="search-expand-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <input type="search" name="s" placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>" class="search-input" id="searchInput" required autocomplete="off" />
+                        <button type="submit" class="search-submit" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                            <?php esc_html_e( 'खोजें', 'bhaiyyantop' ); ?>
+                        </button>
+                    </form>
                 </div>
-            </nav>
+                <button type="button" class="search-toggle" id="searchToggleBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <div class="header-social-buttons">
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
         </div>
     </div>
 </header>
