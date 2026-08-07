@@ -148,7 +148,7 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                                 <article class="grid-news-card poster-card">
                                     <div class="grid-news-thumb" style="position: relative;">
                                         <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'bhaiyyantop-medium' ); else : ?>
-                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/city_skyline.png" alt="<?php the_title(); ?>">
+                                            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/city_skyline.png' ); ?>" alt="<?php the_title_attribute(); ?>">
                                         <?php endif; ?>
                                         <div class="play-icon-overlay"><i class="fa fa-play"></i></div>
                                         <span class="video-duration-badge">03:45</span>
@@ -188,7 +188,7 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                                 <article class="poster-card">
                                     <div class="grid-news-thumb">
                                         <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'bhaiyyantop-medium' ); else : ?>
-                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/music_concert.png" alt="<?php the_title(); ?>">
+                                            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/music_concert.png' ); ?>" alt="<?php the_title_attribute(); ?>">
                                         <?php endif; ?>
                                     </div>
                                     <div class="grid-news-content" style="padding:15px;">
@@ -207,7 +207,7 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                                 <article class="grid-news-card">
                                     <div class="grid-news-thumb">
                                         <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'bhaiyyantop-medium' ); else : ?>
-                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/city_skyline.png" alt="<?php the_title(); ?>">
+                                            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/city_skyline.png' ); ?>" alt="<?php the_title_attribute(); ?>">
                                         <?php endif; ?>
                                     </div>
                                     <div class="grid-news-content">

@@ -79,12 +79,16 @@ function bhaiyyantop_scripts() {
     // Enqueue FontAwesome for icons (e.g. search, arrows, bolt)
     wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0' );
 
-    // Enqueue main stylesheet.
-    wp_enqueue_style( 'bhaiyyantop-style', get_stylesheet_uri(), array( 'bhaiyyantop-fonts', 'font-awesome' ), '1.0.0' );
+    // Enqueue main stylesheet with dynamic filemtime versioning
+    $theme_css_path = get_template_directory() . '/style.css';
+    $theme_css_ver  = file_exists( $theme_css_path ) ? filemtime( $theme_css_path ) : '1.0.0';
+    wp_enqueue_style( 'bhaiyyantop-style', get_stylesheet_uri(), array( 'bhaiyyantop-fonts', 'font-awesome' ), $theme_css_ver );
 
-    // Enqueue single post CSS if viewing single article
+    // Enqueue single post CSS if viewing single article with filemtime versioning
     if ( is_single() ) {
-        wp_enqueue_style( 'bhaiyyantop-single-style', get_template_directory_uri() . '/assets/css/single.css', array( 'bhaiyyantop-style' ), '1.0.0' );
+        $single_css_path = get_template_directory() . '/assets/css/single.css';
+        $single_css_ver  = file_exists( $single_css_path ) ? filemtime( $single_css_path ) : '1.0.0';
+        wp_enqueue_style( 'bhaiyyantop-single-style', get_template_directory_uri() . '/assets/css/single.css', array( 'bhaiyyantop-style' ), $single_css_ver );
     }
 }
 add_action( 'wp_enqueue_scripts', 'bhaiyyantop_scripts' );
@@ -225,7 +229,7 @@ function bhaiyyantop_get_recent_posts( $args = array() ) {
     }
 
     // Fallback dynamic mock data when running locally or if database has no posts
-    $theme_uri = function_exists('get_template_directory_uri') ? get_template_directory_uri() : 'bhaiyyantop';
+    $theme_uri = get_template_directory_uri();
     
     $mock_all = array(
         array(
@@ -353,5 +357,7 @@ require_once get_template_directory() . '/inc/author-box.php';
 require_once get_template_directory() . '/inc/share-buttons.php';
 require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/scripts-handler.php';
+require_once get_template_directory() . '/inc/demo-import.php';
+
 
 
