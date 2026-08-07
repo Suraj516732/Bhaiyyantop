@@ -10,10 +10,11 @@
 <?php wp_body_open(); ?>
 
 <header id="masthead" class="site-header">
+    <div class="header-overlay-bg"></div>
     <div class="container header-inner">
         <!-- Site Branding (Logo) -->
         <div class="logo-container">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-container">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-link">
                 <div class="logo-bubble">
                     <span>भ</span>
                 </div>
@@ -34,32 +35,27 @@
                     'depth'          => 1,
                 ) );
             } else {
-                // Fallback menu matching the screenshot exactly
+                $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
                 echo '<ul class="header-menu">';
                 echo '<li class="current-menu-item"><a href="' . esc_url( home_url( '/' ) ) . '">होम</a></li>';
-                echo '<li><a href="#">देश</a></li>';
-                echo '<li><a href="#">दुनिया</a></li>';
-                echo '<li><a href="#">बिज़नेस</a></li>';
-                echo '<li><a href="#">टेक्नोलॉजी</a></li>';
-                echo '<li><a href="#">खेल</a></li>';
-                echo '<li><a href="#">मनोरंजन</a></li>';
-                echo '<li><a href="#">स्वास्थ्य</a></li>';
-                echo '<li><a href="#">लाइफस्टाइल</a></li>';
-                echo '<li><a href="#">ब्लॉग</a></li>';
-                echo '<li><a href="#">वीडियो</a></li>';
+                foreach ( $categories as $slug => $cat_info ) {
+                    echo '<li><a href="' . esc_url( $cat_info['url'] ) . '">' . esc_html( $cat_info['name'] ) . '</a></li>';
+                }
                 echo '</ul>';
             }
             ?>
 
             <!-- Search and Action Buttons -->
             <div class="header-actions">
-                <button class="search-trigger" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                <button class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
                     <i class="fa fa-search"></i>
                 </button>
-                <button class="subscribe-btn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></button>
+                <button class="subscribe-btn" id="subscribeBtn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></button>
             </div>
         </nav>
     </div>
+    <!-- Bottom Accent Yellow Bar -->
+    <div class="header-yellow-bar"></div>
 </header>
 
 <!-- Breaking News Ticker -->
