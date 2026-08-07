@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <defs>
+    <!-- Define font import for Noto Sans Devanagari -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@800;900&amp;display=swap');
+      .logo-text {
+        font-family: 'Noto Sans Devanagari', 'Helvetica Neue', sans-serif;
+        font-weight: 900;
+        fill: #FFFFFF;
+        font-size: 34px;
+        letter-spacing: 0.5px;
+      }
+      .bubble-char {
+        font-family: 'Noto Sans Devanagari', 'Helvetica Neue', sans-serif;
+        font-weight: 900;
+        fill: #FFFFFF;
+        font-size: 38px;
+      }
+    </style>
+  </defs>
+
+  <!-- Main Container -->
+  <g id="Logo">
+    <!-- Yellow/Orange Bottom Drop-Accent under the banner -->
+    <rect x="58" y="16" width="248" height="48" rx="2" fill="#FBC02D" />
+    
+    <!-- Pink Banner Rectangle (shifted slightly up-left to expose the accent) -->
+    <rect x="58" y="16" width="244" height="42" rx="2" fill="#E91E63" />
+
+    <!-- White Text: भैय्यनटॉप -->
+    <text x="96" y="48" class="logo-text">भैय्यनटॉप</text>
+    
+    <!-- Bubble Outer Rings -->
+    <!-- Outer Yellow Ring -->
+    <circle cx="40" cy="37" r="35" fill="#FFC107" />
+    
+    <!-- Outer Orange/Red Ring -->
+    <circle cx="40" cy="37" r="32" fill="#FF5722" />
+    
+    <!-- Outer Pink Ring -->
+    <circle cx="40" cy="37" r="29" fill="#E91E63" />
+    
+    <!-- Cyan Ring (matches header background) -->
+    <circle cx="40" cy="37" r="26" fill="#4DD0E1" />
+    
+    <!-- Inner Pink Circle -->
+    <circle cx="40" cy="37" r="20" fill="#E91E63" />
+    
+    <!-- Inner Devanagari letter "भ" -->
+    <text x="40" y="37" dominant-baseline="central" text-anchor="middle" class="bubble-char" dy="2">भ</text>
+  </g>
+</svg>

@@ -12,20 +12,58 @@
 <header id="masthead" class="site-header">
     <div class="header-overlay-bg"></div>
     <div class="container header-inner">
-        <!-- Site Branding (Logo) -->
         <div class="logo-container">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-link">
-                <div class="logo-bubble">
-                    <span>भ</span>
-                </div>
-                <div class="logo-text-banner">
-                    <h1>भैय्यान्टॉप</h1>
-                </div>
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="भैय्यान्टॉप" class="custom-logo">
             </a>
         </div>
 
-        <!-- Navigation Menu -->
-        <nav id="site-navigation" class="header-nav" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
+        <!-- Right Side Widgets (Date, Weather, Live TV) -->
+        <div class="header-widgets-container">
+            <!-- Hindi Date & Weather Widget -->
+            <div class="date-weather-widget">
+                <div class="date-text">
+                    <i class="fa fa-calendar-alt"></i>
+                    <span><?php 
+                        $days = array('रविवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार');
+                        $months = array('', 'जनवरी', 'फरवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर');
+                        
+                        $day_of_week = $days[date('w')];
+                        $day_of_month = date('j');
+                        $month = $months[date('n')];
+                        $year = date('Y');
+                        
+                        echo esc_html("$day_of_week, $day_of_month $month $year");
+                    ?></span>
+                </div>
+                <div class="weather-text">
+                    <i class="fa fa-cloud-sun"></i>
+                    <span>नई दिल्ली, 31°C</span>
+                </div>
+            </div>
+
+            <!-- Social Follow Icons -->
+            <div class="header-social-icons">
+                <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon twitter" aria-label="Twitter (X)"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sticky and Responsive Navigation Menu Bar -->
+<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
+    <div class="container nav-container">
+        <!-- Mobile Menu Hamburger Trigger -->
+        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
+
+        <div class="nav-menu-wrapper" id="primary-menu">
             <?php
             if ( has_nav_menu( 'primary' ) ) {
                 wp_nav_menu( array(
@@ -44,19 +82,17 @@
                 echo '</ul>';
             }
             ?>
+        </div>
 
-            <!-- Search and Action Buttons -->
-            <div class="header-actions">
-                <button class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
-                    <i class="fa fa-search"></i>
-                </button>
-                <button class="subscribe-btn" id="subscribeBtn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></button>
-            </div>
-        </nav>
+        <!-- Search and Action Buttons -->
+        <div class="header-actions">
+            <button class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                <i class="fa fa-search"></i>
+            </button>
+            <button class="subscribe-btn" id="subscribeBtn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></button>
+        </div>
     </div>
-    <!-- Bottom Accent Yellow Bar -->
-    <div class="header-yellow-bar"></div>
-</header>
+</nav>
 
 <!-- Breaking News Ticker -->
 <section class="breaking-ticker">

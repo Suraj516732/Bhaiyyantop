@@ -225,4 +225,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // -------------------------------------------------------------
+    // Mobile Menu Toggle
+    // -------------------------------------------------------------
+    const menuToggle = document.querySelector('.menu-toggle');
+    const primaryMenu = document.getElementById('primary-menu');
+    
+    if (menuToggle && primaryMenu) {
+        menuToggle.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            this.classList.toggle('active');
+            primaryMenu.classList.toggle('active');
+        });
+    }
 });
