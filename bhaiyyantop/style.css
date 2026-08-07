@@ -395,8 +395,6 @@ img {
 /* Breaking News Ticker (Yellow & Cyan Gradient Bar with White Color Box) */
 .breaking-ticker {
     background: linear-gradient(to right, #ffc107 0%, #ffd54f 20%, #4dd0e1 50%, #ffd54f 80%, #ffc107 100%);
-    border-top: 3px solid #00bcd4;
-    border-bottom: 3px solid #00bcd4;
     padding: 6px 0;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
