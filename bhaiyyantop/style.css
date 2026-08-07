@@ -5,6 +5,9 @@ Author: Antigravity
 Author URI: https://antigravity.ai
 Description: A production-ready custom WordPress news theme matching the Bhaiyyantop design.
 Version: 1.0.0
+Requires PHP: 7.4
+Requires at least: 5.6
+Tested up to: 6.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: bhaiyyantop
@@ -1879,4 +1882,70 @@ input {
 .editorial-post-card:focus-within {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
+}
+
+/* Search Overlay Modal */
+.search-overlay-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.search-overlay-content {
+    background: #ffffff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.search-overlay-content h3 {
+    margin-bottom: 18px;
+    color: var(--primary-color);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.close-search-btn {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+}
+
+.search-form-inner {
+    display: flex;
+    gap: 8px;
+}
+
+.search-form-inner .search-field {
+    flex-grow: 1;
+    padding: 12px 16px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.search-form-inner .search-submit {
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
 }

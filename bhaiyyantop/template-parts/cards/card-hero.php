@@ -17,7 +17,7 @@ if ( $hero_item ) {
     $title       = isset( $hero_item['title'] ) ? $hero_item['title'] : get_the_title( $hero_item['id'] );
     $thumbnail   = isset( $hero_item['thumbnail'] ) ? $hero_item['thumbnail'] : get_the_post_thumbnail_url( $hero_item['id'], 'bhaiyyantop-hero' );
     $category    = isset( $hero_item['category'] ) ? $hero_item['category'] : 'समाचार';
-    $cat_url     = isset( $hero_item['cat_url'] ) ? $hero_item['cat_url'] : '#';
+    $cat_url     = isset( $hero_item['cat_url'] ) && '#' !== $hero_item['cat_url'] ? $hero_item['cat_url'] : home_url( '/' );
     $author_name = isset( $hero_item['author'] ) ? $hero_item['author'] : get_the_author();
     $date        = isset( $hero_item['date'] ) ? $hero_item['date'] : get_the_date( 'j F, Y' );
     $excerpt     = isset( $hero_item['excerpt'] ) ? $hero_item['excerpt'] : '';
@@ -28,7 +28,7 @@ if ( $hero_item ) {
     $thumbnail   = get_the_post_thumbnail_url( $post_id, 'bhaiyyantop-hero' );
     $categories  = get_the_category( $post_id );
     $category    = ! empty( $categories ) ? $categories[0]->name : 'समाचार';
-    $cat_url     = ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : '#';
+    $cat_url     = ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : home_url( '/' );
     $author_name = get_the_author();
     $date        = get_the_date( 'j F, Y' );
     $excerpt     = get_the_excerpt( $post_id );

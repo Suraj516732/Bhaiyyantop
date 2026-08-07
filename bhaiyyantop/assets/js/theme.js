@@ -1,6 +1,16 @@
+/**
+ * Bhaiyyantop Theme JavaScript
+ *
+ * Handles Breaking News Ticker, Hero Slider, Mobile Menu, Search Modal, and News Filters.
+ *
+ * @package Bhaiyyantop
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+
     // -------------------------------------------------------------
-    // Breaking News Ticker Auto Scroll
+    // 1. Breaking News Ticker Auto Scroll
     // -------------------------------------------------------------
     const tickerList = document.querySelector('.ticker-list');
     const tickerItems = document.querySelectorAll('.ticker-item');
@@ -9,10 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (tickerList && tickerItems.length > 0) {
         let tickerIndex = 0;
-        let tickerInterval;
+        let tickerInterval = null;
 
         function getTranslateValue() {
-            // Find current item width + margin/padding
             let width = 0;
             for (let i = 0; i < tickerIndex; i++) {
                 width += tickerItems[i].offsetWidth;
@@ -41,16 +50,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function startTicker() {
-            tickerInterval = setInterval(slideNext, 4000);
+            if (!tickerInterval) {
+                tickerInterval = setInterval(slideNext, 4000);
+            }
         }
 
         function stopTicker() {
-            clearInterval(tickerInterval);
+            if (tickerInterval) {
+                clearInterval(tickerInterval);
+                tickerInterval = null;
+            }
         }
 
-        // Event listeners for controls
         if (nextBtn) {
-            nextBtn.addEventListener('click', function() {
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
                 stopTicker();
                 slideNext();
                 startTicker();
@@ -58,14 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (prevBtn) {
-            prevBtn.addEventListener('click', function() {
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
                 stopTicker();
                 slidePrev();
                 startTicker();
             });
         }
 
-        // Hover triggers
         tickerList.addEventListener('mouseenter', stopTicker);
         tickerList.addEventListener('mouseleave', startTicker);
 
@@ -73,22 +87,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // -------------------------------------------------------------
-    // Hero Slider Carousel
+    // 2. Hero Slider Carousel
     // -------------------------------------------------------------
     const sliderDots = document.querySelectorAll('.slider-dot');
     const sliderSlides = document.querySelectorAll('.hero-slide');
     
     if (sliderSlides.length > 1 && sliderDots.length > 0) {
         let activeSlideIndex = 0;
-        let slideInterval;
+        let slideInterval = null;
 
         function showSlide(index) {
             sliderSlides.forEach((slide, idx) => {
-                if (idx === index) {
-                    slide.style.display = 'block';
-                } else {
-                    slide.style.display = 'none';
-                }
+                slide.style.display = (idx === index) ? 'block' : 'none';
             });
 
             sliderDots.forEach((dot, idx) => {
@@ -106,11 +116,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function startSlider() {
-            slideInterval = setInterval(nextSlide, 5000);
+            if (!slideInterval) {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
         }
 
         function stopSlider() {
-            clearInterval(slideInterval);
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
         }
 
         sliderDots.forEach((dot, index) => {
@@ -122,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Initialize display
         showSlide(0);
         startSlider();
     } else if (sliderSlides.length === 1) {
@@ -130,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // -------------------------------------------------------------
-    // Category Tabs Filter (Bottom Section)
+    // 3. Category Tabs Filter (Homepage Filter)
     // -------------------------------------------------------------
     const tabButtons = document.querySelectorAll('.cat-tab-btn');
     const gridCards = document.querySelectorAll('.grid-news-card');
@@ -138,16 +152,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (tabButtons.length > 0 && gridCards.length > 0) {
         tabButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remove active class from all
                 tabButtons.forEach(btn => btn.classList.remove('active'));
-                // Add to clicked
                 this.classList.add('active');
 
                 const filterCategory = this.getAttribute('data-category');
 
                 gridCards.forEach(card => {
                     const cardCats = card.getAttribute('data-cats') ? card.getAttribute('data-cats').split(',') : [];
-                    
                     if (filterCategory === 'all' || cardCats.includes(filterCategory)) {
                         card.style.display = 'flex';
                         card.style.opacity = '0';
@@ -166,47 +177,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // -------------------------------------------------------------
-    // Interactive Search & Subscribe Triggers
+    // 4. Interactive Search Trigger & Modal
     // -------------------------------------------------------------
     const searchBtn = document.getElementById('searchTriggerBtn');
-    if (searchBtn) {
-        searchBtn.addEventListener('click', function() {
-            let searchBox = document.getElementById('headerSearchOverlay');
-            if (!searchBox) {
-                searchBox = document.createElement('div');
-                searchBox.id = 'headerSearchOverlay';
-                searchBox.innerHTML = `
-                    <div style="position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); z-index:9999; display:flex; align-items:center; justify-content:center; animation:fadeIn 0.3s ease;">
-                        <div style="background:#ffffff; padding:30px; border-radius:12px; max-width:500px; width:90%; box-shadow:0 15px 30px rgba(0,0,0,0.3); position:relative;">
-                            <button id="closeSearchBtn" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#777;">&times;</button>
-                            <h3 style="margin-bottom:15px; font-family:'Noto Sans Devanagari', sans-serif; color:#e91e63;">भैय्यान्टॉप पर खोजें</h3>
-                            <form action="/" method="get" style="display:flex; gap:10px;">
-                                <input type="text" name="s" placeholder="अपनी पसंदीदा ख़बर खोजें..." style="flex-grow:1; padding:12px 16px; border:2px solid #00bcd4; border-radius:6px; font-size:15px; outline:none;" required autofocus>
-                                <button type="submit" style="background:#e91e63; color:#fff; border:none; padding:12px 20px; border-radius:6px; font-weight:700; cursor:pointer;">खोजें</button>
-                            </form>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(searchBox);
-                document.getElementById('closeSearchBtn').addEventListener('click', () => searchBox.remove());
-                searchBox.querySelector('div').addEventListener('click', (e) => {
-                    if (e.target === searchBox.querySelector('div')) searchBox.remove();
-                });
+    const searchModal = document.getElementById('searchOverlayModal');
+    const closeSearchBtn = document.getElementById('closeSearchBtn');
+
+    if (searchBtn && searchModal) {
+        searchBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            searchModal.style.display = 'flex';
+            const inputField = searchModal.querySelector('input[type="search"]');
+            if (inputField) {
+                inputField.focus();
             }
         });
     }
 
+    if (closeSearchBtn && searchModal) {
+        closeSearchBtn.addEventListener('click', function() {
+            searchModal.style.display = 'none';
+        });
+    }
+
+    if (searchModal) {
+        searchModal.addEventListener('click', function(e) {
+            if (e.target === searchModal) {
+                searchModal.style.display = 'none';
+            }
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 5. Interactive Subscribe Modal
+    // -------------------------------------------------------------
     const subBtn = document.getElementById('subscribeBtn');
     if (subBtn) {
-        subBtn.addEventListener('click', function() {
+        subBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             let subBox = document.getElementById('headerSubscribeOverlay');
             if (!subBox) {
                 subBox = document.createElement('div');
                 subBox.id = 'headerSubscribeOverlay';
                 subBox.innerHTML = `
-                    <div style="position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); z-index:9999; display:flex; align-items:center; justify-content:center; animation:fadeIn 0.3s ease;">
+                    <div style="position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); z-index:9999; display:flex; align-items:center; justify-content:center;">
                         <div style="background:#ffffff; padding:35px; border-radius:12px; max-width:450px; width:90%; text-align:center; box-shadow:0 15px 30px rgba(0,0,0,0.3); position:relative;">
-                            <button id="closeSubBtn" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#777;">&times;</button>
+                            <button id="closeSubBtn" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#777;">&times;</button>
                             <div style="width:60px; height:60px; background:#e91e63; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:28px;"><i class="fa fa-envelope"></i></div>
                             <h3 style="margin-bottom:10px; font-family:'Noto Sans Devanagari', sans-serif; color:#1a1a1a;">भैय्यान्टॉप न्यूज़लेटर सब्सक्राइब करें</h3>
                             <p style="font-size:14px; color:#666; margin-bottom:20px;">देश-दुनिया की ताज़ा खबरें सीधे अपने इनबॉक्स में पाएं!</p>
@@ -219,8 +235,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 document.body.appendChild(subBox);
                 document.getElementById('closeSubBtn').addEventListener('click', () => subBox.remove());
-                subBox.querySelector('div').addEventListener('click', (e) => {
-                    if (e.target === subBox.querySelector('div')) subBox.remove();
+                subBox.addEventListener('click', (ev) => {
+                    if (ev.target === subBox || ev.target.firstElementChild === ev.target) subBox.remove();
                 });
             }
         });

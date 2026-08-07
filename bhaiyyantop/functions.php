@@ -355,3 +355,5 @@ require_once get_template_directory() . '/inc/breadcrumbs.php';
 require_once get_template_directory() . '/inc/related-posts.php';
 require_once get_template_directory() . '/inc/author-box.php';
 require_once get_template_directory() . '/inc/share-buttons.php';
+require_once get_template_directory() . '/inc/customizer.php';
+
