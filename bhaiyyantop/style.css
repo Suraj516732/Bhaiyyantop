@@ -40,7 +40,7 @@ This theme is designed from a custom visual layout with high fidelity Devanagari
     --border-color: #e0e0e0;
     --font-primary: 'Noto Sans Devanagari', sans-serif;
     --container-width: 1800px;
-    --container-radius: 4px;
+    --container-radius: 6px;
 }
 
 body {
@@ -285,7 +285,7 @@ img {
 
 .ticker-white-box {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 4px 10px;
     display: flex;
     align-items: center;
@@ -299,7 +299,7 @@ img {
     color: #ffffff;
     font-weight: 800;
     padding: 7px 16px;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 15px;
     display: flex;
     align-items: center;
