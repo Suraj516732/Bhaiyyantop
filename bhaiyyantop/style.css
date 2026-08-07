@@ -38,7 +38,7 @@ This theme is designed from a custom visual layout with high fidelity Devanagari
     --text-muted: #757575;
     --light-bg: #f4f3ef;
     --border-color: #e0e0e0;
-    --font-primary: 'Outfit', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-primary: 'Noto Sans Devanagari', sans-serif;
     --container-width: 1800px;
     --container-radius: 4px;
 }

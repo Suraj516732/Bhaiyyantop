@@ -73,8 +73,8 @@ add_action( 'after_setup_theme', 'bhaiyyantop_setup' );
  * Enqueue scripts and styles.
  */
 function bhaiyyantop_scripts() {
-    // Enqueue Google Fonts (Outfit & Noto Sans Devanagari for Hindi translation)
-    wp_enqueue_style( 'bhaiyyantop-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;900&family=Outfit:wght@400;600;700;800;900&display=swap', array(), null );
+    // Enqueue Google Fonts (Noto Sans Devanagari for whole website)
+    wp_enqueue_style( 'bhaiyyantop-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap', array(), null );
 
     // Enqueue FontAwesome for icons (e.g. search, arrows, bolt)
     wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0' );
