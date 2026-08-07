@@ -220,31 +220,34 @@ function bhaiyyantop_get_theme_inline_script() {
             });
         }
 
-        // 6. Inline Expanding Search Bar Handler
+        // 6. Animated Dropdown Search Box Handler
         const searchBtn = document.getElementById('searchTriggerBtn');
-        const searchForm = document.getElementById('expandableSearchForm');
-        const searchInput = document.getElementById('expandableSearchInput');
+        const searchDropdown = document.getElementById('headerSearchBoxDropdown');
+        const searchInput = document.getElementById('headerSearchInput');
 
-        if (searchBtn && searchForm && searchInput) {
+        if (searchBtn && searchDropdown) {
             searchBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                if (!searchForm.classList.contains('active')) {
-                    searchForm.classList.add('active');
-                    searchInput.focus();
-                } else if (searchInput.value.trim() !== '') {
-                    searchForm.submit();
-                } else {
-                    searchForm.classList.remove('active');
+                e.stopPropagation();
+                const isActive = searchDropdown.classList.toggle('active');
+                searchBtn.classList.toggle('active');
+                if (isActive && searchInput) {
+                    setTimeout(() => searchInput.focus(), 100);
                 }
             });
 
             document.addEventListener('click', function(e) {
-                if (searchForm && !searchForm.contains(e.target)) {
-                    if (searchInput.value.trim() === '') {
-                        searchForm.classList.remove('active');
-                    }
+                if (searchDropdown && !searchDropdown.contains(e.target) && !searchBtn.contains(e.target)) {
+                    searchDropdown.classList.remove('active');
+                    searchBtn.classList.remove('active');
                 }
             });
+
+            if (searchDropdown) {
+                searchDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
         }
 
         // 7. Interactive Subscribe Modal

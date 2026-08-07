@@ -172,7 +172,7 @@ img {
     color: #ffffff;
 }
 
-/* Header Actions: Inline Expanding Search Input & Social Media Icon Buttons */
+/* Header Actions: Animated Search Input Dropdown Box & Social Buttons */
 .header-actions {
     display: flex;
     align-items: center;
@@ -180,54 +180,17 @@ img {
     flex-shrink: 0;
 }
 
-.expandable-search-form-wrap {
+.search-trigger-wrap {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.expandable-search-form {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 25px;
-    padding: 3px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-    border: 1.5px solid transparent;
-}
-
-.expandable-search-form.active {
-    border-color: #e91e63;
-    box-shadow: 0 4px 14px rgba(233, 30, 99, 0.25);
-}
-
-.expandable-search-input {
-    width: 0;
-    opacity: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 15px;
-    color: #111111;
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease;
-    font-family: 'Noto Sans Devanagari', sans-serif;
-}
-
-.expandable-search-form.active .expandable-search-input,
-.expandable-search-input:focus {
-    width: 220px;
-    opacity: 1;
-    padding: 6px 14px;
-}
-
 .search-trigger {
     background: #ffffff;
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,14 +198,97 @@ img {
     color: #111111;
     cursor: pointer;
     font-size: 17px;
-    transition: all 0.25s ease;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.search-trigger:hover,
+.search-trigger.active {
+    background-color: #e91e63;
+    color: #ffffff;
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.35);
+}
+
+/* Animated Dropdown Box <div><input></div> */
+.header-search-box-dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    z-index: 999;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 8px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 2px solid #e91e63;
+    min-width: 290px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px) scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s ease;
+}
+
+.header-search-box-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 14px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 8px solid #e91e63;
+}
+
+.header-search-box-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.header-search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.header-search-input {
+    flex-grow: 1;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 15px;
+    outline: none;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    color: #111111;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header-search-input:focus {
+    border-color: #e91e63;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.15);
+}
+
+.header-search-submit {
+    background: #e91e63;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
     flex-shrink: 0;
 }
 
-.expandable-search-form.active .search-trigger,
-.search-trigger:hover {
-    background-color: #e91e63;
-    color: #ffffff;
+.header-search-submit:hover {
+    background-color: #d81b60;
+    transform: scale(1.05);
 }
 
 .header-social-buttons {

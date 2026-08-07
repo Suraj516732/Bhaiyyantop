@@ -20,7 +20,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Header Section with Inline Expanding Search Bar -->
+<!-- Header Section with Animated Dropdown Search Box -->
 <header id="masthead" class="site-header">
     <div class="container header-inner">
         <!-- Site Branding Logo -->
@@ -64,16 +64,24 @@
             </div>
         </nav>
 
-        <!-- Inline Expanding Search Input Bar & Social Buttons -->
+        <!-- Search Icon Trigger & Social Media Buttons -->
         <div class="header-actions">
-            <div class="expandable-search-form-wrap">
-                <form role="search" method="get" class="expandable-search-form" id="expandableSearchForm" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                    <input type="search" class="expandable-search-input" id="expandableSearchInput" name="s" placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>" required />
-                    <button type="button" class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </form>
+            <div class="search-trigger-wrap">
+                <button type="button" class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <!-- Animated Search Input Box Dropdown <div><input></div> -->
+                <div class="header-search-box-dropdown" id="headerSearchBoxDropdown">
+                    <form role="search" method="get" class="header-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <input type="search" class="header-search-input" id="headerSearchInput" name="s" placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>" required autocomplete="off" />
+                        <button type="submit" class="header-search-submit" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
+
             <div class="header-social-buttons">
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>

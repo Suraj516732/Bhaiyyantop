@@ -48,15 +48,21 @@
             </div>
         </nav>
 
-        <!-- Inline Expanding Search Bar & Social Buttons -->
+        <!-- Animated Dropdown Search Box & Social Buttons -->
         <div class="header-actions">
-            <div class="expandable-search-form-wrap">
-                <form role="search" method="get" class="expandable-search-form" id="expandableSearchForm" action="preview.html" onsubmit="event.preventDefault(); alert('खोज की जा रही है...');">
-                    <input type="search" class="expandable-search-input" id="expandableSearchInput" name="s" placeholder="समाचार खोजें..." required />
-                    <button type="button" class="search-trigger" id="searchTriggerBtn" aria-label="Search">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </form>
+            <div class="search-trigger-wrap">
+                <button type="button" class="search-trigger" id="searchTriggerBtn" aria-label="Search">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <div class="header-search-box-dropdown" id="headerSearchBoxDropdown">
+                    <form role="search" method="get" class="header-search-form" action="preview.html" onsubmit="event.preventDefault(); alert('खोज की जा रही है...');">
+                        <input type="search" class="header-search-input" id="headerSearchInput" name="s" placeholder="समाचार खोजें..." required autocomplete="off" />
+                        <button type="submit" class="header-search-submit" aria-label="Search">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
             <div class="header-social-buttons">
                 <a href="#instagram" class="social-btn instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
