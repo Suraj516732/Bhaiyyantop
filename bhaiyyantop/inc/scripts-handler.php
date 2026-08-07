@@ -220,30 +220,29 @@ function bhaiyyantop_get_theme_inline_script() {
             });
         }
 
-        // 6. Interactive Search Trigger & Modal
+        // 6. Inline Expanding Search Bar Handler
         const searchBtn = document.getElementById('searchTriggerBtn');
-        const searchModal = document.getElementById('searchOverlayModal');
-        const closeSearchBtn = document.getElementById('closeSearchBtn');
+        const searchForm = document.getElementById('expandableSearchForm');
+        const searchInput = document.getElementById('expandableSearchInput');
 
-        if (searchBtn && searchModal) {
+        if (searchBtn && searchForm && searchInput) {
             searchBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                searchModal.style.display = 'flex';
-                const inputField = searchModal.querySelector('input[type="search"]');
-                if (inputField) inputField.focus();
+                if (!searchForm.classList.contains('active')) {
+                    searchForm.classList.add('active');
+                    searchInput.focus();
+                } else if (searchInput.value.trim() !== '') {
+                    searchForm.submit();
+                } else {
+                    searchForm.classList.remove('active');
+                }
             });
-        }
 
-        if (closeSearchBtn && searchModal) {
-            closeSearchBtn.addEventListener('click', function() {
-                searchModal.style.display = 'none';
-            });
-        }
-
-        if (searchModal) {
-            searchModal.addEventListener('click', function(e) {
-                if (e.target === searchModal) {
-                    searchModal.style.display = 'none';
+            document.addEventListener('click', function(e) {
+                if (searchForm && !searchForm.contains(e.target)) {
+                    if (searchInput.value.trim() === '') {
+                        searchForm.classList.remove('active');
+                    }
                 }
             });
         }

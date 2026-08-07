@@ -172,7 +172,7 @@ img {
     color: #ffffff;
 }
 
-/* Header Actions: White Search Circle & Social Media Icon Buttons (Instagram, YouTube, Facebook) */
+/* Header Actions: Inline Expanding Search Input & Social Media Icon Buttons */
 .header-actions {
     display: flex;
     align-items: center;
@@ -180,11 +180,54 @@ img {
     flex-shrink: 0;
 }
 
+.expandable-search-form-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.expandable-search-form {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 3px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    border: 1.5px solid transparent;
+}
+
+.expandable-search-form.active {
+    border-color: #e91e63;
+    box-shadow: 0 4px 14px rgba(233, 30, 99, 0.25);
+}
+
+.expandable-search-input {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: #111111;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
+.expandable-search-form.active .expandable-search-input,
+.expandable-search-input:focus {
+    width: 220px;
+    opacity: 1;
+    padding: 6px 14px;
+}
+
 .search-trigger {
     background: #ffffff;
     border: none;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,14 +235,14 @@ img {
     color: #111111;
     cursor: pointer;
     font-size: 17px;
-    transition: all 0.2s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+    flex-shrink: 0;
 }
 
+.expandable-search-form.active .search-trigger,
 .search-trigger:hover {
-    transform: scale(1.08);
-    background-color: #ffffff;
-    color: #e91e63;
+    background-color: #e91e63;
+    color: #ffffff;
 }
 
 .header-social-buttons {

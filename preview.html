@@ -48,11 +48,16 @@
             </div>
         </nav>
 
-        <!-- Search Circle Button & Social Media Icon Buttons (Instagram, YouTube, Facebook) -->
+        <!-- Inline Expanding Search Bar & Social Buttons -->
         <div class="header-actions">
-            <button class="search-trigger" id="searchTriggerBtn" aria-label="Search">
-                <i class="fa fa-search"></i>
-            </button>
+            <div class="expandable-search-form-wrap">
+                <form role="search" method="get" class="expandable-search-form" id="expandableSearchForm" action="preview.html" onsubmit="event.preventDefault(); alert('खोज की जा रही है...');">
+                    <input type="search" class="expandable-search-input" id="expandableSearchInput" name="s" placeholder="समाचार खोजें..." required />
+                    <button type="button" class="search-trigger" id="searchTriggerBtn" aria-label="Search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
             <div class="header-social-buttons">
                 <a href="#instagram" class="social-btn instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#youtube" class="social-btn youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -85,23 +90,6 @@
         </div>
     </div>
 </section>
-            <button class="ticker-control-btn ticker-prev" aria-label="Previous news"><i class="fa fa-chevron-left"></i></button>
-            <button class="ticker-control-btn ticker-next" aria-label="Next news"><i class="fa fa-chevron-right"></i></button>
-        </div>
-    </div>
-</section>
-
-<!-- Search Modal -->
-<div id="searchOverlayModal" class="search-overlay-modal" style="display: none;">
-    <div class="search-overlay-content">
-        <button id="closeSearchBtn" class="close-search-btn" aria-label="Close search">&times;</button>
-        <h3>भैय्यान्टॉप पर खोजें</h3>
-        <form action="preview.html" method="get" class="search-form-inner" onsubmit="event.preventDefault(); alert('खोज परिणाम लोड हो रहे हैं...');">
-            <input type="search" class="search-field" placeholder="समाचार खोजें..." required>
-            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-</div>
 
 <!-- Main Content Area -->
 <div class="main-wrapper">

@@ -20,10 +20,10 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Header Section with 1.5x Banner Size and 1.5x Logo Size -->
+<!-- Header Section with Inline Expanding Search Bar -->
 <header id="masthead" class="site-header">
     <div class="container header-inner">
-        <!-- Site Branding Logo (0.5x / +50% larger) -->
+        <!-- Site Branding Logo -->
         <div class="logo-container">
             <?php if ( has_custom_logo() ) : ?>
                 <?php the_custom_logo(); ?>
@@ -64,11 +64,16 @@
             </div>
         </nav>
 
-        <!-- Search Circle Button & Social Media Icon Buttons (Instagram, YouTube, Facebook) -->
+        <!-- Inline Expanding Search Input Bar & Social Buttons -->
         <div class="header-actions">
-            <button class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
-                <i class="fa fa-search"></i>
-            </button>
+            <div class="expandable-search-form-wrap">
+                <form role="search" method="get" class="expandable-search-form" id="expandableSearchForm" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                    <input type="search" class="expandable-search-input" id="expandableSearchInput" name="s" placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>" required />
+                    <button type="button" class="search-trigger" id="searchTriggerBtn" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
             <div class="header-social-buttons">
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -77,15 +82,6 @@
         </div>
     </div>
 </header>
-
-<!-- Search Overlay Modal -->
-<div id="searchOverlayModal" class="search-overlay-modal" style="display: none;">
-    <div class="search-overlay-content">
-        <button id="closeSearchBtn" class="close-search-btn" aria-label="<?php esc_attr_e( 'Close search', 'bhaiyyantop' ); ?>">&times;</button>
-        <h3><?php esc_html_e( 'खोजें (Search)', 'bhaiyyantop' ); ?></h3>
-        <?php get_search_form(); ?>
-    </div>
-</div>
 
 <?php if ( get_theme_mod( 'bhaiyyantop_show_ticker', true ) ) : ?>
 <!-- Breaking News Ticker in Transparent Faded Yellow Bar with White Color Box -->
