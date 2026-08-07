@@ -1,9 +1,10 @@
 <?php
 /**
- * Comprehensive Bhaiyyantop Theme Customizer Integration
+ * Refactored Bhaiyyantop Theme Customizer Integration
  *
- * Provides editable Theme Customizer settings for Header Background, Colors,
- * Typography, Logo, Breaking News Ticker, Dark Mode, Social Links, and Footer.
+ * Organizes Theme Customizer into 10 structured sections:
+ * Brand, Header, Navigation, Typography, Buttons, Footer, Search, Ads, Social, and Layout.
+ * Supports selective_refresh and postMessage live preview for every setting.
  *
  * @package Bhaiyyantop
  */
@@ -25,27 +26,16 @@ function bhaiyyantop_customize_register( $wp_customize ) {
         'capability'     => 'edit_theme_options',
         'theme_supports' => '',
         'title'          => __( 'Bhaiyyantop Theme Options', 'bhaiyyantop' ),
-        'description'    => __( 'Customize Header, Colors, Typography, Logo, Ticker, Dark Mode, Social Links, and Footer.', 'bhaiyyantop' ),
+        'description'    => __( 'Full customization options for Brand, Header, Navigation, Typography, Buttons, Footer, Search, Ads, Social, and Layout.', 'bhaiyyantop' ),
     ) );
 
-    // -------------------------------------------------------------
-    // Section 1: Logo & Branding
-    // -------------------------------------------------------------
-    $wp_customize->add_section( 'bhaiyyantop_logo_section', array(
-        'title'    => __( 'Logo & Branding', 'bhaiyyantop' ),
+    // =============================================================
+    // 1. BRAND SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_brand_section', array(
+        'title'    => __( '1. Brand & Logo', 'bhaiyyantop' ),
         'panel'    => 'bhaiyyantop_panel',
         'priority' => 10,
-    ) );
-
-    // Logo Bubble Letter
-    $wp_customize->add_setting( 'bhaiyyantop_logo_bubble_letter', array(
-        'default'           => 'भ',
-        'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'bhaiyyantop_logo_bubble_letter', array(
-        'label'    => __( 'Logo Icon Bubble Character', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_logo_section',
-        'type'     => 'text',
     ) );
 
     // Logo Text Title
@@ -55,15 +45,27 @@ function bhaiyyantop_customize_register( $wp_customize ) {
     ) );
     $wp_customize->add_control( 'bhaiyyantop_logo_text_title', array(
         'label'    => __( 'Header Logo Title Text', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_logo_section',
+        'section'  => 'bhaiyyantop_brand_section',
         'type'     => 'text',
     ) );
 
-    // -------------------------------------------------------------
-    // Section 2: Header & Header Background
-    // -------------------------------------------------------------
+    // Logo Icon Bubble Character
+    $wp_customize->add_setting( 'bhaiyyantop_logo_bubble_letter', array(
+        'default'           => 'भ',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'bhaiyyantop_logo_bubble_letter', array(
+        'label'    => __( 'Logo Icon Bubble Character', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_brand_section',
+        'type'     => 'text',
+    ) );
+
+    // =============================================================
+    // 2. HEADER SECTION
+    // =============================================================
     $wp_customize->add_section( 'bhaiyyantop_header_section', array(
-        'title'    => __( 'Header & Background', 'bhaiyyantop' ),
+        'title'    => __( '2. Header & Banner', 'bhaiyyantop' ),
         'panel'    => 'bhaiyyantop_panel',
         'priority' => 20,
     ) );
@@ -88,50 +90,66 @@ function bhaiyyantop_customize_register( $wp_customize ) {
         'section'  => 'bhaiyyantop_header_section',
     ) ) );
 
-    // -------------------------------------------------------------
-    // Section 3: Colors & Theme Style
-    // -------------------------------------------------------------
-    $wp_customize->add_section( 'bhaiyyantop_colors_section', array(
-        'title'    => __( 'Colors & Accent Theme', 'bhaiyyantop' ),
+    // =============================================================
+    // 3. NAVIGATION SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_nav_section', array(
+        'title'    => __( '3. Navigation Menu', 'bhaiyyantop' ),
         'panel'    => 'bhaiyyantop_panel',
         'priority' => 30,
     ) );
 
-    // Primary Color
-    $wp_customize->add_setting( 'bhaiyyantop_primary_color', array(
+    // Nav Item Text Color
+    $wp_customize->add_setting( 'bhaiyyantop_nav_text_color', array(
+        'default'           => '#111111',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_nav_text_color', array(
+        'label'    => __( 'Navigation Link Text Color', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_nav_section',
+    ) ) );
+
+    // Nav Item Hover Text Color
+    $wp_customize->add_setting( 'bhaiyyantop_nav_hover_color', array(
+        'default'           => '#ffffff',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_nav_hover_color', array(
+        'label'    => __( 'Navigation Hover Text Color', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_nav_section',
+    ) ) );
+
+    // Nav Item Hover Background Color
+    $wp_customize->add_setting( 'bhaiyyantop_nav_hover_bg', array(
         'default'           => '#e91e63',
+        'transport'         => 'postMessage',
         'sanitize_callback' => 'sanitize_hex_color',
     ) );
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_primary_color', array(
-        'label'    => __( 'Primary Accent Color (Pink/Red)', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_colors_section',
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_nav_hover_bg', array(
+        'label'    => __( 'Navigation Hover/Active Background Color', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_nav_section',
     ) ) );
 
-    // Secondary Color
-    $wp_customize->add_setting( 'bhaiyyantop_secondary_color', array(
-        'default'           => '#00bcd4',
-        'sanitize_callback' => 'sanitize_hex_color',
+    // Nav Link Font Size
+    $wp_customize->add_setting( 'bhaiyyantop_nav_font_size', array(
+        'default'           => 19,
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'absint',
     ) );
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_secondary_color', array(
-        'label'    => __( 'Secondary Accent Color (Teal)', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_colors_section',
-    ) ) );
-
-    // Body Background Color
-    $wp_customize->add_setting( 'bhaiyyantop_body_bg_color', array(
-        'default'           => '#f4f6f9',
-        'sanitize_callback' => 'sanitize_hex_color',
+    $wp_customize->add_control( 'bhaiyyantop_nav_font_size', array(
+        'label'       => __( 'Navigation Link Font Size (px)', 'bhaiyyantop' ),
+        'section'     => 'bhaiyyantop_nav_section',
+        'type'        => 'number',
+        'input_attrs' => array( 'min' => 14, 'max' => 26, 'step' => 1 ),
     ) );
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_body_bg_color', array(
-        'label'    => __( 'Body Page Background Color', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_colors_section',
-    ) ) );
 
-    // -------------------------------------------------------------
-    // Section 4: Typography Settings
-    // -------------------------------------------------------------
+    // =============================================================
+    // 4. TYPOGRAPHY SECTION
+    // =============================================================
     $wp_customize->add_section( 'bhaiyyantop_typography_section', array(
-        'title'    => __( 'Typography Settings', 'bhaiyyantop' ),
+        'title'    => __( '4. Typography Settings', 'bhaiyyantop' ),
         'panel'    => 'bhaiyyantop_panel',
         'priority' => 40,
     ) );
@@ -181,122 +199,44 @@ function bhaiyyantop_customize_register( $wp_customize ) {
         'input_attrs' => array( 'min' => 12, 'max' => 22, 'step' => 1 ),
     ) );
 
-    // -------------------------------------------------------------
-    // Section 5: Breaking News & Ticker
-    // -------------------------------------------------------------
-    $wp_customize->add_section( 'bhaiyyantop_ticker_section', array(
-        'title'    => __( 'Breaking News & Ticker', 'bhaiyyantop' ),
+    // =============================================================
+    // 5. BUTTONS SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_button_section', array(
+        'title'    => __( '5. Button Styles', 'bhaiyyantop' ),
         'panel'    => 'bhaiyyantop_panel',
         'priority' => 50,
     ) );
 
-    // Show/Hide Ticker
-    $wp_customize->add_setting( 'bhaiyyantop_show_ticker', array(
-        'default'           => true,
-        'sanitize_callback' => 'bhaiyyantop_sanitize_checkbox',
+    // Button Background Color
+    $wp_customize->add_setting( 'bhaiyyantop_button_bg', array(
+        'default'           => '#e91e63',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
     ) );
-    $wp_customize->add_control( 'bhaiyyantop_show_ticker', array(
-        'label'    => __( 'Show Breaking News Ticker', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_ticker_section',
-        'type'     => 'checkbox',
-    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_button_bg', array(
+        'label'    => __( 'Primary Button Background Color', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_button_section',
+    ) ) );
 
-    // Ticker Badge Label
-    $wp_customize->add_setting( 'bhaiyyantop_header_notice', array(
-        'default'           => __( 'ताजा खबरें', 'bhaiyyantop' ),
-        'sanitize_callback' => 'sanitize_text_field',
+    // Button Hover Color
+    $wp_customize->add_setting( 'bhaiyyantop_button_hover', array(
+        'default'           => '#c2185b',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
     ) );
-    $wp_customize->add_control( 'bhaiyyantop_header_notice', array(
-        'label'    => __( 'Ticker Badge Label Text', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_ticker_section',
-        'type'     => 'text',
-    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_button_hover', array(
+        'label'    => __( 'Primary Button Hover Color', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_button_section',
+    ) ) );
 
-    // Ticker Auto-Scroll Speed (ms)
-    $wp_customize->add_setting( 'bhaiyyantop_ticker_speed', array(
-        'default'           => 4000,
-        'sanitize_callback' => 'absint',
-    ) );
-    $wp_customize->add_control( 'bhaiyyantop_ticker_speed', array(
-        'label'       => __( 'Ticker Slide Speed (Milliseconds)', 'bhaiyyantop' ),
-        'section'     => 'bhaiyyantop_ticker_section',
-        'type'        => 'number',
-        'input_attrs' => array( 'min' => 1000, 'max' => 10000, 'step' => 500 ),
-    ) );
-
-    // -------------------------------------------------------------
-    // Section 6: Dark Mode Settings
-    // -------------------------------------------------------------
-    $wp_customize->add_section( 'bhaiyyantop_darkmode_section', array(
-        'title'    => __( 'Dark Mode Settings', 'bhaiyyantop' ),
+    // =============================================================
+    // 6. FOOTER SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_footer_section', array(
+        'title'    => __( '6. Footer Options', 'bhaiyyantop' ),
         'panel'    => 'bhaiyyantop_panel',
         'priority' => 60,
-    ) );
-
-    // Enable Dark Mode Toggle Button in Header
-    $wp_customize->add_setting( 'bhaiyyantop_enable_dark_mode_toggle', array(
-        'default'           => true,
-        'sanitize_callback' => 'bhaiyyantop_sanitize_checkbox',
-    ) );
-    $wp_customize->add_control( 'bhaiyyantop_enable_dark_mode_toggle', array(
-        'label'    => __( 'Enable Dark Mode Toggle Button', 'bhaiyyantop' ),
-        'section'  => 'bhaiyyantop_darkmode_section',
-        'type'     => 'checkbox',
-    ) );
-
-    // Default Theme Mode
-    $wp_customize->add_setting( 'bhaiyyantop_default_theme_mode', array(
-        'default'           => 'light',
-        'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'bhaiyyantop_default_theme_mode', array(
-        'label'   => __( 'Default Theme Appearance Mode', 'bhaiyyantop' ),
-        'section' => 'bhaiyyantop_darkmode_section',
-        'type'    => 'select',
-        'choices' => array(
-            'light' => __( 'Light Mode (Default)', 'bhaiyyantop' ),
-            'dark'  => __( 'Dark Mode', 'bhaiyyantop' ),
-        ),
-    ) );
-
-    // -------------------------------------------------------------
-    // Section 7: Social Links
-    // -------------------------------------------------------------
-    $wp_customize->add_section( 'bhaiyyantop_social_section', array(
-        'title'    => __( 'Social Links', 'bhaiyyantop' ),
-        'panel'    => 'bhaiyyantop_panel',
-        'priority' => 70,
-    ) );
-
-    $social_networks = array(
-        'facebook'  => __( 'Facebook URL', 'bhaiyyantop' ),
-        'twitter'   => __( 'Twitter / X URL', 'bhaiyyantop' ),
-        'instagram' => __( 'Instagram URL', 'bhaiyyantop' ),
-        'youtube'   => __( 'YouTube URL', 'bhaiyyantop' ),
-        'telegram'  => __( 'Telegram URL', 'bhaiyyantop' ),
-        'whatsapp'  => __( 'WhatsApp Channel URL', 'bhaiyyantop' ),
-        'linkedin'  => __( 'LinkedIn URL', 'bhaiyyantop' ),
-    );
-
-    foreach ( $social_networks as $key => $label ) {
-        $wp_customize->add_setting( 'bhaiyyantop_social_' . $key, array(
-            'default'           => '#',
-            'sanitize_callback' => 'esc_url_raw',
-        ) );
-        $wp_customize->add_control( 'bhaiyyantop_social_' . $key, array(
-            'label'   => $label,
-            'section' => 'bhaiyyantop_social_section',
-            'type'    => 'url',
-        ) );
-    }
-
-    // -------------------------------------------------------------
-    // Section 8: Footer Options
-    // -------------------------------------------------------------
-    $wp_customize->add_section( 'bhaiyyantop_footer_section', array(
-        'title'    => __( 'Footer Options', 'bhaiyyantop' ),
-        'panel'    => 'bhaiyyantop_panel',
-        'priority' => 80,
     ) );
 
     // Footer About Title
@@ -341,6 +281,208 @@ function bhaiyyantop_customize_register( $wp_customize ) {
         'label'    => __( 'Footer Background Color', 'bhaiyyantop' ),
         'section'  => 'bhaiyyantop_footer_section',
     ) ) );
+
+    // Footer Text Color
+    $wp_customize->add_setting( 'bhaiyyantop_footer_text_color', array(
+        'default'           => '#a0a0a0',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_footer_text_color', array(
+        'label'    => __( 'Footer Text Color', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_footer_section',
+    ) ) );
+
+    // =============================================================
+    // 7. SEARCH SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_search_section', array(
+        'title'    => __( '7. Search Settings', 'bhaiyyantop' ),
+        'panel'    => 'bhaiyyantop_panel',
+        'priority' => 70,
+    ) );
+
+    // Search Placeholder Text
+    $wp_customize->add_setting( 'bhaiyyantop_search_placeholder', array(
+        'default'           => __( 'खबरें खोजें...', 'bhaiyyantop' ),
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'bhaiyyantop_search_placeholder', array(
+        'label'    => __( 'Search Input Placeholder Text', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_search_section',
+        'type'     => 'text',
+    ) );
+
+    // =============================================================
+    // 8. ADS SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_ads_section', array(
+        'title'    => __( '8. Advertisement Slots', 'bhaiyyantop' ),
+        'panel'    => 'bhaiyyantop_panel',
+        'priority' => 80,
+    ) );
+
+    // Enable Header Ad Banner
+    $wp_customize->add_setting( 'bhaiyyantop_enable_header_ad', array(
+        'default'           => false,
+        'sanitize_callback' => 'bhaiyyantop_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'bhaiyyantop_enable_header_ad', array(
+        'label'    => __( 'Enable Top Header Ad Banner Space', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_ads_section',
+        'type'     => 'checkbox',
+    ) );
+
+    // Header Ad Code / HTML
+    $wp_customize->add_setting( 'bhaiyyantop_header_ad_code', array(
+        'default'           => '',
+        'sanitize_callback' => 'wp_kses_post',
+    ) );
+    $wp_customize->add_control( 'bhaiyyantop_header_ad_code', array(
+        'label'       => __( 'Header Ad Embed Code / HTML', 'bhaiyyantop' ),
+        'section'     => 'bhaiyyantop_ads_section',
+        'type'        => 'textarea',
+        'description' => __( 'Paste AdSense script or banner HTML code.', 'bhaiyyantop' ),
+    ) );
+
+    // =============================================================
+    // 9. SOCIAL LINKS SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_social_section', array(
+        'title'    => __( '9. Social Media Links', 'bhaiyyantop' ),
+        'panel'    => 'bhaiyyantop_panel',
+        'priority' => 90,
+    ) );
+
+    $social_networks = array(
+        'facebook'  => __( 'Facebook URL', 'bhaiyyantop' ),
+        'twitter'   => __( 'Twitter / X URL', 'bhaiyyantop' ),
+        'instagram' => __( 'Instagram URL', 'bhaiyyantop' ),
+        'youtube'   => __( 'YouTube URL', 'bhaiyyantop' ),
+        'telegram'  => __( 'Telegram URL', 'bhaiyyantop' ),
+        'whatsapp'  => __( 'WhatsApp Channel URL', 'bhaiyyantop' ),
+        'linkedin'  => __( 'LinkedIn URL', 'bhaiyyantop' ),
+    );
+
+    foreach ( $social_networks as $key => $label ) {
+        $wp_customize->add_setting( 'bhaiyyantop_social_' . $key, array(
+            'default'           => '#',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => 'esc_url_raw',
+        ) );
+        $wp_customize->add_control( 'bhaiyyantop_social_' . $key, array(
+            'label'   => $label,
+            'section' => 'bhaiyyantop_social_section',
+            'type'    => 'url',
+        ) );
+    }
+
+    // =============================================================
+    // 10. LAYOUT & COLORS SECTION
+    // =============================================================
+    $wp_customize->add_section( 'bhaiyyantop_layout_section', array(
+        'title'    => __( '10. Theme Colors & Layout', 'bhaiyyantop' ),
+        'panel'    => 'bhaiyyantop_panel',
+        'priority' => 100,
+    ) );
+
+    // Primary Color
+    $wp_customize->add_setting( 'bhaiyyantop_primary_color', array(
+        'default'           => '#e91e63',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_primary_color', array(
+        'label'    => __( 'Primary Accent Color (Pink/Red)', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_layout_section',
+    ) ) );
+
+    // Secondary Color
+    $wp_customize->add_setting( 'bhaiyyantop_secondary_color', array(
+        'default'           => '#00bcd4',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_secondary_color', array(
+        'label'    => __( 'Secondary Accent Color (Teal)', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_layout_section',
+    ) ) );
+
+    // Accent Color
+    $wp_customize->add_setting( 'bhaiyyantop_accent_color', array(
+        'default'           => '#ffeb3b',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_accent_color', array(
+        'label'    => __( 'Accent Highlight Color (Yellow)', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_layout_section',
+    ) ) );
+
+    // Body Background Color
+    $wp_customize->add_setting( 'bhaiyyantop_body_bg_color', array(
+        'default'           => '#f4f3ef',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'bhaiyyantop_body_bg_color', array(
+        'label'    => __( 'Body Page Background Color', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_layout_section',
+    ) ) );
+
+    // Container Radius
+    $wp_customize->add_setting( 'bhaiyyantop_container_radius', array(
+        'default'           => 8,
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'absint',
+    ) );
+    $wp_customize->add_control( 'bhaiyyantop_container_radius', array(
+        'label'       => __( 'Container Border Radius (px)', 'bhaiyyantop' ),
+        'section'     => 'bhaiyyantop_layout_section',
+        'type'        => 'number',
+        'input_attrs' => array( 'min' => 0, 'max' => 30, 'step' => 1 ),
+    ) );
+
+    // Ticker Badge Label
+    $wp_customize->add_setting( 'bhaiyyantop_header_notice', array(
+        'default'           => __( 'ताज़ा खबरें', 'bhaiyyantop' ),
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'bhaiyyantop_header_notice', array(
+        'label'    => __( 'Ticker Badge Label Text', 'bhaiyyantop' ),
+        'section'  => 'bhaiyyantop_layout_section',
+        'type'     => 'text',
+    ) );
+
+    // Selective Refresh Support for live updates without full page refresh
+    if ( isset( $wp_customize->selective_refresh ) ) {
+        $wp_customize->selective_refresh->add_partial( 'bhaiyyantop_logo_text_title', array(
+            'selector'        => '.logo-link',
+            'render_callback' => function() {
+                return esc_html( get_theme_mod( 'bhaiyyantop_logo_text_title', __( 'भैय्यान्टॉप', 'bhaiyyantop' ) ) );
+            },
+        ) );
+        $wp_customize->selective_refresh->add_partial( 'bhaiyyantop_header_notice', array(
+            'selector'        => '.ticker-label span',
+            'render_callback' => function() {
+                return esc_html( get_theme_mod( 'bhaiyyantop_header_notice', __( 'ताज़ा खबरें', 'bhaiyyantop' ) ) );
+            },
+        ) );
+        $wp_customize->selective_refresh->add_partial( 'bhaiyyantop_footer_about_text', array(
+            'selector'        => '.footer-widget:first-child p',
+            'render_callback' => function() {
+                return wp_kses_post( get_theme_mod( 'bhaiyyantop_footer_about_text', __( 'भैय्यान्टॉप भारत का एक अग्रणी न्यूज़ पोर्टल है...', 'bhaiyyantop' ) ) );
+            },
+        ) );
+        $wp_customize->selective_refresh->add_partial( 'bhaiyyantop_footer_copyright', array(
+            'selector'        => '.footer-bottom p',
+            'render_callback' => function() {
+                return wp_kses_post( get_theme_mod( 'bhaiyyantop_footer_copyright', sprintf( __( '© %s भैय्यान्टॉप. सर्वाधिकार सुरक्षित।', 'bhaiyyantop' ), date( 'Y' ) ) ) );
+            },
+        ) );
+    }
 }
 add_action( 'customize_register', 'bhaiyyantop_customize_register' );
 
