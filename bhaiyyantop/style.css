@@ -434,31 +434,64 @@ img {
     gap: 25px;
 }
 
-/* Section Header Custom Titles */
+/* Sidebar Columns (.col-left & .col-right) Card Containers */
+.col-left,
+.col-right {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    padding: 18px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Section Title Wrap with Soft Cyan Top-Left Gradient Fade Effect & Pink Underline Accent */
 .section-title-wrap {
-    background-color: var(--secondary-color);
-    color: #ffffff;
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 18px;
-    margin-bottom: 15px;
-    border-radius: 4px;
+    padding: 12px 16px;
+    margin: -18px -18px 18px -18px; /* Fit seamlessly at top of column container */
+    background: linear-gradient(120deg, rgba(77, 208, 225, 0.55) 0%, rgba(77, 208, 225, 0.25) 35%, rgba(255, 255, 255, 0) 75%), #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .section-title {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 19px;
+    font-weight: 800;
+    color: #111111;
+    position: relative;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    margin: 0;
+    padding-bottom: 8px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 55px;
+    height: 3.5px;
+    background-color: #e91e63;
+    border-radius: 2px;
 }
 
 .section-more-link {
     font-size: 14px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+    color: #222222;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s ease;
 }
 
 .section-more-link:hover {
-    color: #ffffff;
+    color: #e91e63;
 }
 
 /* Category Badge Tags */
