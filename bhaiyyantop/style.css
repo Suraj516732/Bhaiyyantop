@@ -31,7 +31,8 @@ This theme is designed from a custom visual layout with high fidelity Devanagari
     --light-bg: #f9f9f9;
     --border-color: #e0e0e0;
     --font-primary: 'Outfit', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --container-width: 1200px;
+    --container-width: 1800px;
+    --container-radius: 4px;
 }
 
 body {
@@ -62,7 +63,8 @@ img {
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 25px;
+    border-radius: var(--container-radius);
 }
 
 /* Header Styles */
@@ -350,8 +352,8 @@ img {
 
 .theme-grid {
     display: grid;
-    grid-template-columns: 300px 1fr 340px;
-    gap: 20px;
+    grid-template-columns: 360px 1fr 400px;
+    gap: 25px;
 }
 
 /* Section Header Custom Titles */
@@ -361,9 +363,9 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 15px;
+    padding: 10px 18px;
     margin-bottom: 15px;
-    border-radius: 4px 4px 0 0;
+    border-radius: 4px;
 }
 
 .section-title {
@@ -507,7 +509,7 @@ img {
 /* Center Content Column (Hero Slider & Bottom Content) */
 .hero-slider-wrap {
     position: relative;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     margin-bottom: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -516,7 +518,7 @@ img {
 
 .hero-slide {
     position: relative;
-    height: 420px;
+    height: 480px;
 }
 
 .hero-slide img {
@@ -768,15 +770,15 @@ img {
 
 .latest-news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
 }
 
 .grid-news-card {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
     background-color: #ffffff;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -1120,7 +1122,7 @@ img {
 
 .business-table-card {
     background: #fff;
-    border-radius: 8px;
+    border-radius: 4px;
     border-left: 4px solid #00bcd4;
     padding: 15px 20px;
     margin-bottom: 15px;
@@ -1139,7 +1141,7 @@ img {
 .khel-scoreboard {
     background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
     color: #ffffff;
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 20px 25px;
     margin-bottom: 30px;
     border: 2px solid #ffeb3b;
@@ -1209,7 +1211,7 @@ img {
 /* 3. VIDEO: Dark Player Hero & Play Badges */
 .video-hero-stage {
     background: #ffffff;
-    border-radius: 12px;
+    border-radius: 4px;
     overflow: hidden;
     margin-bottom: 35px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
@@ -1299,7 +1301,7 @@ img {
 /* 4. MANORANJAN: Movie Poster Grid & Ratings */
 .poster-card {
     position: relative;
-    border-radius: 10px;
+    border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.12);
     background: #fff;
@@ -1328,7 +1330,7 @@ img {
     background: #e0f7fa;
     border-left: 6px solid #00bcd4;
     padding: 22px 28px;
-    border-radius: 8px;
+    border-radius: 4px;
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -1362,7 +1364,7 @@ img {
 .tech-hero-box {
     background: #1e293b;
     color: #fff;
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 25px;
     margin-bottom: 30px;
     display: grid;
@@ -1382,7 +1384,7 @@ img {
 .magazine-hero-card {
     position: relative;
     height: 420px;
-    border-radius: 12px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -1405,7 +1407,7 @@ img {
 /* 8. BLOG: Editorial Reading Format */
 .editorial-post-card {
     background: #ffffff;
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 30px;
     margin-bottom: 25px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
