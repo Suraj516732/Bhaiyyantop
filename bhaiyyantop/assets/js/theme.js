@@ -1,6 +1,6 @@
 /**
  * Bhaiyyantop Theme JavaScript
- * Handles Premium Floating Sticky Navigation Bar, Mobile Drawer, and Accessibility Keyboard Focus
+ * Handles Premium Floating Sticky Navigation Bar, Inline Expanding Search, Mobile Drawer, and Accessibility Keyboard Focus
  */
 
 (function () {
@@ -29,6 +29,64 @@
             window.requestAnimationFrame(handleScroll);
             isTicking = true;
         }
+    }
+
+    // Inline Expanding Search Handler (No Popups / No Modals)
+    function initInlineSearch() {
+        const searchContainers = document.querySelectorAll('.header-search-container');
+
+        searchContainers.forEach(function (container) {
+            const toggleBtn = container.querySelector('.search-toggle-btn');
+            const expandWrap = container.querySelector('.search-expand-wrap');
+            const searchInput = container.querySelector('.header-search-input');
+
+            if (!toggleBtn || !expandWrap || !searchInput) return;
+
+            function openSearch() {
+                toggleBtn.classList.add('is-active');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                expandWrap.classList.add('is-open');
+                setTimeout(function () {
+                    searchInput.focus();
+                }, 100);
+            }
+
+            function closeSearch() {
+                toggleBtn.classList.remove('is-active');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                expandWrap.classList.remove('is-open');
+            }
+
+            toggleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (expandWrap.classList.contains('is-open')) {
+                    closeSearch();
+                } else {
+                    openSearch();
+                }
+            });
+
+            // Prevent click inside search form from closing
+            expandWrap.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+
+            // Close on Click Outside
+            document.addEventListener('click', function (e) {
+                if (expandWrap.classList.contains('is-open') && !container.contains(e.target)) {
+                    closeSearch();
+                }
+            });
+
+            // Close on Escape Key Press
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && expandWrap.classList.contains('is-open')) {
+                    closeSearch();
+                    toggleBtn.focus();
+                }
+            });
+        });
     }
 
     function initMobileMenuToggles() {
@@ -78,11 +136,13 @@
         document.addEventListener('DOMContentLoaded', function () {
             window.addEventListener('scroll', onScroll, { passive: true });
             handleScroll();
+            initInlineSearch();
             initMobileMenuToggles();
         });
     } else {
         window.addEventListener('scroll', onScroll, { passive: true });
         handleScroll();
+        initInlineSearch();
         initMobileMenuToggles();
     }
 })();

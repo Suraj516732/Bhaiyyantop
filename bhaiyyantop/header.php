@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     
-    <?php if ( is_single() ) : ?>
-        <meta property="og:title" content="<?php echo esc_attr( get_the_title() ); ?>">
-        <meta property="og:description" content="<?php echo esc_attr( get_the_excerpt() ); ?>">
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="<?php echo esc_url( get_permalink() ); ?>">
-        <?php if ( has_post_thumbnail() ) : ?>
-            <meta property="og:image" content="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'large' ) ); ?>">
-        <?php endif; ?>
-    <?php endif; ?>
-
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+
+<!-- Skip to Content Link for Keyboard Accessibility -->
+<a class="skip-link screen-reader-text" href="#primary-content"><?php esc_html_e( 'मुख्य सामग्री पर जाएं', 'bhaiyyantop' ); ?></a>
 
 <!-- Main Header Section -->
 <header id="masthead" class="site-header">
@@ -36,7 +29,7 @@
 
         <!-- Categories Navigation Menu -->
         <nav id="site-navigation" class="header-nav main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
-            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Navigation', 'bhaiyyantop' ); ?>">
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
@@ -64,8 +57,24 @@
             </div>
         </nav>
 
-        <!-- Right Side Actions: Social Buttons -->
+        <!-- Right Side Actions: Inline Expanding Search & Social Buttons -->
         <div class="header-actions">
+            <!-- Inline Expanding Search Form -->
+            <div class="header-search-container">
+                <div class="search-expand-wrap" id="headerSearchExpand">
+                    <form role="search" method="get" class="header-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <input type="search" class="header-search-input" placeholder="<?php echo esc_attr( get_theme_mod( 'bhaiyyantop_search_placeholder', __( 'खबरें खोजें...', 'bhaiyyantop' ) ) ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off">
+                        <button type="submit" class="search-submit-btn" aria-label="<?php esc_attr_e( 'Search Submit', 'bhaiyyantop' ); ?>">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <button type="button" class="search-toggle-btn" id="headerSearchToggle" aria-expanded="false" aria-controls="headerSearchExpand" aria-label="<?php esc_attr_e( 'Toggle Search Bar', 'bhaiyyantop' ); ?>">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Social Media Buttons -->
             <div class="header-social-buttons">
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -99,7 +108,7 @@
 
         <!-- Main Navigation Menu -->
         <nav class="sticky-nav main-navigation" aria-label="<?php esc_attr_e( 'Sticky Navigation Menu', 'bhaiyyantop' ); ?>">
-            <button class="menu-toggle sticky-menu-toggle" aria-controls="sticky-primary-menu" aria-expanded="false" aria-label="Toggle Sticky Navigation">
+            <button class="menu-toggle sticky-menu-toggle" aria-controls="sticky-primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Sticky Navigation', 'bhaiyyantop' ); ?>">
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
@@ -127,8 +136,22 @@
             </div>
         </nav>
 
-        <!-- Right Side Actions: Social Icons -->
+        <!-- Right Side Actions: Sticky Inline Search & Social Icons -->
         <div class="sticky-actions">
+            <div class="header-search-container sticky-search-container">
+                <div class="search-expand-wrap" id="stickySearchExpand">
+                    <form role="search" method="get" class="header-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <input type="search" class="header-search-input" placeholder="<?php echo esc_attr( get_theme_mod( 'bhaiyyantop_search_placeholder', __( 'खबरें खोजें...', 'bhaiyyantop' ) ) ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off">
+                        <button type="submit" class="search-submit-btn" aria-label="<?php esc_attr_e( 'Search Submit', 'bhaiyyantop' ); ?>">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <button type="button" class="search-toggle-btn" id="stickySearchToggle" aria-expanded="false" aria-controls="stickySearchExpand" aria-label="<?php esc_attr_e( 'Toggle Search Bar', 'bhaiyyantop' ); ?>">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
             <div class="header-social-buttons sticky-social-buttons">
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>

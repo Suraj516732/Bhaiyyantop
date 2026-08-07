@@ -228,8 +228,119 @@ img {
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     flex-shrink: 0;
+}
+
+/* Inline Expanding Search Bar */
+.header-search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 42px;
+}
+
+.search-toggle-btn {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 17px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    z-index: 6;
+}
+
+.search-toggle-btn:hover,
+.search-toggle-btn.is-active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(233, 30, 99, 0.35);
+}
+
+.search-toggle-btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* Expanding Container */
+.search-expand-wrap {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 42px;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
+    z-index: 5;
+}
+
+.search-expand-wrap.is-open {
+    width: 280px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.header-search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 48px 0 18px;
+    position: relative;
+}
+
+.header-search-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: #111111;
+    outline: none;
+}
+
+.header-search-input::placeholder {
+    color: #888888;
+    font-weight: 500;
+}
+
+.search-submit-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.search-submit-btn:hover {
+    transform: translateY(-50%) translateX(2px);
 }
 
 /* ==========================================
@@ -1833,7 +1944,8 @@ img {
 .poster-card,
 .editorial-post-card {
     position: relative;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    will-change: transform;
 }
 
 .stretched-link::after {
@@ -1844,6 +1956,33 @@ img {
     left: 0;
     z-index: 1;
     content: "";
+}
+
+.card-title,
+.mid-card-title,
+.editors-hero-title,
+.editors-wide-title,
+.mini-news-title {
+    font-family: var(--font-heading);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Card Hover Elevation State Triggered when hovering over card */
+.grid-news-card:hover,
+.mini-news-card:hover,
+.editors-hero-card:hover,
+.editors-wide-card:hover,
+.mid-featured-story:hover,
+.poster-card:hover,
+.editorial-post-card:hover,
+.color-card-promo:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
 }
 
 /* Nested Interactive Elements (Higher z-index so category & author links remain independently clickable) */
@@ -1961,4 +2100,64 @@ input {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 700;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & SCREEN READERS (WCAG 2.1 AA)
+   ========================================================================== */
+
+/* Visually Hidden Screen Reader Text */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+    background-color: var(--primary-color);
+    border-radius: var(--container-radius);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    clip-path: none !important;
+    color: #ffffff;
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+    height: auto;
+    left: 15px;
+    line-height: normal;
+    padding: 15px 24px;
+    text-decoration: none;
+    top: 15px;
+    width: auto;
+    z-index: 100000;
+}
+
+/* Clear Keyboard Focus Rings */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary-color) !important;
+    outline-offset: 3px !important;
+}
+
+/* Reduced Motion Preference Media Query */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

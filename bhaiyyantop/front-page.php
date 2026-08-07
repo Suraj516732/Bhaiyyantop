@@ -19,7 +19,7 @@ $editors_posts   = array_slice( $recent_posts, 2, 3 );
 $grid_posts      = array_slice( $recent_posts, 0, 8 );
 ?>
 
-<div class="main-wrapper">
+<div class="main-wrapper" id="primary-content">
     <div class="container theme-grid">
         
         <!-- ========================================== -->

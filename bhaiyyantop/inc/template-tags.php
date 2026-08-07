@@ -104,3 +104,54 @@ function bhaiyyantop_set_post_views( $post_id ) {
         update_post_meta( $post_id, $count_key, $count );
     }
 }
+
+if ( ! function_exists( 'bhaiyyantop_get_card_data' ) ) :
+    /**
+     * Helper to normalize and extract post data for Card Components.
+     *
+     * @param array $args Component arguments passed to get_template_part.
+     * @return array Normalized post data.
+     */
+    function bhaiyyantop_get_card_data( $args = array() ) {
+        $item = isset( $args['item'] ) ? $args['item'] : null;
+
+        if ( $item && is_array( $item ) ) {
+            $id          = isset( $item['id'] ) ? $item['id'] : 0;
+            $permalink   = isset( $item['permalink'] ) ? $item['permalink'] : ( $id ? get_permalink( $id ) : '#' );
+            $title       = isset( $item['title'] ) ? $item['title'] : ( $id ? get_the_title( $id ) : '' );
+            $thumbnail   = isset( $item['thumbnail'] ) ? $item['thumbnail'] : ( $id ? get_the_post_thumbnail_url( $id, 'large' ) : '' );
+            $category    = isset( $item['category'] ) ? $item['category'] : 'समाचार';
+            $cat_url     = isset( $item['cat_url'] ) && '#' !== $item['cat_url'] ? $item['cat_url'] : home_url( '/' );
+            $author_name = isset( $item['author'] ) ? $item['author'] : ( $id ? get_the_author_meta( 'display_name', get_post_field( 'post_author', $id ) ) : 'संपादक' );
+            $date        = isset( $item['date'] ) ? $item['date'] : ( $id ? get_the_date( 'j F, Y', $id ) : date( 'j F, Y' ) );
+            $excerpt     = isset( $item['excerpt'] ) ? $item['excerpt'] : ( $id ? get_the_excerpt( $id ) : '' );
+        } else {
+            $id          = get_the_ID();
+            $permalink   = get_permalink( $id );
+            $title       = get_the_title( $id );
+            $thumbnail   = get_the_post_thumbnail_url( $id, 'large' );
+            $categories  = get_the_category( $id );
+            $category    = ! empty( $categories ) ? $categories[0]->name : 'समाचार';
+            $cat_url     = ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : home_url( '/' );
+            $author_name = get_the_author();
+            $date        = get_the_date( 'j F, Y' );
+            $excerpt     = get_the_excerpt( $id );
+        }
+
+        if ( empty( $thumbnail ) ) {
+            $thumbnail = get_template_directory_uri() . '/assets/images/hero.png';
+        }
+
+        return array(
+            'id'          => $id,
+            'permalink'   => $permalink,
+            'title'       => $title,
+            'thumbnail'   => $thumbnail,
+            'category'    => $category,
+            'cat_url'     => $cat_url,
+            'author'      => $author_name,
+            'date'        => $date,
+            'excerpt'     => $excerpt,
+        );
+    }
+endif;
