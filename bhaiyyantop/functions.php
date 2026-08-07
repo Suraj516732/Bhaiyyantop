@@ -82,14 +82,10 @@ function bhaiyyantop_scripts() {
     // Enqueue main stylesheet.
     wp_enqueue_style( 'bhaiyyantop-style', get_stylesheet_uri(), array( 'bhaiyyantop-fonts', 'font-awesome' ), '1.0.0' );
 
-    // Enqueue single post CSS and Reading Progress JS if viewing single article
+    // Enqueue single post CSS if viewing single article
     if ( is_single() ) {
         wp_enqueue_style( 'bhaiyyantop-single-style', get_template_directory_uri() . '/assets/css/single.css', array( 'bhaiyyantop-style' ), '1.0.0' );
-        wp_enqueue_script( 'bhaiyyantop-reading-progress', get_template_directory_uri() . '/assets/js/reading-progress.js', array(), '1.0.0', true );
     }
-
-    // Enqueue theme javascript (handles carousel, ticker and ajax categories if needed)
-    wp_enqueue_script( 'bhaiyyantop-scripts', get_template_directory_uri() . '/assets/js/theme.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'bhaiyyantop_scripts' );
 
@@ -356,4 +352,6 @@ require_once get_template_directory() . '/inc/related-posts.php';
 require_once get_template_directory() . '/inc/author-box.php';
 require_once get_template_directory() . '/inc/share-buttons.php';
 require_once get_template_directory() . '/inc/customizer.php';
+require_once get_template_directory() . '/inc/scripts-handler.php';
+
 
