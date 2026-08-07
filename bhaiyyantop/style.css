@@ -93,7 +93,6 @@ img {
     /* Positioned a little above the bottom-end of the container! */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     z-index: 100;
-    overflow: hidden;
 }
 
 
@@ -297,12 +296,14 @@ img {
         top: 100%;
         left: 0;
         right: 0;
-        background: #00bcd4;
-        padding: 15px;
+        background: #ffffff;
+        padding: 15px 25px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        border-top: 1px solid #eeeeee;
     }
     .sticky-nav .nav-menu-wrapper.active {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
     .sticky-nav .menu-toggle {
         display: flex;
@@ -363,7 +364,7 @@ img {
 
 .menu-toggle .hamburger-bar {
     width: 100%;
-    height: 3px;
+    height: 2px;
     background-color: #111111;
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -1210,38 +1211,45 @@ img {
         top: 100%;
         left: 0;
         right: 0;
-        background-color: #1a1a1a;
+        background-color: #ffffff;
         display: none;
         flex-direction: column;
         width: 100%;
         padding: 15px 25px;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-        border-top: 1px solid #2d2d2d;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        border-top: 1px solid #eeeeee;
         height: auto;
     }
 
     .nav-menu-wrapper.active {
         display: flex;
         animation: navSlideDown 0.3s ease forwards;
+        z-index: 99999;
     }
 
     .nav-menu-wrapper .header-menu {
         flex-direction: column;
         align-items: stretch;
-        width: 100%;
-        gap: 8px;
-        height: auto;
     }
 
-    .nav-menu-wrapper .header-menu li {
+    .header-menu li {
         width: 100%;
+        margin-left: 0;
+        border-bottom: 1px solid #eeeeee;
     }
 
-    .nav-menu-wrapper .header-menu li a {
+    .header-menu a {
         display: block;
-        padding: 10px 15px;
+        padding: 15px 0;
         width: 100%;
         font-size: 17px;
+        color: #111111;
+    }
+
+    .header-menu a.btn.btn-primary {
+        background: transparent !important;
+        color: #e91e63 !important;
+        padding: 15px 0 !important;
     }
 
     .menu-toggle.active .hamburger-bar:nth-child(1) {
@@ -1271,8 +1279,10 @@ img {
 
 @media (max-width: 768px) {
     .header-inner {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 5px;
     }
 
     .header-menu {
@@ -1918,4 +1928,201 @@ input {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 700;
+}
+
+/* Weather & Date Widget */
+.header-weather-date {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 6px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    margin-left: 15px;
+}
+
+.header-weather-date i {
+    color: #ffeb3b;
+    margin-right: 4px;
+}
+
+/* Mobile Subheader */
+.mobile-subheader {
+    display: none;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+    padding: 10px 0;
+}
+
+.mobile-subheader-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.gwalior-breaking-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+}
+
+/* =====================================================================
+   GLOBAL RESPONSIVE MEDIA QUERIES
+   ===================================================================== */
+
+/* Tablet & Smaller Devices */
+@media (max-width: 992px) {
+    /* Grids & Layout */
+    .tech-hero-box {
+        grid-template-columns: 1fr;
+    }
+    
+    .lifestyle-magazine-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer */
+    .footer-widgets {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    /* Icons & UI Elements */
+    .social-btn {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 14px;
+        line-height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .header-social-buttons {
+        gap: 6px;
+    }
+    
+    .search-toggle {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .menu-toggle {
+        width: 24px;
+        height: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+    
+    .menu-toggle .hamburger-bar {
+        background-color: #111111;
+        height: 2px;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .site-header {
+        min-height: 80px;
+        padding: 5px 0 0 0;
+    }
+    
+    .header-inner, .sticky-navbar-inner {
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        justify-content: space-between !important;
+        align-items: center;
+    }
+    
+    .logo-container, .sticky-logo-wrap {
+        justify-content: flex-end;
+        margin: 0;
+    }
+    
+    .header-nav, .sticky-nav {
+        display: flex;
+        justify-content: flex-start;
+        flex: 1;
+    }
+    
+    .custom-logo, .sticky-logo-img {
+        height: 50px;
+    }
+    
+    .header-weather-date {
+        display: inline-flex;
+        font-size: 10px;
+        padding: 4px 8px;
+        gap: 6px;
+        margin-left: 8px;
+        white-space: nowrap;
+    }
+    
+    .mobile-subheader {
+        display: block;
+    }
+    
+    .site-header .menu-toggle {
+        display: none !important;
+    }
+    
+    .site-header .nav-menu-wrapper {
+        top: 165px !important;
+    }
+    
+    .header-actions {
+        display: none !important;
+    }
+    
+
+    .footer-widgets {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-col {
+        margin-bottom: 30px;
+    }
+    
+    /* Post grids */
+    .posts-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Typography adjustments */
+    h1, h2, h3, h4 {
+        line-height: 1.3;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .site-header {
+        padding: 10px 0 0 0;
+    }
+    
+    .social-btn {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 13px;
+        line-height: 30px;
+    }
+    
+    .search-input {
+        width: 100%;
+    }
 }

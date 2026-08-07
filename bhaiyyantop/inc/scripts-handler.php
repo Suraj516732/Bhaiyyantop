@@ -185,16 +185,18 @@ function bhaiyyantop_get_theme_inline_script() {
         }
 
         // 4. Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
+        const menuToggles = document.querySelectorAll('.menu-toggle:not(.sticky-menu-toggle)');
         const primaryMenu = document.getElementById('primary-menu');
         
-        if (menuToggle && primaryMenu) {
-            menuToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !expanded);
-                this.classList.toggle('active');
-                primaryMenu.classList.toggle('active');
+        if (menuToggles.length > 0 && primaryMenu) {
+            menuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !expanded);
+                    this.classList.toggle('active');
+                    primaryMenu.classList.toggle('active');
+                });
             });
         }
 

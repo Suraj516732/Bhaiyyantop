@@ -36,11 +36,16 @@
 
         <!-- Categories Navigation Menu -->
         <nav id="site-navigation" class="header-nav main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
-            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Navigation', 'bhaiyyantop' ); ?>">
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
             </button>
+            
+            <div class="header-weather-date">
+                <span class="header-date"><i class="fa-regular fa-calendar-alt"></i> <?php echo date_i18n( 'j F' ); ?></span>
+                <span class="header-temp"><i class="fa-solid fa-cloud-sun"></i> 28°C</span>
+            </div>
 
             <div class="nav-menu-wrapper" id="primary-menu">
                 <?php
@@ -66,11 +71,6 @@
 
         <!-- Right Side Actions: Social Buttons -->
         <div class="header-actions">
-            <div class="header-social-buttons">
-                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            </div>
         </div>
     </div>
 </header>
@@ -96,14 +96,18 @@
                 <?php endif; ?>
             </a>
         </div>
-
         <!-- Main Navigation Menu -->
         <nav class="sticky-nav main-navigation" aria-label="<?php esc_attr_e( 'Sticky Navigation Menu', 'bhaiyyantop' ); ?>">
-            <button class="menu-toggle sticky-menu-toggle" aria-controls="sticky-primary-menu" aria-expanded="false" aria-label="Toggle Sticky Navigation">
+            <button class="menu-toggle sticky-menu-toggle" aria-controls="sticky-primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Sticky Navigation Menu', 'bhaiyyantop' ); ?>">
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
             </button>
+            
+            <div class="header-weather-date">
+                <span class="header-date"><i class="fa-regular fa-calendar-alt"></i> <?php echo date_i18n( 'j F' ); ?></span>
+                <span class="header-temp"><i class="fa-solid fa-cloud-sun"></i> 28°C</span>
+            </div>
 
             <div class="nav-menu-wrapper" id="sticky-primary-menu">
                 <?php
@@ -129,11 +133,6 @@
 
         <!-- Right Side Actions: Social Icons -->
         <div class="sticky-actions">
-            <div class="header-social-buttons sticky-social-buttons">
-                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            </div>
         </div>
     </div>
 </div>
@@ -177,4 +176,16 @@
         </div>
     </div>
 </section>
+
+<!-- Mobile Subheader with Menu Toggle and Gwalior Breaking -->
+<div class="mobile-subheader">
+    <div class="container mobile-subheader-inner">
+        <button class="menu-toggle subheader-menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Navigation', 'bhaiyyantop' ); ?>">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
+        <span class="gwalior-breaking-text">Gwalior breaking</span>
+    </div>
+</div>
 <?php endif; ?>

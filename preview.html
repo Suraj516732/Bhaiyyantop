@@ -30,6 +30,11 @@
                 <span class="hamburger-bar"></span>
             </button>
 
+            <div class="header-weather-date">
+                <span class="header-date"><i class="fa-regular fa-calendar-alt"></i> 8 अगस्त</span>
+                <span class="header-temp"><i class="fa-solid fa-cloud-sun"></i> 28°C</span>
+            </div>
+
             <div class="nav-menu-wrapper" id="primary-menu">
                 <ul class="header-menu">
                     <li class="current-menu-item"><a href="preview.html">होम</a></li>
@@ -49,12 +54,6 @@
 
         <!-- Right Side Actions: Social Buttons -->
         <div class="header-actions">
-
-            <div class="header-social-buttons">
-                <a href="#instagram" class="social-btn instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#youtube" class="social-btn youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#facebook" class="social-btn facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            </div>
         </div>
     </div>
 </header>
@@ -68,7 +67,6 @@
                 <img src="bhaiyyantop/assets/images/logo.svg" alt="भैय्यान्टॉप" class="sticky-logo-img">
             </a>
         </div>
-
         <!-- Main Navigation Menu -->
         <nav class="sticky-nav main-navigation" aria-label="Sticky Navigation Menu">
             <button class="menu-toggle sticky-menu-toggle" aria-controls="sticky-primary-menu" aria-expanded="false" aria-label="Toggle Sticky Navigation">
@@ -76,6 +74,11 @@
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
             </button>
+            
+            <div class="header-weather-date">
+                <span class="header-date"><i class="fa-regular fa-calendar-alt"></i> 8 अगस्त</span>
+                <span class="header-temp"><i class="fa-solid fa-cloud-sun"></i> 28°C</span>
+            </div>
 
             <div class="nav-menu-wrapper" id="sticky-primary-menu">
                 <ul class="header-menu sticky-header-menu">
@@ -96,11 +99,6 @@
 
         <!-- Right Side Actions: Social Icons -->
         <div class="sticky-actions">
-            <div class="header-social-buttons sticky-social-buttons">
-                <a href="#instagram" class="social-btn instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#youtube" class="social-btn youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#facebook" class="social-btn facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            </div>
         </div>
     </div>
 </div>
@@ -128,6 +126,18 @@
         </div>
     </div>
 </section>
+
+<!-- Mobile Subheader with Menu Toggle and Gwalior Breaking -->
+<div class="mobile-subheader">
+    <div class="container mobile-subheader-inner">
+        <button class="menu-toggle subheader-menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </button>
+        <span class="gwalior-breaking-text">Gwalior breaking</span>
+    </div>
+</div>
 
 <!-- Main Content Area -->
 <div class="main-wrapper">
@@ -455,11 +465,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Mobile Menu Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
+    const menuToggles = document.querySelectorAll('.menu-toggle:not(.sticky-menu-toggle)');
     const primaryMenu = document.getElementById('primary-menu');
-    if (menuToggle && primaryMenu) {
-        menuToggle.addEventListener('click', function() {
-            primaryMenu.classList.toggle('active');
+    if (menuToggles.length > 0 && primaryMenu) {
+        menuToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                primaryMenu.classList.toggle('active');
+            });
         });
     }
 
