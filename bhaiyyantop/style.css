@@ -387,12 +387,13 @@ img {
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-/* Breaking News Ticker (Yellow Bar with Fade & Transparent Gradient Effect + White Color Box) */
+/* Breaking News Ticker (Yellow & Cyan Gradient Bar with White Color Box) */
 .breaking-ticker {
-    background: linear-gradient(to right, rgba(255, 235, 59, 0.95) 0%, rgba(255, 235, 59, 0.75) 50%, rgba(255, 235, 59, 0.35) 85%, rgba(255, 235, 59, 0.1) 100%);
-    backdrop-filter: blur(4px);
-    border-bottom: 2px solid rgba(251, 192, 45, 0.3);
+    background: linear-gradient(to right, #ffc107 0%, #ffd54f 20%, #4dd0e1 50%, #ffd54f 80%, #ffc107 100%);
+    border-top: 3px solid #00bcd4;
+    border-bottom: 3px solid #00bcd4;
     padding: 6px 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .ticker-container-wrap {
@@ -406,8 +407,8 @@ img {
     display: flex;
     align-items: center;
     gap: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .ticker-label {
