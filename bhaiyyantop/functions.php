@@ -90,6 +90,12 @@ function bhaiyyantop_scripts() {
         $single_css_ver  = file_exists( $single_css_path ) ? filemtime( $single_css_path ) : '1.0.0';
         wp_enqueue_style( 'bhaiyyantop-single-style', get_template_directory_uri() . '/assets/css/single.css', array( 'bhaiyyantop-style' ), $single_css_ver );
     }
+
+    // Enqueue theme JS script for sticky navbar and scroll throttling
+    $theme_js_path = get_template_directory() . '/assets/js/theme.js';
+    if ( file_exists( $theme_js_path ) ) {
+        wp_enqueue_script( 'bhaiyyantop-theme-js', get_template_directory_uri() . '/assets/js/theme.js', array(), filemtime( $theme_js_path ), true );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'bhaiyyantop_scripts' );
 

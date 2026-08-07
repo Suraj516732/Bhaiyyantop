@@ -20,7 +20,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Header Section with Logo, Navigation & Search arranged in same line a little above bottom end -->
+<!-- Main Header Section -->
 <header id="masthead" class="site-header">
     <div class="container header-inner">
         <!-- Site Branding Logo -->
@@ -66,7 +66,6 @@
 
         <!-- Right Side Actions: Social Buttons -->
         <div class="header-actions">
-
             <div class="header-social-buttons">
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -75,6 +74,69 @@
         </div>
     </div>
 </header>
+
+<!-- Premium Floating Sticky Navigation Bar -->
+<div id="bhaiyyantop-sticky-nav" class="bhaiyyantop-sticky-navbar">
+    <div class="container sticky-navbar-inner">
+        <!-- Small Logo -->
+        <div class="sticky-logo-wrap">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="sticky-logo-link">
+                <?php if ( has_custom_logo() ) : ?>
+                    <?php
+                    $custom_logo_id = get_theme_mod( 'custom_logo' );
+                    $logo_img       = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+                    if ( $logo_img ) :
+                        ?>
+                        <img src="<?php echo esc_url( $logo_img[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="sticky-logo-img">
+                    <?php else : ?>
+                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="sticky-logo-img">
+                    <?php endif; ?>
+                <?php else : ?>
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="sticky-logo-img">
+                <?php endif; ?>
+            </a>
+        </div>
+
+        <!-- Main Navigation Menu -->
+        <nav class="sticky-nav main-navigation" aria-label="<?php esc_attr_e( 'Sticky Navigation Menu', 'bhaiyyantop' ); ?>">
+            <button class="menu-toggle sticky-menu-toggle" aria-controls="sticky-primary-menu" aria-expanded="false" aria-label="Toggle Sticky Navigation">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+
+            <div class="nav-menu-wrapper" id="sticky-primary-menu">
+                <?php
+                if ( has_nav_menu( 'primary' ) ) {
+                    wp_nav_menu( array(
+                        'theme_location' => 'primary',
+                        'menu_class'     => 'header-menu sticky-header-menu',
+                        'container'      => false,
+                        'depth'          => 1,
+                    ) );
+                } else {
+                    $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
+                    echo '<ul class="header-menu sticky-header-menu">';
+                    echo '<li class="current-menu-item"><a href="' . esc_url( home_url( '/' ) ) . '">होम</a></li>';
+                    foreach ( $categories as $slug => $cat_info ) {
+                        echo '<li><a href="' . esc_url( $cat_info['url'] ) . '">' . esc_html( $cat_info['name'] ) . '</a></li>';
+                    }
+                    echo '</ul>';
+                }
+                ?>
+            </div>
+        </nav>
+
+        <!-- Right Side Actions: Social Icons -->
+        <div class="sticky-actions">
+            <div class="header-social-buttons sticky-social-buttons">
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php if ( get_theme_mod( 'bhaiyyantop_show_ticker', true ) ) : ?>
 <!-- Breaking News Ticker in Transparent Faded Yellow Bar with White Color Box -->

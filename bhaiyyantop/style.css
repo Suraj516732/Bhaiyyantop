@@ -207,10 +207,107 @@ img {
 }
 
 /* ==========================================
-   INLINE HEADER SEARCH
+   PREMIUM FLOATING STICKY NAVIGATION BAR
    ========================================== */
+.bhaiyyantop-sticky-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    background-color: #00bcd4;
+    background-image: linear-gradient(to bottom, rgba(0, 188, 212, 0.4) 0%, rgba(0, 188, 212, 0.75) 60%, rgba(0, 188, 212, 0.95) 100%), url('assets/images/header_banner.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(.22, 1, .36, 1), opacity 0.35s ease, visibility 0.35s;
+    padding: 6px 0;
+}
 
+.bhaiyyantop-sticky-navbar.sticky-active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
 
+.sticky-navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.sticky-logo-wrap {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sticky-logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.sticky-logo-img:hover {
+    transform: scale(1.04);
+}
+
+.sticky-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.sticky-header-menu {
+    gap: 10px;
+}
+
+.sticky-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+    .sticky-logo-img {
+        height: 38px;
+    }
+    .sticky-header-menu li a {
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sticky-nav .nav-menu-wrapper {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #00bcd4;
+        padding: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .sticky-nav .nav-menu-wrapper.active {
+        display: block;
+    }
+    .sticky-nav .menu-toggle {
+        display: flex;
+    }
+}
 
 .header-social-buttons {
     display: flex;
