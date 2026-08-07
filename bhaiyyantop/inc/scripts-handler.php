@@ -220,48 +220,7 @@ function bhaiyyantop_get_theme_inline_script() {
             });
         }
 
-        // 6. Inline Expanding Search Bar Handler (Right-to-Left expand width: 0 -> 320px)
-        const searchToggleBtn = document.getElementById('searchToggleBtn');
-        const searchExpand = document.getElementById('searchExpand');
-        const searchInput = document.getElementById('searchInput');
 
-        if (searchToggleBtn && searchExpand) {
-            searchToggleBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const isAlreadyActive = searchExpand.classList.contains('active');
-                
-                if (!isAlreadyActive) {
-                    searchExpand.classList.add('active');
-                    searchToggleBtn.classList.add('active');
-                    if (searchInput) {
-                        setTimeout(function() { searchInput.focus(); }, 150);
-                    }
-                } else {
-                    if (searchInput && searchInput.value.trim() !== '') {
-                        const form = searchExpand.querySelector('form');
-                        if (form) form.submit();
-                    } else {
-                        searchExpand.classList.remove('active');
-                        searchToggleBtn.classList.remove('active');
-                    }
-                }
-            });
-
-            document.addEventListener('click', function(e) {
-                if (searchExpand && !searchExpand.contains(e.target) && !searchToggleBtn.contains(e.target)) {
-                    if (!searchInput || searchInput.value.trim() === '') {
-                        searchExpand.classList.remove('active');
-                        searchToggleBtn.classList.remove('active');
-                    }
-                }
-            });
-
-            searchExpand.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        }
 
         // 7. Interactive Subscribe Modal
         const subBtn = document.getElementById('subscribeBtn');

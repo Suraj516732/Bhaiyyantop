@@ -64,29 +64,8 @@
             </div>
         </nav>
 
-        <!-- Right Side Actions: Inline Header Search & Social Buttons -->
+        <!-- Right Side Actions: Social Buttons -->
         <div class="header-actions">
-            <div class="header-search-container">
-                <div class="search-expand" id="searchExpand">
-                    <form class="search-expand-form" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                        <input
-                            class="search-input"
-                            id="searchInput"
-                            type="search"
-                            placeholder="<?php echo esc_attr_x( 'समाचार खोजें...', 'placeholder', 'bhaiyyantop' ); ?>"
-                            name="s"
-                            required
-                            autocomplete="off">
-                        <button class="search-submit" type="submit">
-                            <?php esc_html_e( 'खोजें', 'bhaiyyantop' ); ?>
-                        </button>
-                    </form>
-                </div>
-
-                <button class="search-toggle" id="searchToggleBtn" type="button" aria-label="<?php esc_attr_e( 'Search', 'bhaiyyantop' ); ?>">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
 
             <div class="header-social-buttons">
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
