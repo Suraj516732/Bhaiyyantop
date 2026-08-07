@@ -1,0 +1,206 @@
+/**
+ * Header & Banner Styles
+ */
+.site-header {
+    position: relative;
+    background-color: var(--header-bg);
+    background-image: url('../images/header_banner.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #111111;
+    min-height: var(--header-min-height);
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 18px;
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 188, 212, 0) 0%,
+            rgba(0, 188, 212, 0.2) 30%,
+            rgba(0, 188, 212, 0.4) 60%,
+            rgba(0, 188, 212, 0.65) 80%,
+            rgba(0, 188, 212, var(--header-overlay-opacity)) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.site-header > * {
+    position: relative;
+    z-index: 2;
+}
+
+.header-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.logo-link:hover {
+    transform: scale(1.03);
+}
+
+.custom-logo {
+    height: 112px;
+    width: auto;
+    display: block;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.header-social-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.social-btn.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.social-btn.youtube {
+    background-color: #ff0000;
+}
+
+.social-btn.facebook {
+    background-color: #1877f2;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: var(--shadow-md);
+    color: #ffffff;
+}
+
+/* Breaking News Ticker */
+.breaking-ticker {
+    background: linear-gradient(to right, #ffc107 0%, #ffd54f 20%, #4dd0e1 50%, #ffd54f 80%, #ffc107 100%);
+    padding: 6px 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.ticker-container-wrap {
+    width: 100%;
+}
+
+.ticker-white-box {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ticker-label {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-weight: 800;
+    padding: 7px 16px;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.ticker-label i {
+    animation: flash 1s infinite alternate;
+    font-size: 16px;
+    color: var(--accent-color);
+}
+
+.ticker-slider {
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    white-space: nowrap;
+    transition: transform 0.5s ease-in-out;
+}
+
+.ticker-item {
+    padding: 0 15px;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #222222;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ticker-item a {
+    color: #222222;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.ticker-item a:hover {
+    color: var(--primary-color);
+}
+
+.ticker-item::after {
+    content: "•";
+    color: #888888;
+    font-size: 18px;
+    margin-left: 15px;
+}

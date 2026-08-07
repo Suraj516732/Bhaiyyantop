@@ -1,0 +1,44 @@
+/**
+ * Buttons & Interactive Controls
+ */
+.button,
+.btn,
+.search-submit,
+.ticker-control-btn {
+    font-family: var(--font-body);
+    transition: var(--transition);
+}
+
+.ticker-controls {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.ticker-control-btn {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444444;
+    cursor: pointer;
+    font-size: 12px;
+    transition: var(--transition);
+}
+
+.ticker-control-btn:hover {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+}
+
+.ticker-control-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(233, 30, 99, 0.2);
+}

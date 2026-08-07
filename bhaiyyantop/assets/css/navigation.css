@@ -1,0 +1,118 @@
+/**
+ * Navigation & Sticky Navbar
+ */
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.nav-menu-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu-wrapper .header-menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu-wrapper .header-menu li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu-wrapper .header-menu li a {
+    color: var(--nav-text);
+    font-weight: 700;
+    padding: 6px 14px;
+    font-size: var(--nav-font-size);
+    border-radius: var(--container-radius);
+    transition: var(--transition);
+    text-decoration: none;
+    font-family: var(--font-primary);
+    white-space: nowrap;
+}
+
+.nav-menu-wrapper .header-menu li a:hover,
+.nav-menu-wrapper .header-menu li.current-menu-item a {
+    background-color: var(--nav-hover-bg);
+    color: var(--nav-hover);
+}
+
+/* Premium Floating Sticky Navbar */
+.bhaiyyantop-sticky-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    background-color: var(--header-bg);
+    background-image: linear-gradient(to bottom, rgba(0, 188, 212, 0.4) 0%, rgba(0, 188, 212, 0.75) 60%, rgba(0, 188, 212, 0.95) 100%), url('../images/header_banner.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(.22, 1, .36, 1), opacity 0.35s ease, visibility 0.35s;
+    padding: 6px 0;
+}
+
+.bhaiyyantop-sticky-navbar.sticky-active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.sticky-navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.sticky-logo-wrap {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sticky-logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+    transition: var(--transition);
+}
+
+.sticky-logo-img:hover {
+    transform: scale(1.04);
+}
+
+.sticky-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.sticky-header-menu {
+    gap: 10px;
+}
+
+.sticky-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}

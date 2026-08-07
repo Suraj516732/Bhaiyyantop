@@ -1,0 +1,51 @@
+/**
+ * Theme CSS Variables
+ */
+:root {
+    --primary-color: #e91e63;
+    --secondary-color: #00bcd4;
+    --accent-color: #ffeb3b;
+    --accent-yellow: #ffeb3b;
+    --header-bg: #00bcd4;
+    --header-overlay-opacity: 0.65;
+    --header-min-height: 155px;
+    --card-bg: #ffffff;
+    --dark-color: #1a1a1a;
+    --text-color: #333333;
+    --text-muted: #757575;
+    --light-bg: #f4f3ef;
+    --border-color: #e0e0e0;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.12);
+    
+    /* Radii */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --container-radius: 8px;
+    
+    /* Transitions & Fonts */
+    --transition: all 0.25s ease;
+    --font-body: 'Noto Sans Devanagari', sans-serif;
+    --font-heading: 'Noto Sans Devanagari', sans-serif;
+    --font-primary: 'Noto Sans Devanagari', sans-serif;
+    --container-width: 1800px;
+    
+    /* Navigation Defaults */
+    --nav-text: #111111;
+    --nav-hover: #ffffff;
+    --nav-hover-bg: #e91e63;
+    --nav-font-size: 19px;
+    
+    /* Button Defaults */
+    --button-bg: #e91e63;
+    --button-hover: #c2185b;
+    --button-text: #ffffff;
+    
+    /* Footer Defaults */
+    --footer-bg: #121216;
+    --footer-text: #a0a0a0;
+}
