@@ -1022,8 +1022,20 @@ function bhaiyyantop_customizer_css() {
             background-color: var(--nav-hover-bg);
         }
 
-        .nav-menu-wrapper {
-            background-color: var(--nav-dropdown-bg);
+        @media (min-width: 1281px) {
+            .site-header .header-nav > .nav-menu-wrapper {
+                background: transparent;
+            }
+            .header-menu .sub-menu,
+            .header-menu .dropdown-menu {
+                background-color: var(--nav-dropdown-bg);
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .site-header .header-nav > .nav-menu-wrapper {
+                background-color: var(--mobile-menu-bg);
+            }
         }
 
         .hamburger-bar {
