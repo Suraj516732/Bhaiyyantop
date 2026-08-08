@@ -185,7 +185,7 @@
             <span class="hamburger-bar"></span>
             <span class="hamburger-bar"></span>
         </button>
-        <span class="gwalior-breaking-text">Gwalior breaking</span>
+        <span class="gwalior-breaking-text">bhaiyyantop</span>
     </div>
 </div>
 <?php endif; ?>
