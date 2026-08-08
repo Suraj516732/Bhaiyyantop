@@ -203,6 +203,7 @@ img {
 
 .nav-menu-wrapper .header-menu {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     align-items: center;
     gap: 8px;
@@ -350,6 +351,7 @@ img {
 
 .sticky-header-menu {
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .sticky-actions {
@@ -2278,5 +2280,16 @@ input {
     
     .search-input {
         width: 100%;
+    }
+}
+
+/* WordPress Admin Bar Offsets */
+.admin-bar .bhaiyyantop-sticky-navbar {
+    top: 32px !important;
+}
+
+@media (max-width: 782px) {
+    .admin-bar .bhaiyyantop-sticky-navbar {
+        top: 46px !important;
     }
 }

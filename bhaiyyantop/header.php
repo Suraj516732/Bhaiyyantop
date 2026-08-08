@@ -55,6 +55,7 @@
                         'menu_class'     => 'header-menu',
                         'container'      => false,
                         'depth'          => 1,
+                        'fallback_cb'    => '__return_false',
                     ) );
                 } else {
                     $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
@@ -126,6 +127,7 @@
                         'menu_class'     => 'header-menu sticky-header-menu',
                         'container'      => false,
                         'depth'          => 1,
+                        'fallback_cb'    => '__return_false',
                     ) );
                 } else {
                     $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
