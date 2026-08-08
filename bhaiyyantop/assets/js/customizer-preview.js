@@ -136,7 +136,7 @@
     wp.customize('bhaiyyantop_nav_dropdown_bg', function (value) {
         value.bind(function (newVal) {
             setCssVar('--nav-dropdown-bg', newVal);
-            $('.nav-menu-wrapper').css('background-color', newVal);
+            $('.header-menu .sub-menu, .header-menu .dropdown-menu').css('background-color', newVal);
         });
     });
 

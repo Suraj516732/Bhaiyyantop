@@ -204,7 +204,6 @@
                 <span class="hamburger-bar"></span>
                 <span class="hamburger-bar"></span>
             </button>
-            <span class="gwalior-breaking-text">Bhaiyyantop</span>
         </div>
         <div class="mobile-header-actions">
             <div class="header-search-wrap">

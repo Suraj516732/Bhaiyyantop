@@ -187,12 +187,27 @@ function bhaiyyantop_get_theme_inline_script() {
         // 4. Mobile Menu Toggle
         const menuToggles = document.querySelectorAll('.menu-toggle:not(.sticky-menu-toggle)');
         const primaryMenu = document.getElementById('primary-menu');
-        
+        const MENU_GAP = 30; // px of breathing room below the button row — increase/decrease to taste
+
         if (menuToggles.length > 0 && primaryMenu) {
             menuToggles.forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
                     e.preventDefault();
                     const expanded = this.getAttribute('aria-expanded') === 'true';
+
+                    // Anchor to the row that actually contains the clicked button.
+                    const row = this.closest('.mobile-subheader')
+                        || this.closest('.header-inner')
+                        || this.closest('.site-header');
+                    const bottom = row
+                        ? Math.max(row.getBoundingClientRect().bottom, 0) + MENU_GAP
+                        : 150;
+
+                    // setProperty with 'important' guarantees this always wins,
+                    // even if a leftover stylesheet rule tries to fight it again.
+                    primaryMenu.style.setProperty('top', bottom + 'px', 'important');
+                    primaryMenu.style.setProperty('max-height', 'calc(100vh - ' + bottom + 'px)', 'important');
+
                     this.setAttribute('aria-expanded', !expanded);
                     this.classList.toggle('active');
                     primaryMenu.classList.toggle('active');
