@@ -1404,64 +1404,355 @@ img {
     }
 }
 
+/* Global Flexbox Sticky Footer Setup (Ensures footer never overlaps and naturally stays at bottom when content is short) */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-wrapper {
+    flex: 1 0 auto;
+}
+
+.site-footer {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* Hide mobile drawer & category bar on Desktop */
+.mobile-bottom-nav,
+.mobile-category-bar,
+.mobile-menu-backdrop {
+    display: none;
+}
+
 @media (max-width: 768px) {
-    .header-inner {
-        flex-direction: column;
-        text-align: center;
+    /* 1. Mobile Body & Scroll Lock */
+    body {
+        padding-bottom: 65px;
+        -webkit-tap-highlight-color: transparent;
+        overscroll-behavior-y: contain;
     }
 
-    .header-menu {
+    body.menu-open,
+    body.mobile-menu-open {
+        overflow: hidden !important;
+    }
+
+    /* Hide desktop floating sticky navigation bar on mobile to ensure ONLY ONE logo & header exists on mobile */
+    #bhaiyyantop-sticky-nav {
+        display: none !important;
+    }
+
+    /* 2. Sticky Mobile Header (Height 60px, Hamburger Left, Logo Center, Search Right) */
+    .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10000;
+        height: 60px;
+        background-color: var(--header-bg, #00bcd4);
+        background-image: linear-gradient(to bottom, rgba(0, 188, 212, 0.5) 0%, rgba(0, 188, 212, 0.95) 100%);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+        display: flex;
+        align-items: center;
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        height: 100%;
+        padding: 0 16px !important;
+        position: relative;
+    }
+
+    /* Hamburger on Left */
+    .header-nav {
+        order: 1;
+    }
+
+    .header-nav .menu-toggle {
+        display: flex !important;
+        width: 44px;
+        height: 44px;
+        align-items: center;
         justify-content: center;
     }
 
-    .sticky-nav .nav-menu-wrapper {
+    /* Logo Centered */
+    .logo-container {
+        order: 2;
+        margin: 0 auto !important;
+        text-align: center;
+    }
+
+    .site-header .custom-logo {
+        height: 44px !important;
+        width: auto !important;
+    }
+
+    /* Search Icon on Right */
+    .header-actions {
+        order: 3;
+        gap: 0;
+    }
+
+    .header-social-buttons {
+        display: none !important;
+    }
+
+    /* 3. Mobile Backdrop Overlay */
+    .mobile-menu-backdrop {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 10001;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.25s ease, visibility 0.25s;
+    }
+
+    .mobile-menu-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* 4. Full-Height 85% Left Slide-In Menu Drawer (GPU Accelerated Animation) */
+    .nav-menu-wrapper {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 85% !important;
+        max-width: 320px !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        background: linear-gradient(180deg, #008b9b 0%, #004d40 100%);
+        z-index: 10002;
+        padding: 0 !important;
+        box-shadow: 8px 0 25px rgba(0, 0, 0, 0.3);
+        will-change: transform, opacity;
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.35s cubic-bezier(.22, 1, .36, 1), opacity 0.25s ease, visibility 0.35s;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-menu-wrapper.active {
+        transform: translate3d(0, 0, 0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    /* Mobile Drawer Header with Title & Close Button */
+    .mobile-drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        background: rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .mobile-drawer-title {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 800;
+        font-family: var(--font-heading);
+    }
+
+    .mobile-drawer-close {
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 1;
+        padding: 4px 8px;
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-menu-wrapper .header-menu {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        padding: 15px;
+        gap: 6px;
+    }
+
+    .nav-menu-wrapper .header-menu li a {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 10px 18px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s ease;
+    }
+
+    .nav-menu-wrapper .header-menu li.current-menu-item a,
+    .nav-menu-wrapper .header-menu li a:hover {
+        background-color: var(--primary-color);
+        color: #ffffff;
+    }
+
+    /* 5. Mobile Snap Scrolling Horizontal Category Bar */
+    .mobile-category-bar {
+        display: block;
+        background: #ffffff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 8px 12px;
+        position: sticky;
+        top: 60px;
+        z-index: 999;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .mobile-cat-scroll {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+    }
+
+    .mobile-cat-scroll::-webkit-scrollbar {
         display: none;
-        position: absolute;
-        top: 100%;
+    }
+
+    .cat-pill {
+        scroll-snap-align: start;
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: #f1f3f4;
+        color: #3c4043;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        flex-shrink: 0;
+        min-height: 36px;
+    }
+
+    .cat-pill.active,
+    .cat-pill:hover {
+        background: var(--primary-color);
+        color: #ffffff;
+    }
+
+    /* 6. Compact 40px Breaking News Ticker on Mobile */
+    .breaking-ticker {
+        height: 40px !important;
+        min-height: 40px !important;
+    }
+
+    .ticker-white-box {
+        height: 40px !important;
+        padding: 0 10px !important;
+    }
+
+    /* 7. Mobile News Cards Layout (Image Left, Headline Right, Meta Below) */
+    .mini-news-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 10px !important;
+        background: #ffffff !important;
+        border-radius: 8px !important;
+        margin-bottom: 10px !important;
+        border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .mini-news-thumb {
+        width: 100px !important;
+        height: 75px !important;
+        flex-shrink: 0 !important;
+        border-radius: 6px !important;
+        overflow: hidden !alignment;
+    }
+
+    .mini-news-content {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        flex: 1 !important;
+    }
+
+    .mini-news-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* 8. App Bottom Navigation Bar */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
         left: 0;
         right: 0;
-        background: var(--secondary-color);
-        padding: 15px;
-        box-shadow: var(--shadow-lg);
+        height: 60px;
+        background: #ffffff;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.08);
+        z-index: 10000;
+        justify-content: space-around;
+        align-items: center;
     }
 
-    .sticky-nav .nav-menu-wrapper.active {
-        display: block;
-    }
-
-    .sticky-nav .menu-toggle {
+    .mobile-bottom-nav .nav-tab {
         display: flex;
-    }
-
-    .ticker-inner {
-        flex-wrap: nowrap;
-    }
-
-    .hero-slide {
-        height: 320px;
-    }
-
-    .hero-title {
-        font-size: 18px;
-    }
-
-    .mid-card-inner {
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #5f6368;
+        text-decoration: none;
+        background: transparent;
+        border: none;
+        font-size: 11px;
+        font-weight: 700;
+        gap: 3px;
+        flex: 1;
+        height: 100%;
+        min-height: 48px;
+        cursor: pointer;
     }
 
-    .mid-card-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .bottom-section-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
+    .mobile-bottom-nav .nav-tab.active {
+        color: var(--primary-color);
     }
 }
 

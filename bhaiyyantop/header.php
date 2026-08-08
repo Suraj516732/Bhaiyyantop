@@ -13,21 +13,13 @@
 <!-- Skip to Content Link for Keyboard Accessibility -->
 <a class="skip-link screen-reader-text" href="#primary-content"><?php esc_html_e( 'मुख्य सामग्री पर जाएं', 'bhaiyyantop' ); ?></a>
 
+<!-- Mobile Drawer Backdrop Overlay -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
 <!-- Main Header Section -->
 <header id="masthead" class="site-header">
     <div class="container header-inner">
-        <!-- Site Branding Logo -->
-        <div class="logo-container">
-            <?php if ( has_custom_logo() ) : ?>
-                <?php the_custom_logo(); ?>
-            <?php else : ?>
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-link">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="custom-logo">
-                </a>
-            <?php endif; ?>
-        </div>
-
-        <!-- Categories Navigation Menu -->
+        <!-- Categories Navigation Menu Toggle (Mobile Left) -->
         <nav id="site-navigation" class="header-nav main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'bhaiyyantop' ); ?>">
             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Navigation', 'bhaiyyantop' ); ?>">
                 <span class="hamburger-bar"></span>
@@ -35,14 +27,20 @@
                 <span class="hamburger-bar"></span>
             </button>
 
+            <!-- Slide-in Drawer Container -->
             <div class="nav-menu-wrapper" id="primary-menu">
+                <div class="mobile-drawer-header">
+                    <span class="mobile-drawer-title"><?php esc_html_e( 'मेनू / कैटेगरीज', 'bhaiyyantop' ); ?></span>
+                    <button type="button" class="mobile-drawer-close" aria-label="<?php esc_attr_e( 'Close Menu', 'bhaiyyantop' ); ?>">&times;</button>
+                </div>
+
                 <?php
                 if ( has_nav_menu( 'primary' ) ) {
                     wp_nav_menu( array(
                         'theme_location' => 'primary',
                         'menu_class'     => 'header-menu',
                         'container'      => false,
-                        'depth'          => 1,
+                        'depth'          => 2,
                     ) );
                 } else {
                     $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
@@ -57,7 +55,18 @@
             </div>
         </nav>
 
-        <!-- Right Side Actions: Inline Expanding Search & Social Buttons -->
+        <!-- Site Branding Logo (Mobile Centered) -->
+        <div class="logo-container">
+            <?php if ( has_custom_logo() ) : ?>
+                <?php the_custom_logo(); ?>
+            <?php else : ?>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-link">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="custom-logo">
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <!-- Right Side Actions: Inline Search (Mobile Right) -->
         <div class="header-actions">
             <!-- Inline Expanding Search Form -->
             <div class="header-search-container">
@@ -74,7 +83,7 @@
                 </button>
             </div>
 
-            <!-- Social Media Buttons -->
+            <!-- Social Media Buttons (Desktop Only) -->
             <div class="header-social-buttons">
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -84,10 +93,23 @@
     </div>
 </header>
 
-<!-- Premium Floating Sticky Navigation Bar -->
+<!-- Mobile Horizontal Category Scroll Bar (Google News Style Snap Scrolling) -->
+<div class="mobile-category-bar">
+    <div class="mobile-cat-scroll">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="cat-pill active">होम</a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'desh' ) ); ?>" class="cat-pill">देश</a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'duniya' ) ); ?>" class="cat-pill">दुनिया</a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'business' ) ); ?>" class="cat-pill">बिज़नेस</a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'khel' ) ); ?>" class="cat-pill">खेल</a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'technology' ) ); ?>" class="cat-pill">तकनीक</a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'manoranjan' ) ); ?>" class="cat-pill">मनोरंजन</a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'swasthya' ) ); ?>" class="cat-pill">स्वास्थ्य</a>
+    </div>
+</div>
+
+<!-- Premium Floating Sticky Navigation Bar (Desktop Sticky Header) -->
 <div id="bhaiyyantop-sticky-nav" class="bhaiyyantop-sticky-navbar">
     <div class="container sticky-navbar-inner">
-        <!-- Small Logo -->
         <div class="sticky-logo-wrap">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="sticky-logo-link">
                 <?php if ( has_custom_logo() ) : ?>
@@ -106,7 +128,6 @@
             </a>
         </div>
 
-        <!-- Main Navigation Menu -->
         <nav class="sticky-nav main-navigation" aria-label="<?php esc_attr_e( 'Sticky Navigation Menu', 'bhaiyyantop' ); ?>">
             <button class="menu-toggle sticky-menu-toggle" aria-controls="sticky-primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Sticky Navigation', 'bhaiyyantop' ); ?>">
                 <span class="hamburger-bar"></span>
@@ -136,7 +157,6 @@
             </div>
         </nav>
 
-        <!-- Right Side Actions: Sticky Inline Search & Social Icons -->
         <div class="sticky-actions">
             <div class="header-search-container sticky-search-container">
                 <div class="search-expand-wrap" id="stickySearchExpand">
@@ -162,7 +182,7 @@
 </div>
 
 <?php if ( get_theme_mod( 'bhaiyyantop_show_ticker', true ) ) : ?>
-<!-- Breaking News Ticker in Transparent Faded Yellow Bar with White Color Box -->
+<!-- Compact 40px Breaking News Ticker -->
 <section class="breaking-ticker">
     <div class="container ticker-container-wrap">
         <div class="ticker-white-box">

@@ -63,6 +63,30 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
     </footer>
 
+    <!-- Mobile App Bottom Navigation Bar (Google News / Aaj Tak App Style) -->
+    <nav class="mobile-bottom-nav" aria-label="<?php esc_attr_e( 'Mobile Navigation', 'bhaiyyantop' ); ?>">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-tab active">
+            <i class="fa fa-home"></i>
+            <span><?php esc_html_e( 'होम', 'bhaiyyantop' ); ?></span>
+        </a>
+        <a href="#heroSlider" class="nav-tab">
+            <i class="fa fa-bolt"></i>
+            <span><?php esc_html_e( 'ताज़ा खबरें', 'bhaiyyantop' ); ?></span>
+        </a>
+        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'manoranjan' ) ); ?>" class="nav-tab">
+            <i class="fa fa-play-circle"></i>
+            <span><?php esc_html_e( 'वीडियो', 'bhaiyyantop' ); ?></span>
+        </a>
+        <button type="button" class="nav-tab mobile-drawer-trigger menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Open Categories Menu">
+            <i class="fa fa-th-large"></i>
+            <span><?php esc_html_e( 'कैटेगरी', 'bhaiyyantop' ); ?></span>
+        </button>
+        <button type="button" class="nav-tab mobile-search-trigger" id="mobileBottomSearchTrigger" aria-label="Search News">
+            <i class="fa fa-search"></i>
+            <span><?php esc_html_e( 'खोजें', 'bhaiyyantop' ); ?></span>
+        </button>
+    </nav>
+
     <?php wp_footer(); ?>
 </body>
 </html>

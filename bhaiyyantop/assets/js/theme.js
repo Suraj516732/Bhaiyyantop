@@ -1,6 +1,6 @@
 /**
  * Bhaiyyantop Theme JavaScript
- * Handles Premium Floating Sticky Navigation Bar, Inline Expanding Search, Mobile Drawer, and Accessibility Keyboard Focus
+ * Mobile Navigation UX Fixes (GPU Slide-In Drawer, Auto-Close on Nav Link Click, Backdrop, ESC key, Body Scroll Lock)
  */
 
 (function () {
@@ -87,47 +87,96 @@
                 }
             });
         });
-    }
 
-    function initMobileMenuToggles() {
-        // Find all hamburger toggle buttons (main header & sticky header)
-        const toggleButtons = document.querySelectorAll('.menu-toggle');
-
-        toggleButtons.forEach(function (toggleBtn) {
-            const targetId = toggleBtn.getAttribute('aria-controls');
-            const menuWrapper = targetId ? document.getElementById(targetId) : null;
-
-            if (!toggleBtn || !menuWrapper) return;
-
-            toggleBtn.addEventListener('click', function (e) {
+        // Mobile Bottom Bar Search Trigger Listener
+        const mobileBottomSearchBtn = document.getElementById('mobileBottomSearchTrigger');
+        if (mobileBottomSearchBtn) {
+            mobileBottomSearchBtn.addEventListener('click', function (e) {
                 e.preventDefault();
-                const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-                const nextState = !isExpanded;
-
-                toggleBtn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
-                toggleBtn.classList.toggle('is-active', nextState);
-                menuWrapper.classList.toggle('active', nextState);
-
-                // Add body scroll lock on mobile when drawer is active
-                if (window.innerWidth <= 768) {
-                    document.body.classList.toggle('mobile-menu-open', nextState);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const mainSearchToggle = document.getElementById('headerSearchToggle');
+                if (mainSearchToggle) {
+                    setTimeout(function () {
+                        mainSearchToggle.click();
+                    }, 250);
                 }
             });
+        }
+    }
+
+    // Smooth Mobile Left Slide-In Drawer & Overlay Handler
+    function initMobileMenuToggles() {
+        const toggleButtons = document.querySelectorAll('.menu-toggle');
+        const backdrop = document.getElementById('mobileMenuBackdrop');
+        const closeDrawerBtn = document.querySelector('.mobile-drawer-close');
+        const navMenuWrapper = document.getElementById('primary-menu');
+
+        function closeMenu() {
+            toggleButtons.forEach(function (btn) {
+                btn.setAttribute('aria-expanded', 'false');
+                btn.classList.remove('is-active');
+            });
+            if (navMenuWrapper) {
+                navMenuWrapper.classList.remove('active');
+            }
+            if (backdrop) {
+                backdrop.classList.remove('active');
+            }
+            document.body.classList.remove('menu-open', 'mobile-menu-open');
+        }
+
+        function openMenu() {
+            toggleButtons.forEach(function (btn) {
+                btn.setAttribute('aria-expanded', 'true');
+                btn.classList.add('is-active');
+            });
+            if (navMenuWrapper) {
+                navMenuWrapper.classList.add('active');
+            }
+            if (backdrop) {
+                backdrop.classList.add('active');
+            }
+            document.body.classList.add('menu-open', 'mobile-menu-open');
+        }
+
+        function toggleMenu(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            if (navMenuWrapper && navMenuWrapper.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
+
+        toggleButtons.forEach(function (toggleBtn) {
+            toggleBtn.addEventListener('click', toggleMenu);
         });
 
-        // Close mobile drawer on Escape key press for Accessibility
+        if (backdrop) {
+            backdrop.addEventListener('click', closeMenu);
+        }
+
+        if (closeDrawerBtn) {
+            closeDrawerBtn.addEventListener('click', closeMenu);
+        }
+
+        // Auto-close mobile drawer when any navigation link is clicked
+        if (navMenuWrapper) {
+            const navLinks = navMenuWrapper.querySelectorAll('a');
+            navLinks.forEach(function (link) {
+                link.addEventListener('click', function () {
+                    closeMenu();
+                });
+            });
+        }
+
+        // Close on Escape Key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-                toggleButtons.forEach(function (toggleBtn) {
-                    const targetId = toggleBtn.getAttribute('aria-controls');
-                    const menuWrapper = targetId ? document.getElementById(targetId) : null;
-                    if (toggleBtn && menuWrapper && menuWrapper.classList.contains('active')) {
-                        toggleBtn.setAttribute('aria-expanded', 'false');
-                        toggleBtn.classList.remove('is-active');
-                        menuWrapper.classList.remove('active');
-                        document.body.classList.remove('mobile-menu-open');
-                    }
-                });
+                closeMenu();
             }
         });
     }
