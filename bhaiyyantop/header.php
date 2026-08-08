@@ -21,7 +21,7 @@
 <?php wp_body_open(); ?>
 
 <!-- Main Header Section -->
-<header id="masthead" class="site-header">
+<header id="masthead" class="site-header" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/header_banner.png' ); ?>');">
     <div class="container header-inner">
         <!-- Site Branding Logo -->
         <div class="logo-container">
@@ -86,7 +86,7 @@
 </header>
 
 <!-- Premium Floating Sticky Navigation Bar -->
-<div id="bhaiyyantop-sticky-nav" class="bhaiyyantop-sticky-navbar">
+<div id="bhaiyyantop-sticky-nav" class="bhaiyyantop-sticky-navbar" style="background-image: linear-gradient(to bottom, rgba(0, 188, 212, 0.4) 0%, rgba(0, 188, 212, 0.75) 60%, rgba(0, 188, 212, 0.95) 100%), url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/header_banner.png' ); ?>');">
     <div class="container sticky-navbar-inner">
         <!-- Small Logo -->
         <div class="sticky-logo-wrap">
