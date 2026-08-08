@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! function_exists( 'bhaiyyantop_related_posts' ) ) :
     function bhaiyyantop_related_posts() {
-        $post_id = get_the_ID();
+        $post_id    = get_the_ID();
         $categories = get_the_category( $post_id );
 
         if ( empty( $categories ) ) {
@@ -24,11 +24,14 @@ if ( ! function_exists( 'bhaiyyantop_related_posts' ) ) :
         }
 
         $args = array(
-            'category__in'        => $category_ids,
-            'post__not_in'        => array( $post_id ),
-            'posts_per_page'      => 3,
-            'ignore_sticky_posts' => 1,
-            'orderby'             => 'rand',
+            'category__in'           => $category_ids,
+            'post__not_in'           => array( $post_id ),
+            'posts_per_page'         => 3,
+            'ignore_sticky_posts'    => 1,
+            'orderby'                => 'rand',
+            'no_found_rows'          => true,
+            'update_post_term_cache' => false,
+            'update_post_meta_cache' => false,
         );
 
         $related_query = new WP_Query( $args );
@@ -37,7 +40,7 @@ if ( ! function_exists( 'bhaiyyantop_related_posts' ) ) :
             ?>
             <div class="bhaiyyantop-related-posts">
                 <div class="section-title-wrap">
-                    <h3 class="section-title"><i class="fa fa-newspaper"></i> सम्बंधित समाचार (Related News)</h3>
+                    <h3 class="section-title"><i class="fa fa-newspaper"></i> <?php esc_html_e( 'सम्बंधित समाचार (Related News)', 'bhaiyyantop' ); ?></h3>
                 </div>
                 <div class="related-posts-grid">
                     <?php
@@ -59,7 +62,7 @@ if ( ! function_exists( 'bhaiyyantop_related_posts' ) ) :
                                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                 </h4>
                                 <div class="post-meta">
-                                    by <span><?php the_author(); ?></span> &bull; <?php echo esc_html( get_the_date( 'j F, Y' ) ); ?>
+                                    <?php esc_html_e( 'by', 'bhaiyyantop' ); ?> <span><?php the_author(); ?></span> &bull; <?php echo esc_html( get_the_date( 'j F, Y' ) ); ?>
                                 </div>
                             </div>
                         </article>

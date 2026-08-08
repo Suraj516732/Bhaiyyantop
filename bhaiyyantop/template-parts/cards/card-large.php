@@ -16,7 +16,7 @@ $loading_attr = $is_first ? 'fetchpriority="high" decoding="async"' : 'loading="
 ?>
 
 <div class="hero-slide active whole-card-link">
-    <img src="<?php echo esc_url( $card['thumbnail'] ); ?>" alt="<?php echo esc_attr( $card['title'] ); ?>" width="800" height="450" <?php echo $loading_attr; ?>>
+    <img src="<?php echo esc_url( $card['thumbnail'] ); ?>" alt="<?php echo esc_attr( $card['title'] ); ?>" width="800" height="450" <?php echo wp_kses_post( $loading_attr ); ?>>
     <div class="hero-overlay">
         <a href="<?php echo esc_url( $card['cat_url'] ); ?>" class="cat-badge pink"><?php echo esc_html( $card['category'] ); ?></a>
         <h2 class="hero-title">

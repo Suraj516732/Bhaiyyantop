@@ -54,7 +54,7 @@ function bhaiyyantop_demo_import_page_render() {
         <p><?php esc_html_e( 'एक क्लिक में अपनी वेबसाइट पर सैंपल न्यूज़ कैटेगरी, आर्टिकल्स और प्राइमरी मेन्यू इम्पोर्ट करें।', 'bhaiyyantop' ); ?></p>
 
         <?php if ( ! empty( $message ) ) : ?>
-            <div class="notice <?php echo $imported ? 'notice-success' : 'notice-error'; ?> is-dismissible">
+            <div class="notice <?php echo esc_attr( $imported ? 'notice-success' : 'notice-error' ); ?> is-dismissible">
                 <p><strong><?php echo esc_html( $message ); ?></strong></p>
             </div>
         <?php endif; ?>

@@ -37,7 +37,7 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                 <?php echo esc_html( $cat_name ); ?>
             </h1>
             <div class="category-desc">
-                <?php echo category_description() ? category_description() : esc_html( $cat_name ) . ' की सभी प्रमुख एवं ताज़ा ख़बरें और विशेष रिपोर्ट'; ?>
+                <?php echo category_description() ? wp_kses_post( category_description() ) : esc_html( $cat_name . ' की सभी प्रमुख एवं ताज़ा ख़बरें और विशेष रिपोर्ट' ); ?>
             </div>
         </div>
         <div class="category-breadcrumbs">
@@ -155,7 +155,7 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                                     </div>
                                     <div class="grid-news-content">
                                         <h3 class="grid-news-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                        <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo get_the_date(); ?></div>
+                                        <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo esc_html( get_the_date() ); ?></div>
                                     </div>
                                 </article>
                             <?php endwhile; ?>
@@ -167,15 +167,15 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                             <?php while ( have_posts() ) : the_post(); ?>
                                 <article class="editorial-post-card">
                                     <div class="author-meta-box">
-                                        <div class="author-avatar"><?php echo mb_substr( get_the_author(), 0, 1 ); ?></div>
+                                        <div class="author-avatar"><?php echo esc_html( mb_substr( get_the_author(), 0, 1 ) ); ?></div>
                                         <div>
                                             <strong><?php the_author(); ?></strong>
-                                            <div style="font-size:12px; color:#666;"><?php echo get_the_date(); ?></div>
+                                            <div style="font-size:12px; color:#666;"><?php echo esc_html( get_the_date() ); ?></div>
                                         </div>
                                         <span class="read-time-pill" style="margin-left:auto;"><i class="fa fa-clock"></i> 4 मिनट पठन</span>
                                     </div>
                                     <h2 style="font-size:22px; font-weight:800; margin-bottom:12px;"><a href="<?php the_permalink(); ?>" style="color:#111; text-decoration:none;"><?php the_title(); ?></a></h2>
-                                    <p style="color:#444; line-height:1.6; margin-bottom:15px;"><?php echo get_the_excerpt(); ?></p>
+                                    <p style="color:#444; line-height:1.6; margin-bottom:15px;"><?php echo esc_html( get_the_excerpt() ); ?></p>
                                     <a href="<?php the_permalink(); ?>" class="read-more-link" style="color:#e91e63; font-weight:700; text-decoration:none;">पूरा लेख पढ़ें <i class="fa fa-arrow-right"></i></a>
                                 </article>
                             <?php endwhile; ?>
@@ -194,7 +194,7 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                                     <div class="grid-news-content" style="padding:15px;">
                                         <span class="star-rating-badge"><i class="fa fa-star"></i> 4.5/5 रिव्यू</span>
                                         <h3 class="grid-news-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                        <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo get_the_date(); ?></div>
+                                        <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo esc_html( get_the_date() ); ?></div>
                                     </div>
                                 </article>
                             <?php endwhile; ?>
@@ -212,7 +212,7 @@ $cat_icon = isset( $cat_icons[ $cat_slug ] ) ? $cat_icons[ $cat_slug ] : 'fa-new
                                     </div>
                                     <div class="grid-news-content">
                                         <h3 class="grid-news-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                        <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo get_the_date(); ?></div>
+                                        <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo esc_html( get_the_date() ); ?></div>
                                     </div>
                                 </article>
                             <?php endwhile; ?>

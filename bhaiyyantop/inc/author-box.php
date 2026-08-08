@@ -20,7 +20,7 @@ if ( ! function_exists( 'bhaiyyantop_author_box' ) ) :
         <div class="bhaiyyantop-author-box">
             <div class="author-box-avatar">
                 <a href="<?php echo esc_url( $author_posts_url ); ?>">
-                    <?php echo $author_avatar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php echo wp_kses_post( $author_avatar ); ?>
                 </a>
             </div>
             <div class="author-box-details">

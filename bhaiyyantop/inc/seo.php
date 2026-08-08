@@ -1,6 +1,7 @@
 <?php
 /**
  * Advanced SEO, OpenGraph, Twitter Cards, Canonical URLs & Schema.org JSON-LD Integration
+ * Fully compatible with Yoast SEO, RankMath, SEOPress, and All in One SEO plugins.
  *
  * @package Bhaiyyantop
  */
@@ -13,6 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Output Canonical URL, Meta Description, OpenGraph, and Twitter Cards in wp_head
  */
 function bhaiyyantop_seo_meta_tags() {
+    // If a dedicated SEO plugin is active, delegate meta/og/twitter tags to the plugin
+    if ( defined( 'WPSEO_VERSION' ) || class_exists( 'RankMath' ) || function_exists( 'seopress_init' ) || defined( 'AIOSEO_VERSION' ) ) {
+        return;
+    }
+
     $site_name   = get_bloginfo( 'name' );
     $site_desc   = get_bloginfo( 'description' );
     $permalink   = home_url( '/' );
@@ -28,9 +34,9 @@ function bhaiyyantop_seo_meta_tags() {
         $excerpt     = get_the_excerpt( $post_id );
         $description = ! empty( $excerpt ) ? wp_strip_all_tags( $excerpt ) : $site_desc;
         $og_type     = is_single() ? 'article' : 'website';
-        
+
         if ( has_post_thumbnail( $post_id ) ) {
-            $thumb_url = get_the_post_thumbnail_url( $post_id, 'large' );
+            $thumb_url = get_the_post_thumbnail_url( $post_id, 'full' );
             if ( $thumb_url ) {
                 $og_image = $thumb_url;
             }
@@ -67,6 +73,11 @@ add_action( 'wp_head', 'bhaiyyantop_seo_meta_tags', 1 );
  * Output JSON-LD Schema.org Structured Data in wp_head
  */
 function bhaiyyantop_schema_structured_data() {
+    // If a dedicated SEO plugin is active, delegate Schema output to the plugin
+    if ( defined( 'WPSEO_VERSION' ) || class_exists( 'RankMath' ) || function_exists( 'seopress_init' ) || defined( 'AIOSEO_VERSION' ) ) {
+        return;
+    }
+
     $site_name = get_bloginfo( 'name' );
     $site_url  = home_url( '/' );
     $logo_url  = get_template_directory_uri() . '/assets/images/logo.png';
@@ -89,12 +100,12 @@ function bhaiyyantop_schema_structured_data() {
             '@type' => 'ImageObject',
             'url'   => $logo_url,
         ),
-        'sameAs'          => array_filter( array(
+        'sameAs'          => array_values( array_filter( array(
             get_theme_mod( 'bhaiyyantop_social_facebook', '' ),
             get_theme_mod( 'bhaiyyantop_social_twitter', '' ),
             get_theme_mod( 'bhaiyyantop_social_instagram', '' ),
             get_theme_mod( 'bhaiyyantop_social_youtube', '' ),
-        ) ),
+        ) ) ),
     );
 
     echo '<script type="application/ld+json">' . wp_json_encode( $website_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";

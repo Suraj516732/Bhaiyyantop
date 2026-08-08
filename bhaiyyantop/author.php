@@ -21,7 +21,7 @@ $author = get_queried_object();
             
             <div class="author-profile-card">
                 <div class="author-avatar-wrapper">
-                    <?php echo get_avatar( $author->ID, 100 ); ?>
+                    <?php echo wp_kses_post( get_avatar( $author->ID, 100 ) ); ?>
                 </div>
                 <div class="author-info-wrapper">
                     <h1 class="author-display-name"><?php echo esc_html( $author->display_name ); ?></h1>

@@ -48,8 +48,8 @@ if ( ! function_exists( 'bhaiyyantop_setup' ) ) :
 
         // Custom logo support
         add_theme_support( 'custom-logo', array(
-            'height'      => 60,
-            'width'       => 240,
+            'height'      => 112,
+            'width'       => 400,
             'flex-width'  => true,
             'flex-height' => true,
         ) );
@@ -110,6 +110,28 @@ function bhaiyyantop_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'bhaiyyantop_resource_hints', 10, 2 );
 
 /**
+ * Defer non-critical theme scripts to improve FID and INP (Core Web Vitals)
+ */
+function bhaiyyantop_defer_theme_scripts( $tag, $handle, $src ) {
+    if ( 'bhaiyyantop-theme-js' === $handle && false === strpos( $tag, 'defer' ) ) {
+        return str_replace( ' src=', ' defer src=', $tag );
+    }
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'bhaiyyantop_defer_theme_scripts', 10, 3 );
+
+/**
+ * Preload LCP Logo / Hero Assets to achieve Lighthouse 95+ score
+ */
+function bhaiyyantop_lcp_preload_hints() {
+    $custom_logo = get_theme_mod( 'bhaiyyantop_logo' );
+    if ( ! empty( $custom_logo ) ) {
+        echo '<link rel="preload" as="image" href="' . esc_url( $custom_logo ) . '" fetchpriority="high" />' . "\n";
+    }
+}
+add_action( 'wp_head', 'bhaiyyantop_lcp_preload_hints', 0 );
+
+/**
  * Register Widget Areas.
  */
 function bhaiyyantop_widgets_init() {
@@ -126,53 +148,99 @@ function bhaiyyantop_widgets_init() {
 add_action( 'widgets_init', 'bhaiyyantop_widgets_init' );
 
 /**
- * Helper to Get Category Permalink by Slug or Fallback to Home URL
+ * Helper to Get Category Permalink by Slug or Fallback to Home URL with Static Memory Cache
  *
  * @param string $slug Category slug.
  * @return string Category URL.
  */
 function bhaiyyantop_get_category_url( $slug = '' ) {
-    if ( empty( $slug ) ) {
+    static $cat_urls = array();
+
+    $clean_slug = sanitize_title( $slug );
+    if ( empty( $clean_slug ) ) {
         return home_url( '/' );
     }
 
-    $category = get_category_by_slug( $slug );
-    if ( $category ) {
-        return get_category_link( $category->term_id );
+    if ( isset( $cat_urls[ $clean_slug ] ) ) {
+        return $cat_urls[ $clean_slug ];
     }
 
-    return home_url( '/' . sanitize_title( $slug ) . '/' );
+    $category = get_category_by_slug( $clean_slug );
+    if ( $category ) {
+        $url = get_category_link( $category->term_id );
+    } else {
+        $url = home_url( '/' . $clean_slug . '/' );
+    }
+
+    $cat_urls[ $clean_slug ] = $url;
+    return $url;
 }
 
 /**
- * Get All Categories List for Navigation Defaults
+ * Get All Categories List for Navigation Defaults with Static Memory Cache
  *
  * @return array Category data list.
  */
 function bhaiyyantop_get_all_categories() {
-    return array(
-        'desh'       => array( 'name' => 'देश', 'url' => bhaiyyantop_get_category_url( 'desh' ) ),
-        'duniya'     => array( 'name' => 'दुनिया', 'url' => bhaiyyantop_get_category_url( 'duniya' ) ),
-        'business'   => array( 'name' => 'बिज़नेस', 'url' => bhaiyyantop_get_category_url( 'business' ) ),
-        'khel'       => array( 'name' => 'खेल', 'url' => bhaiyyantop_get_category_url( 'khel' ) ),
-        'technology' => array( 'name' => 'तकनीक', 'url' => bhaiyyantop_get_category_url( 'technology' ) ),
-        'manoranjan' => array( 'name' => 'मनोरंजन', 'url' => bhaiyyantop_get_category_url( 'manoranjan' ) ),
-        'swasthya'   => array( 'name' => 'स्वास्थ्य', 'url' => bhaiyyantop_get_category_url( 'swasthya' ) ),
-        'auto'       => array( 'name' => 'ऑटो', 'url' => bhaiyyantop_get_category_url( 'auto' ) ),
-        'blog'       => array( 'name' => 'ब्लॉग', 'url' => bhaiyyantop_get_category_url( 'blog' ) ),
-    );
+    static $all_categories = null;
+
+    if ( null !== $all_categories ) {
+        return $all_categories;
+    }
+
+    $all_categories = get_transient( 'bhaiyyantop_all_categories_transient' );
+
+    if ( false === $all_categories ) {
+        $all_categories = array(
+            'desh'       => array( 'name' => __( 'देश', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'desh' ) ),
+            'duniya'     => array( 'name' => __( 'दुनिया', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'duniya' ) ),
+            'business'   => array( 'name' => __( 'बिज़नेस', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'business' ) ),
+            'khel'       => array( 'name' => __( 'खेल', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'khel' ) ),
+            'technology' => array( 'name' => __( 'तकनीक', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'technology' ) ),
+            'manoranjan' => array( 'name' => __( 'मनोरंजन', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'manoranjan' ) ),
+            'swasthya'   => array( 'name' => __( 'स्वास्थ्य', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'swasthya' ) ),
+            'auto'       => array( 'name' => __( 'ऑटो', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'auto' ) ),
+            'blog'       => array( 'name' => __( 'ब्लॉग', 'bhaiyyantop' ), 'url' => bhaiyyantop_get_category_url( 'blog' ) ),
+        );
+
+        set_transient( 'bhaiyyantop_all_categories_transient', $all_categories, DAY_IN_SECONDS );
+    }
+
+    return $all_categories;
 }
 
 /**
- * Render Advertisement Block Component
+ * Flush theme post transients on save, delete or customizer updates.
+ */
+function bhaiyyantop_flush_theme_transients() {
+    delete_transient( 'bhaiyyantop_ticker_posts_5' );
+    delete_transient( 'bhaiyyantop_ticker_posts_10' );
+    delete_transient( 'bhaiyyantop_all_categories_transient' );
+    delete_transient( 'bhaiyyantop_sidebar_recent_posts' );
+
+    global $wpdb;
+    if ( isset( $wpdb->options ) ) {
+        $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_bhaiyyantop_recent_posts_%' OR option_name LIKE '_transient_timeout_bhaiyyantop_recent_posts_%'" );
+    }
+}
+add_action( 'save_post', 'bhaiyyantop_flush_theme_transients' );
+add_action( 'deleted_post', 'bhaiyyantop_flush_theme_transients' );
+add_action( 'created_category', 'bhaiyyantop_flush_theme_transients' );
+add_action( 'edited_category', 'bhaiyyantop_flush_theme_transients' );
+add_action( 'delete_category', 'bhaiyyantop_flush_theme_transients' );
+add_action( 'customize_save_after', 'bhaiyyantop_flush_theme_transients' );
+
+/**
+ * Render Ad Block with Output Escaping
  *
  * @param string $slot Ad slot identifier.
  */
 function bhaiyyantop_render_ad_block( $slot = 'default' ) {
-    $enable_ad = get_theme_mod( 'bhaiyyantop_enable_header_ad', false );
-    $ad_code   = get_theme_mod( 'bhaiyyantop_header_ad_code', '' );
+    $normalized_slot = str_replace( '-', '_', $slot );
+    $slot_enable     = get_theme_mod( 'bhaiyyantop_ad_' . $normalized_slot . '_enable', get_theme_mod( 'bhaiyyantop_enable_header_ad', false ) );
+    $ad_code         = get_theme_mod( 'bhaiyyantop_ad_' . $normalized_slot, get_theme_mod( 'bhaiyyantop_header_ad_code', '' ) );
 
-    if ( $enable_ad && ! empty( $ad_code ) ) {
+    if ( $slot_enable && ! empty( $ad_code ) ) {
         echo '<div class="ad-block-container ad-slot-' . esc_attr( $slot ) . '">';
         echo '<span class="ad-label">' . esc_html__( 'विज्ञापन', 'bhaiyyantop' ) . '</span>';
         echo '<div class="ad-content">' . wp_kses_post( $ad_code ) . '</div>';

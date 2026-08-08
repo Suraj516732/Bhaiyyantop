@@ -8,18 +8,25 @@
 
 get_header();
 
+// Fetch post count preferences from Customizer
+$sidebar_count = get_theme_mod( 'bhaiyyantop_sidebar_post_count', 5 );
+$editors_count = get_theme_mod( 'bhaiyyantop_editors_choice_count', 3 );
+$latest_count  = get_theme_mod( 'bhaiyyantop_latest_news_count', 8 );
+$total_posts   = max( 12, $sidebar_count + $editors_count + $latest_count + 2 );
+
 // Fetch recent posts using theme function
-$recent_posts   = function_exists( 'bhaiyyantop_get_recent_posts' ) ? bhaiyyantop_get_recent_posts( array( 'numberposts' => 12 ) ) : array();
+$recent_posts   = function_exists( 'bhaiyyantop_get_recent_posts' ) ? bhaiyyantop_get_recent_posts( array( 'numberposts' => $total_posts ) ) : array();
 
 // Categorize posts for different layout sections
-$featured_posts = array_slice( $recent_posts, 0, 5 );
+$featured_posts = array_slice( $recent_posts, 0, $sidebar_count );
 $hero_post       = isset( $recent_posts[0] ) ? $recent_posts[0] : null;
 $mid_card_post   = isset( $recent_posts[7] ) ? $recent_posts[7] : ( isset( $recent_posts[1] ) ? $recent_posts[1] : null );
-$editors_posts   = array_slice( $recent_posts, 2, 3 );
-$grid_posts      = array_slice( $recent_posts, 0, 8 );
+$editors_posts   = array_slice( $recent_posts, 2, $editors_count );
+$grid_posts      = array_slice( $recent_posts, 0, $latest_count );
 ?>
 
 <div class="main-wrapper" id="primary-content">
+    <h1 class="screen-reader-text"><?php echo esc_html( get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' ) ); ?></h1>
     <div class="container theme-grid">
         
         <!-- ========================================== -->
@@ -49,8 +56,8 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
                 </div>
             <?php endif; ?>
 
-            <!-- Sidebar Ad Slot -->
-            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'sidebar-left' ); ?>
+            <!-- Sidebar Top Ad Slot -->
+            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'sidebar_top' ); ?>
         </aside>
 
         <!-- ========================================== -->
@@ -58,6 +65,7 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
         <!-- ========================================== -->
         <main class="col-middle">
             
+            <?php if ( get_theme_mod( 'bhaiyyantop_hero_slider_enable', true ) ) : ?>
             <!-- Hero Slider Component -->
             <div class="hero-slider-wrap" id="heroSlider">
                 <?php if ( $hero_post ) : ?>
@@ -72,14 +80,15 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
                     <span class="slider-dot"></span>
                 </div>
             </div>
+            <?php endif; ?>
 
             <!-- Middle Wide Featured Card Component -->
             <?php if ( $mid_card_post ) : ?>
                 <?php get_template_part( 'template-parts/cards/card', 'mid', array( 'item' => $mid_card_post ) ); ?>
             <?php endif; ?>
 
-            <!-- In-Feed Ad Slot -->
-            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'feed-middle' ); ?>
+            <!-- Between Sections Ad Slot -->
+            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'between_sections' ); ?>
         </main>
 
         <!-- ========================================== -->
@@ -107,8 +116,8 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
                 <?php endif; ?>
             </div>
 
-            <!-- Right Sidebar Ad Slot -->
-            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'sidebar-right' ); ?>
+            <!-- Sidebar Middle Ad Slot -->
+            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'sidebar_middle' ); ?>
         </aside>
 
         <!-- ========================================== -->
@@ -117,6 +126,7 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
         <section class="bottom-news-section">
             <div class="bottom-section-header">
                 <h2 class="section-title"><?php esc_html_e( 'लेटेस्ट न्यूज़', 'bhaiyyantop' ); ?></h2>
+                <?php if ( get_theme_mod( 'bhaiyyantop_category_sections_enable', true ) ) : ?>
                 <!-- Filter Tabs with Category Links -->
                 <ul class="category-tabs" role="tablist">
                     <li><button class="cat-tab-btn active" data-category="all"><?php esc_html_e( 'सभी', 'bhaiyyantop' ); ?></button></li>
@@ -126,6 +136,7 @@ $grid_posts      = array_slice( $recent_posts, 0, 8 );
                     <li><a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'khel' ) ); ?>" class="cat-tab-btn" data-category="khel"><?php esc_html_e( 'खेल', 'bhaiyyantop' ); ?></a></li>
                     <li><a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'technology' ) ); ?>" class="cat-tab-btn" data-category="technology"><?php esc_html_e( 'तकनीक', 'bhaiyyantop' ); ?></a></li>
                 </ul>
+                <?php endif; ?>
             </div>
 
             <div class="latest-news-grid" id="latestNewsGrid">

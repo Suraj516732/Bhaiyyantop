@@ -64,6 +64,9 @@ $views      = function_exists( 'bhaiyyantop_post_views' ) ? bhaiyyantop_post_vie
         <!-- Article Main Content -->
         <div class="single-post-content">
 
+            <!-- Article Single Ad Slot -->
+            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'article_ads' ); ?>
+
             <?php if ( has_post_thumbnail() ) : ?>
                 <div class="single-featured-image">
                     <?php the_post_thumbnail( 'full' ); ?>

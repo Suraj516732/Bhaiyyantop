@@ -34,7 +34,7 @@ get_header();
                             </div>
                             <div class="grid-news-content">
                                 <h3 class="grid-news-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo get_the_date(); ?></div>
+                                <div class="post-meta">by <span><?php the_author(); ?></span> &bull; <?php echo esc_html( get_the_date() ); ?></div>
                             </div>
                         </article>
                     <?php endwhile; ?>

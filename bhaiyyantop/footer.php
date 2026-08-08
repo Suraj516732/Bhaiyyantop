@@ -8,84 +8,70 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
+
+$home_url     = home_url( '/' );
+$social_links = array(
+    'facebook'  => array( 'url' => get_theme_mod( 'bhaiyyantop_social_facebook' ),  'icon' => 'fab fa-facebook-f',  'label' => 'Facebook' ),
+    'twitter'   => array( 'url' => get_theme_mod( 'bhaiyyantop_social_twitter' ),   'icon' => 'fab fa-twitter',     'label' => 'Twitter' ),
+    'instagram' => array( 'url' => get_theme_mod( 'bhaiyyantop_social_instagram' ), 'icon' => 'fab fa-instagram',   'label' => 'Instagram' ),
+    'youtube'   => array( 'url' => get_theme_mod( 'bhaiyyantop_social_youtube' ),   'icon' => 'fab fa-youtube',     'label' => 'YouTube' ),
+    'telegram'  => array( 'url' => get_theme_mod( 'bhaiyyantop_social_telegram' ),  'icon' => 'fab fa-telegram',    'label' => 'Telegram' ),
+    'whatsapp'  => array( 'url' => get_theme_mod( 'bhaiyyantop_social_whatsapp' ),  'icon' => 'fab fa-whatsapp',    'label' => 'WhatsApp' ),
+    'linkedin'  => array( 'url' => get_theme_mod( 'bhaiyyantop_social_linkedin' ),  'icon' => 'fab fa-linkedin-in', 'label' => 'LinkedIn' ),
+);
 ?>
-    <footer id="colophon" class="site-footer">
+    <footer id="colophon" class="site-footer" role="contentinfo">
         <div class="container">
             <div class="footer-widgets">
                 <div class="footer-widget">
                     <h4><?php echo esc_html( get_theme_mod( 'bhaiyyantop_footer_about_title', __( 'हमारे बारे में', 'bhaiyyantop' ) ) ); ?></h4>
                     <p><?php echo wp_kses_post( get_theme_mod( 'bhaiyyantop_footer_about_text', __( 'भैय्यान्टॉप भारत का एक अग्रणी न्यूज़ पोर्टल है जो नवीनतम समाचार, राजनीति, खेल, मनोरंजन और तकनीकी जगत की ख़बरें हिंदी में प्रदान करता है।', 'bhaiyyantop' ) ) ); ?></p>
                 </div>
+                <?php if ( get_theme_mod( 'bhaiyyantop_footer_quick_links_enable', true ) ) : ?>
                 <div class="footer-widget">
                     <h4><?php esc_html_e( 'मुख्य श्रेणियां', 'bhaiyyantop' ); ?></h4>
                     <ul>
                         <?php
-                        $categories = function_exists('bhaiyyantop_get_all_categories') ? bhaiyyantop_get_all_categories() : array();
-                        $count = 0;
-                        foreach ( $categories as $slug => $cat_info ) {
-                            if ( $count >= 5 ) break;
+                        $categories = function_exists( 'bhaiyyantop_get_all_categories' ) ? bhaiyyantop_get_all_categories() : array();
+                        $count      = 0;
+                        foreach ( $categories as $cat_info ) {
+                            if ( $count >= 5 ) {
+                                break;
+                            }
                             echo '<li><a href="' . esc_url( $cat_info['url'] ) . '">' . esc_html( $cat_info['name'] ) . '</a></li>';
                             $count++;
                         }
                         ?>
                     </ul>
                 </div>
+                <?php endif; ?>
                 <div class="footer-widget">
                     <h4><?php esc_html_e( 'सामाजिक और संपर्क', 'bhaiyyantop' ); ?></h4>
                     <ul>
-                        <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'मुख्य पृष्ठ (Home)', 'bhaiyyantop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>"><?php esc_html_e( 'फेसबुक पेज़', 'bhaiyyantop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>"><?php esc_html_e( 'यूट्यूब चैनल', 'bhaiyyantop' ); ?></a></li>
+                        <li><a href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'मुख्य पृष्ठ (Home)', 'bhaiyyantop' ); ?></a></li>
+                        <li><a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'फेसबुक पेज़', 'bhaiyyantop' ); ?></a></li>
+                        <li><a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'यूट्यूब चैनल', 'bhaiyyantop' ); ?></a></li>
                     </ul>
                 </div>
             </div>
             
+            <!-- Footer Banner Ad Slot -->
+            <?php if ( function_exists( 'bhaiyyantop_render_ad_block' ) ) bhaiyyantop_render_ad_block( 'footer_banner' ); ?>
+
             <div class="footer-bottom">
                 <p><?php echo wp_kses_post( get_theme_mod( 'bhaiyyantop_footer_copyright', sprintf( __( '© %s भैय्यान्टॉप. सर्वाधिकार सुरक्षित।', 'bhaiyyantop' ), date( 'Y' ) ) ) ); ?></p>
-                <div class="footer-socials">
-                    <?php if ( get_theme_mod( 'bhaiyyantop_social_facebook' ) ) : ?>
-                        <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_facebook', '#' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <?php endif; ?>
-                    <?php if ( get_theme_mod( 'bhaiyyantop_social_twitter' ) ) : ?>
-                        <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_twitter', '#' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <?php endif; ?>
-                    <?php if ( get_theme_mod( 'bhaiyyantop_social_instagram' ) ) : ?>
-                        <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_instagram', '#' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <?php endif; ?>
-                    <?php if ( get_theme_mod( 'bhaiyyantop_social_youtube' ) ) : ?>
-                        <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_youtube', '#' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <?php endif; ?>
-                    <?php if ( get_theme_mod( 'bhaiyyantop_social_telegram' ) ) : ?>
-                        <a href="<?php echo esc_url( get_theme_mod( 'bhaiyyantop_social_telegram', '#' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-                    <?php endif; ?>
+                <?php if ( get_theme_mod( 'bhaiyyantop_footer_social_icons_enable', true ) ) : ?>
+                <div class="footer-socials" aria-label="<?php esc_attr_e( 'Footer Social Links', 'bhaiyyantop' ); ?>">
+                    <?php foreach ( $social_links as $key => $social ) : ?>
+                        <?php if ( ! empty( $social['url'] ) ) : ?>
+                            <a href="<?php echo esc_url( $social['url'] ); ?>" class="social-btn <?php echo esc_attr( $key ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $social['label'] ); ?>"><i class="<?php echo esc_attr( $social['icon'] ); ?>" aria-hidden="true"></i></a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </footer>
-
-    <!-- Mobile App Bottom Navigation Bar (Google News / Aaj Tak App Style) -->
-    <nav class="mobile-bottom-nav" aria-label="<?php esc_attr_e( 'Mobile Navigation', 'bhaiyyantop' ); ?>">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-tab active">
-            <i class="fa fa-home"></i>
-            <span><?php esc_html_e( 'होम', 'bhaiyyantop' ); ?></span>
-        </a>
-        <a href="#heroSlider" class="nav-tab">
-            <i class="fa fa-bolt"></i>
-            <span><?php esc_html_e( 'ताज़ा खबरें', 'bhaiyyantop' ); ?></span>
-        </a>
-        <a href="<?php echo esc_url( bhaiyyantop_get_category_url( 'manoranjan' ) ); ?>" class="nav-tab">
-            <i class="fa fa-play-circle"></i>
-            <span><?php esc_html_e( 'वीडियो', 'bhaiyyantop' ); ?></span>
-        </a>
-        <button type="button" class="nav-tab mobile-drawer-trigger menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Open Categories Menu">
-            <i class="fa fa-th-large"></i>
-            <span><?php esc_html_e( 'कैटेगरी', 'bhaiyyantop' ); ?></span>
-        </button>
-        <button type="button" class="nav-tab mobile-search-trigger" id="mobileBottomSearchTrigger" aria-label="Search News">
-            <i class="fa fa-search"></i>
-            <span><?php esc_html_e( 'खोजें', 'bhaiyyantop' ); ?></span>
-        </button>
-    </nav>
 
     <?php wp_footer(); ?>
 </body>
