@@ -496,10 +496,9 @@ h1, h2, h3, h4, h5, h6,
 /* ==========================================================================
    7. SOCIAL MEDIA BUTTONS & HAMBURGER TOGGLE
    ========================================================================== */
-.header-social-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.header-social-buttons,
+.sticky-social-buttons {
+    display: none !important;
 }
 
 .social-btn {
