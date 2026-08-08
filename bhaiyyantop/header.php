@@ -177,15 +177,4 @@
     </div>
 </section>
 
-<!-- Mobile Subheader with Menu Toggle and Gwalior Breaking -->
-<div class="mobile-subheader">
-    <div class="container mobile-subheader-inner">
-        <button class="menu-toggle subheader-menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Navigation', 'bhaiyyantop' ); ?>">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-        </button>
-        <span class="gwalior-breaking-text">bhaiyyantop</span>
-    </div>
-</div>
 <?php endif; ?>

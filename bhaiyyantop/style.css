@@ -1178,8 +1178,38 @@ img {
 
 /* Responsive Styling */
 @media (max-width: 1024px) {
-    .header-widgets-container {
-        display: none;
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .site-header, .bhaiyyantop-sticky-navbar {
+        position: relative;
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+
+    .bhaiyyantop-sticky-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .header-inner, .sticky-navbar-inner {
+        position: relative;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    .header-nav, .sticky-nav {
+        position: static;
+    }
+
+    .header-widgets-container,
+    .header-weather-date {
+        display: none !important;
     }
 
     .theme-grid {
@@ -1211,31 +1241,41 @@ img {
         top: 100%;
         left: 0;
         right: 0;
-        background-color: #ffffff;
-        display: none;
-        flex-direction: column;
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        background-color: var(--card-bg, #ffffff);
+        display: flex;
+        flex-direction: column;
         padding: 15px 25px;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-        border-top: 1px solid #eeeeee;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        border-top: 1px solid var(--border-subtle, #eeeeee);
         height: auto;
+        z-index: 99999;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
     }
 
     .nav-menu-wrapper.active {
-        display: flex;
-        animation: navSlideDown 0.3s ease forwards;
-        z-index: 99999;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
     }
 
     .nav-menu-wrapper .header-menu {
         flex-direction: column;
         align-items: stretch;
+        width: 100%;
     }
 
     .header-menu li {
         width: 100%;
         margin-left: 0;
-        border-bottom: 1px solid #eeeeee;
+        border-bottom: 1px solid var(--border-subtle, #eeeeee);
     }
 
     .header-menu a {
@@ -1243,740 +1283,12 @@ img {
         padding: 15px 0;
         width: 100%;
         font-size: 17px;
-        color: #111111;
-    }
-
-    .header-menu a.btn.btn-primary {
-        background: transparent !important;
-        color: #e91e63 !important;
-        padding: 15px 0 !important;
-    }
-
-    .menu-toggle.active .hamburger-bar:nth-child(1) {
-        transform: translateY(7.5px) rotate(45deg);
-    }
-
-    .menu-toggle.active .hamburger-bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active .hamburger-bar:nth-child(3) {
-        transform: translateY(-7.5px) rotate(-45deg);
+        color: var(--dark-color, #111111);
+        text-decoration: none;
     }
 }
 
-@keyframes navSlideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 768px) {
-    .header-inner {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding-bottom: 5px;
-    }
-
-    .header-menu {
-        justify-content: center;
-    }
-
-    .ticker-inner {
-        flex-wrap: nowrap;
-    }
-
-    .hero-slide {
-        height: 320px;
-    }
-
-    .hero-title {
-        font-size: 18px;
-    }
-
-    .mid-card-inner {
-        flex-direction: column;
-    }
-
-    .mid-card-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .bottom-section-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-/* ==========================================================================
-   CATEGORY SPECIFIC THEME STRUCTURES
-   ========================================================================== */
-
-/* Category Header Banner */
-.category-banner {
-    background: linear-gradient(135deg, #0097a7 0%, #00bcd4 60%, #e91e63 100%);
-    color: #ffffff;
-    padding: 35px 0 30px;
-    margin-bottom: 30px;
-    border-bottom: 4px solid #ffeb3b;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.category-banner-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.category-title-area h1 {
-    font-size: 32px;
-    font-weight: 900;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.category-icon-badge {
-    background: #e91e63;
-    color: #ffffff;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #ffeb3b;
-    font-size: 20px;
-}
-
-.category-desc {
-    font-size: 15px;
-    opacity: 0.92;
-}
-
-.category-breadcrumbs {
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.category-breadcrumbs a {
-    color: #ffeb3b;
-    text-decoration: none;
-}
-
-/* 1. BUSINESS: Live Stock Ticker & Market Grid */
-.market-ticker-strip {
-    background: #111b24;
-    color: #ffffff;
-    padding: 12px 0;
-    margin-bottom: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.market-ticker-inner {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.market-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.market-name {
-    color: #00bcd4;
-}
-
-.market-val {
-    color: #ffffff;
-}
-
-.market-change.up {
-    color: #4caf50;
-}
-
-.market-change.down {
-    color: #ff5252;
-}
-
-.business-table-card {
-    background: #fff;
-    border-radius: 4px;
-    border-left: 4px solid #00bcd4;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: transform 0.2s ease;
-}
-
-.business-table-card:hover {
-    transform: translateX(4px);
-}
-
-/* 2. KHEL: Live Scoreboard Widget */
-.khel-scoreboard {
-    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
-    color: #ffffff;
-    border-radius: 4px;
-    padding: 20px 25px;
-    margin-bottom: 30px;
-    border: 2px solid #ffeb3b;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-}
-
-.scoreboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.live-tag {
-    background: #e91e63;
-    color: #fff;
-    padding: 3px 10px;
-    border-radius: 12px;
-    animation: blinker 1.5s infinite;
-}
-
-@keyframes blinker {
-    50% {
-        opacity: 0.5;
-    }
-}
-
-.scoreboard-body {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-}
-
-.team-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.team-flag {
-    font-size: 28px;
-}
-
-.team-name {
-    font-weight: 800;
-    font-size: 16px;
-}
-
-.team-score {
-    font-size: 22px;
-    font-weight: 900;
-    color: #ffeb3b;
-}
-
-.vs-badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 8px 14px;
-    border-radius: 50%;
-    font-weight: 900;
-}
-
-/* 3. VIDEO: Dark Player Hero & Play Badges */
-.video-hero-stage {
-    background: #ffffff;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 35px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
-}
-
-.video-player-mock {
-    position: relative;
-    width: 100%;
-    height: 380px;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.big-play-btn {
-    width: 80px;
-    height: 80px;
-    background: #e91e63;
-    color: #ffffff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    box-shadow: 0 0 25px rgba(233, 30, 99, 0.5);
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    border: 3px solid #ffeb3b;
-}
-
-.big-play-btn:hover {
-    transform: scale(1.15);
-    background: #c2185b;
-}
-
-.video-meta-bar {
-    background: #ffffff;
-    color: #0f172a;
-    padding: 18px 25px;
-    border-top: 1px solid #e2e8f0;
-}
-
-.video-meta-bar h2 {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 6px;
-
-}
-
-.video-duration-badge {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background: rgba(0, 0, 0, 0.85);
-    color: #ffeb3b;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.play-icon-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 44px;
-    height: 44px;
-    background: rgba(233, 30, 99, 0.9);
-    border-radius: 50%;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    transition: all 0.25s ease;
-}
-
-.grid-news-card:hover .play-icon-overlay {
-    transform: translate(-50%, -50%) scale(1.2);
-    background: #e91e63;
-}
-
-/* 4. MANORANJAN: Movie Poster Grid & Ratings */
-.poster-card {
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-    background: #fff;
-    transition: transform 0.3s ease;
-}
-
-.poster-card:hover {
-    transform: translateY(-5px);
-}
-
-.star-rating-badge {
-    background: #ffeb3b;
-    color: #111;
-    font-weight: 900;
-    padding: 4px 10px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    margin-bottom: 8px;
-}
-
-/* 5. SWASTHYA: Health Tip Banner & Doctor Quote */
-.health-tip-banner {
-    background: #e0f7fa;
-    border-left: 6px solid #00bcd4;
-    padding: 22px 28px;
-    border-radius: 4px;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.health-tip-icon {
-    font-size: 42px;
-    color: #e91e63;
-}
-
-.health-tip-content h3 {
-    color: #00838f;
-    font-weight: 800;
-    margin-bottom: 6px;
-    font-size: 18px;
-}
-
-/* 6. TECHNOLOGY: Tech Spec Badges & Comparison */
-.tech-tag-pill {
-    background: #00bcd4;
-    color: #fff;
-    font-family: monospace;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-right: 6px;
-}
-
-.tech-hero-box {
-    background: #1e293b;
-    color: #fff;
-    border-radius: 4px;
-    padding: 25px;
-    margin-bottom: 30px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    align-items: center;
-}
-
-/* 7. LIFESTYLE: Asymmetric Magazine Grid */
-.lifestyle-magazine-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    margin-bottom: 35px;
-}
-
-.magazine-hero-card {
-    position: relative;
-    height: 420px;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.magazine-hero-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.magazine-hero-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-    padding: 25px;
-    color: #fff;
-}
-
-/* 8. BLOG: Editorial Reading Format */
-.editorial-post-card {
-    background: #ffffff;
-    border-radius: 4px;
-    padding: 30px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-    border-top: 4px solid #e91e63;
-}
-
-.author-meta-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.author-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #00bcd4;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 800;
-    font-size: 20px;
-    border: 2px solid #ffeb3b;
-}
-
-.read-time-pill {
-    background: #f1f5f9;
-    color: #64748b;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-/* 9. DUNIYA: World Continent Filter Bar */
-.continent-filter-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-}
-
-.continent-btn {
-    background: #ffffff;
-    border: 2px solid #00bcd4;
-    color: #00bcd4;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.continent-btn.active,
-.continent-btn:hover {
-    background: #00bcd4;
-    color: #ffffff;
-}
-
-/* 10. DESH: Timeline Focus */
-.desh-timeline-badge {
-    background: #ffeb3b;
-    color: #111;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-bottom: 10px;
-}
-
-/* ==========================================================================
-   STRETCHED LINK PATTERN (Whole-Card Click Target)
-   ========================================================================== */
-.grid-news-card,
-.mini-news-card,
-.editors-hero-card,
-.editors-wide-card,
-.mid-featured-story,
-.hero-slide,
-.color-card-promo,
-.poster-card,
-.editorial-post-card {
-    position: relative;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.stretched-link::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    content: "";
-}
-
-/* Nested Interactive Elements (Higher z-index so category & author links remain independently clickable) */
-.grid-news-card a:not(.stretched-link),
-.mini-news-card a:not(.stretched-link),
-.editors-hero-card a:not(.stretched-link),
-.editors-wide-card a:not(.stretched-link),
-.mid-featured-story a:not(.stretched-link),
-.hero-slide a:not(.stretched-link),
-.color-card-promo a:not(.stretched-link),
-.poster-card a:not(.stretched-link),
-.editorial-post-card a:not(.stretched-link),
-.cat-badge,
-.author-link,
-.section-more-link,
-.read-more-btn,
-.subscribe-btn,
-.cat-tab-btn,
-button,
-input {
-    position: relative;
-    z-index: 2;
-}
-
-/* Card Hover Elevation State Triggered when hovering over card */
-.grid-news-card:hover,
-.mini-news-card:hover,
-.editors-hero-card:hover,
-.editors-wide-card:hover,
-.mid-featured-story:hover,
-.poster-card:hover,
-.editorial-post-card:hover,
-.color-card-promo:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-/* Keyboard & Accessibility Focus State */
-.stretched-link:focus-visible {
-    outline: none;
-}
-
-.grid-news-card:focus-within,
-.mini-news-card:focus-within,
-.editors-hero-card:focus-within,
-.editors-wide-card:focus-within,
-.mid-featured-story:focus-within,
-.poster-card:focus-within,
-.editorial-post-card:focus-within {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* Search Overlay Modal */
-.search-overlay-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(6px);
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.search-overlay-content {
-    background: #ffffff;
-    padding: 35px 30px;
-    border-radius: 12px;
-    max-width: 520px;
-    width: 100%;
-    position: relative;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.search-overlay-content h3 {
-    margin-bottom: 18px;
-    color: var(--primary-color);
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.close-search-btn {
-    position: absolute;
-    top: 14px;
-    right: 18px;
-    background: transparent;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: #666;
-    line-height: 1;
-}
-
-.search-form-inner {
-    display: flex;
-    gap: 8px;
-}
-
-.search-form-inner .search-field {
-    flex-grow: 1;
-    padding: 12px 16px;
-    border: 2px solid var(--secondary-color);
-    border-radius: 6px;
-    font-size: 15px;
-    outline: none;
-}
-
-.search-form-inner .search-submit {
-    background: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-/* Weather & Date Widget */
-.header-weather-date {
-    display: none;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 6px 14px;
-    border-radius: 20px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    margin-left: 15px;
-}
-
-.header-weather-date i {
-    color: #ffeb3b;
-    margin-right: 4px;
-}
-
-/* Mobile Subheader */
-.mobile-subheader {
-    display: none;
-    background: #ffffff;
-    border-bottom: 1px solid #eeeeee;
-    padding: 10px 0;
-}
-
-.mobile-subheader-inner {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
-}
-
-.gwalior-breaking-text {
-    font-size: 20px;
-    font-weight: 700;
-    color: #111111;
-}
-
-/* =====================================================================
-   GLOBAL RESPONSIVE MEDIA QUERIES
-   ===================================================================== */
-
-/* Tablet & Smaller Devices */
 @media (max-width: 992px) {
     /* Grids & Layout */
     .tech-hero-box {
@@ -2060,7 +1372,7 @@ input {
     }
     
     .header-weather-date {
-        display: inline-flex;
+        display: none !important;
         font-size: 10px;
         padding: 4px 8px;
         gap: 6px;
@@ -2069,15 +1381,18 @@ input {
     }
     
     .mobile-subheader {
-        display: block;
-    }
-    
-    .site-header .menu-toggle {
         display: none !important;
     }
     
+    .site-header .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+    
     .site-header .nav-menu-wrapper {
-        top: 165px !important;
+        top: 100% !important;
     }
     
     .header-actions {
