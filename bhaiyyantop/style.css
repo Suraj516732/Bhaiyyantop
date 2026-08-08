@@ -43,7 +43,7 @@ This theme is designed from a custom visual layout with high fidelity Devanagari
     --font-primary: 'Noto Serif Devanagari', 'Martel', Georgia, serif;
     --font-heading: 'Martel', 'Noto Serif Devanagari', Georgia, serif;
     --font-ui: 'Mukta', sans-serif;
-    --container-width: 1800px;
+    --container-width: 1440px;
     --container-radius: 8px;
 }
 
@@ -86,6 +86,30 @@ img {
     border-radius: var(--container-radius);
 }
 
+@media (min-width: 1025px) {
+    .container {
+        max-width: 1470px;
+        width: calc(100% - 60px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .site-header {
+        min-height: 128px;
+        align-items: center;
+        padding-bottom: 0;
+    }
+    
+    .custom-logo {
+        width: 220px;
+        height: auto;
+    }
+    
+    .header-nav {
+        justify-content: flex-start;
+        margin-left: 30px;
+    }
+}
+
 /* Header Styles */
 .site-header {
     position: relative;
@@ -111,12 +135,14 @@ img {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom,
-            rgba(0, 188, 212, 0) 0%,
-            rgba(0, 188, 212, 0.2) 30%,
-            rgba(0, 188, 212, 0.4) 60%,
-            rgba(0, 188, 212, 0.65) 80%,
-            rgba(0, 188, 212, 0.92) 100%);
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 188, 212, 0.00) 0%,
+        rgba(0, 188, 212, 0.05) 25%,
+        rgba(0, 188, 212, 0.15) 50%,
+        rgba(0, 188, 212, 0.35) 75%,
+        rgba(0, 188, 212, 0.70) 100%
+    );
     z-index: 1;
     pointer-events: none;
     /* so it never blocks clicks on the logo/nav/search above it */
@@ -157,7 +183,7 @@ img {
 }
 
 .custom-logo {
-    height: 112px;
+    height: 85px;
     width: auto;
     display: block;
 }
@@ -179,7 +205,7 @@ img {
     display: flex;
     list-style: none;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     margin: 0;
     padding: 0;
 }
@@ -192,7 +218,7 @@ img {
 .nav-menu-wrapper .header-menu li a {
     color: #111111;
     font-weight: 600;
-    padding: 6px 14px;
+    padding: 6px 10px;
     font-size: 19px;
     border-radius: 8px;
     transition: all 0.2s ease;
@@ -211,8 +237,52 @@ img {
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.search-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #111111;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.search-btn:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.subscribe-btn {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-family: var(--font-ui);
+    line-height: 1.4;
+}
+
+.subscribe-btn:hover {
+    background-color: #d81b60;
+    color: #ffffff;
+    transform: scale(1.03);
 }
 
 /* ==========================================
@@ -287,6 +357,7 @@ img {
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    margin-right: 15px;
 }
 
 @media (max-width: 992px) {
@@ -546,7 +617,7 @@ img {
 .col-left,
 .col-right {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
     padding: 18px;
@@ -746,7 +817,7 @@ img {
 /* Center Content Column (Hero Slider & Bottom Content) */
 .hero-slider-wrap {
     position: relative;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     margin-bottom: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -824,7 +895,7 @@ img {
 /* Mid Featured Story (Category Wide Block) */
 .mid-featured-story {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 15px;
     border: 1px solid var(--border-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
@@ -944,7 +1015,7 @@ img {
 .bottom-news-section {
     grid-column: 1 / span 3;
     background: #ffffff;
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 20px;
     border: 1px solid var(--border-color);
     margin-top: 10px;
@@ -1016,7 +1087,7 @@ img {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     background-color: #ffffff;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -1881,70 +1952,91 @@ input {
     outline-offset: 2px;
 }
 
-/* Search Overlay Modal */
-.search-overlay-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(6px);
-    z-index: 99999;
+/* Header Expanding Search Bar */
+.header-search-wrap {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.header-search-form {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    border: none;
+    z-index: 100;
+    width: 40px;
+}
+
+.header-search-input {
+    width: 0;
+    opacity: 0;
+    border: none;
+    outline: none;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    color: #111111;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-grow: 1;
+}
+
+.header-search-submit-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-}
-
-.search-overlay-content {
-    background: #ffffff;
-    padding: 35px 30px;
-    border-radius: 12px;
-    max-width: 520px;
-    width: 100%;
-    position: relative;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.search-overlay-content h3 {
-    margin-bottom: 18px;
-    color: var(--primary-color);
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.close-search-btn {
-    position: absolute;
-    top: 14px;
-    right: 18px;
-    background: transparent;
-    border: none;
-    font-size: 28px;
     cursor: pointer;
-    color: #666;
-    line-height: 1;
-}
-
-.search-form-inner {
-    display: flex;
-    gap: 8px;
-}
-
-.search-form-inner .search-field {
-    flex-grow: 1;
-    padding: 12px 16px;
-    border: 2px solid var(--secondary-color);
-    border-radius: 6px;
+    color: #111111;
     font-size: 15px;
-    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
-.search-form-inner .search-submit {
-    background: var(--primary-color);
+.header-search-submit-btn:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.05);
+}
+
+/* Expanded State classes */
+.header-search-wrap.active .header-search-form {
+    background-color: #ffffff;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0 4px 0 14px;
+    width: 240px; /* absolute width when open */
+}
+
+.header-search-wrap.active .header-search-input {
+    width: 170px;
+    opacity: 1;
+    padding: 8px 4px;
+}
+
+.header-search-wrap.active .header-search-submit-btn {
+    background-color: var(--primary-color);
     color: #ffffff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 700;
+    box-shadow: none;
+}
+
+.header-search-wrap.active .header-search-submit-btn:hover {
+    background-color: #d81b60;
+    transform: none;
 }
 
 /* Weather & Date Widget */
@@ -1979,14 +2071,38 @@ input {
 .mobile-subheader-inner {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+}
+
+.mobile-left-header {
+    display: flex;
+    align-items: center;
     gap: 15px;
+}
+
+.mobile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .gwalior-breaking-text {
     font-size: 20px;
     font-weight: 700;
     color: #111111;
+}
+
+@media (max-width: 480px) {
+    .header-search-wrap.active .header-search-form {
+        width: 170px;
+    }
+    .header-search-wrap.active .header-search-input {
+        width: 110px;
+    }
+    .mobile-subheader .subscribe-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
 }
 
 /* =====================================================================

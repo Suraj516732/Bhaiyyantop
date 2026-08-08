@@ -71,6 +71,15 @@
 
         <!-- Right Side Actions: Social Buttons -->
         <div class="header-actions">
+            <div class="header-search-wrap">
+                <form class="header-search-form" onsubmit="return false;">
+                    <input type="search" class="header-search-input" placeholder="<?php esc_attr_e( 'खोजें... / Search...', 'bhaiyyantop' ); ?>" autocomplete="off">
+                    <button type="button" class="header-search-submit-btn" aria-label="Search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <a href="https://youtube.com/@bhaiyyantop?si=7OtlJ7ZhX0__RkR0" target="_blank" rel="noopener noreferrer" class="subscribe-btn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></a>
         </div>
     </div>
 </header>
@@ -133,6 +142,15 @@
 
         <!-- Right Side Actions: Social Icons -->
         <div class="sticky-actions">
+            <div class="header-search-wrap">
+                <form class="header-search-form" onsubmit="return false;">
+                    <input type="search" class="header-search-input" placeholder="<?php esc_attr_e( 'खोजें... / Search...', 'bhaiyyantop' ); ?>" autocomplete="off">
+                    <button type="button" class="header-search-submit-btn" aria-label="Search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <a href="https://youtube.com/@bhaiyyantop?si=7OtlJ7ZhX0__RkR0" target="_blank" rel="noopener noreferrer" class="subscribe-btn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></a>
         </div>
     </div>
 </div>
@@ -180,12 +198,28 @@
 <!-- Mobile Subheader with Menu Toggle and Gwalior Breaking -->
 <div class="mobile-subheader">
     <div class="container mobile-subheader-inner">
-        <button class="menu-toggle subheader-menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Navigation', 'bhaiyyantop' ); ?>">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-        </button>
-        <span class="gwalior-breaking-text">Bhaiyyantop</span>
+        <div class="mobile-left-header">
+            <button class="menu-toggle subheader-menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle Navigation', 'bhaiyyantop' ); ?>">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+            <span class="gwalior-breaking-text">Bhaiyyantop</span>
+        </div>
+        <div class="mobile-header-actions">
+            <div class="header-search-wrap">
+                <form class="header-search-form" onsubmit="return false;">
+                    <input type="search" class="header-search-input" placeholder="<?php esc_attr_e( 'खोजें... / Search...', 'bhaiyyantop' ); ?>" autocomplete="off">
+                    <button type="button" class="header-search-submit-btn" aria-label="Search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <a href="https://youtube.com/@bhaiyyantop?si=7OtlJ7ZhX0__RkR0" target="_blank" rel="noopener noreferrer" class="subscribe-btn"><?php esc_html_e( 'Subscribe', 'bhaiyyantop' ); ?></a>
+        </div>
     </div>
 </div>
 <?php endif; ?>
+
+
+
