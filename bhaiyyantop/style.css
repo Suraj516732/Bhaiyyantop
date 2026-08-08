@@ -1701,7 +1701,7 @@ body {
         height: 75px !important;
         flex-shrink: 0 !important;
         border-radius: 6px !important;
-        overflow: hidden !alignment;
+        overflow: hidden !important;
     }
 
     .mini-news-content {
